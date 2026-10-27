@@ -1,10 +1,10 @@
 {
   "site_name": "Glow Notes",
   "tagline": "Iskrene beauty recenzije na hrvatskom, od Rhode do Chanela, testirane na osjetljivoj koži",
-  "base_url": "https://www.glownotes.hr",
+  "base_url": "https://glownotes.eu",
   "author": "Ema",
   "author_bio": "Imam osjetljivu, reaktivnu kožu s rozaceom i svijetao ten. Godinama isprobavam kozmetiku na vlastitoj koži i pišem samo o onome što sam stvarno koristila.",
-  "contact_email": "info@glownotes.hr",
+  "contact_email": "info@glownotes.eu",
   "posthog_key": "",
   "posthog_host": "https://eu.i.posthog.com",
   "google_site_verification": "",
