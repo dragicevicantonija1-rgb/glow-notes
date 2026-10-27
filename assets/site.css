@@ -28,12 +28,14 @@
   :root:not([data-theme="light"]) {
     --paper: #24090f; --blush: #361219; --card: #2d0e15; --burgundy: #ffb8c9; --ink: #fbe6ea; --ink-soft: #e0b8c1; --hair: #4d1d28;
     --link: #ff9ab2; --good: #6fe0a8; --ok: #ffd45c; --meh: #ffab6e; --bad: #ff7a8a;
+    --top-bg: #123326; --flop-bg: #4a1622; --field-line: #6b2a39;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --paper: #24090f; --blush: #361219; --card: #2d0e15; --burgundy: #ffb8c9; --ink: #fbe6ea; --ink-soft: #e0b8c1; --hair: #4d1d28;
   --link: #ff9ab2; --good: #6fe0a8; --ok: #ffd45c; --meh: #ffab6e; --bad: #ff7a8a;
+  --top-bg: #123326; --flop-bg: #4a1622; --field-line: #6b2a39;
   color-scheme: dark;
 }
 *, *::before, *::after { box-sizing: border-box; }
@@ -257,7 +259,7 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
 .topflop__col { border-radius: 22px; padding: 18px 22px; }
 .topflop__col h3 { margin: 0 0 8px; font-family: var(--display); font-size: 1.3rem; color: var(--burgundy); }
 .topflop__col ul { margin: 0; padding-left: 1.1em; } .topflop__col li { margin: 4px 0; }
-.topflop__col--top { background: #d7efe2; } .topflop__col--flop { background: #f8c3c8; }
+.topflop__col--top { background: var(--top-bg, #d7efe2); } .topflop__col--flop { background: var(--flop-bg, #f8c3c8); }
 .rating { margin-top: 32px; background: var(--blush); border-radius: 22px; padding: 18px 24px; }
 .rating h2 { margin-top: 0; }
 .rating__row { display: flex; align-items: center; gap: 14px; margin: 0; } .rating__row strong { font: 900 2rem/1 var(--display); color: var(--burgundy); }
@@ -271,7 +273,7 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
 .comment-form { display: grid; gap: 14px; background: var(--blush); border-radius: 22px; padding: 20px; }
 .comment-form label { display: grid; gap: 6px; font-weight: 600; color: var(--burgundy); font-size: .92rem; }
 .comment-form label span { font-weight: 400; color: var(--ink-soft); }
-.comment-form input, .comment-form textarea { font: inherit; color: var(--ink); background: #fffbf7; border: 1px solid #f2c4d0; border-radius: 12px; padding: 10px 12px; width: 100%; box-sizing: border-box; }
+.comment-form input, .comment-form textarea { font: inherit; color: var(--ink); background: var(--paper); border: 1px solid var(--field-line, #f2c4d0); border-radius: 12px; padding: 10px 12px; width: 100%; box-sizing: border-box; }
 .comment-form__row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .comment-form__note { font-size: .85rem; color: var(--ink-soft); margin: 0; }
 .comment-form .btn { justify-self: start; border: 0; cursor: pointer; }
