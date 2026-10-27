@@ -653,12 +653,12 @@ ARTICLES_EN.update({
         "title": "Rhode Pocket Blush Tan Line review: cream blush for sensitive skin, my experience",
         "h1": "Rhode Pocket Blush in Tan Line: the perfect blush",
         "description": "Review of Rhode Pocket Blush in Tan Line: Hailey Bieber's cream blush that blends easily, looks like a natural sun flush and doesn't irritate sensitive skin. Rating 5/5.",
-        "excerpt": "A lovely blush that blends easily, doesn't irritate me at all and looks like a natural flush from the sun. It also lasts a long time on me.",
+        "excerpt": "A lovely blush that blends easily, doesn't irritate me at all and looks like a natural flush from the sun. The only minus: it runs out fast.",
         "kicker": "Review",
         "verdict": "Rating 5/5: the perfect blush",
         "review": {"product": "Rhode Pocket Blush (Tan Line)",
                    "pros": ["Blends easily with fingers", "Doesn't irritate me, even on rosacea skin", "The colour of a natural sun flush", "Lasts a long time on me", "Tiny pack fits in any pocket"],
-                   "cons": ["Honestly, none"]},
+                   "cons": ["There isn't much product and it runs out fast"]},
         "faq": [("What shade is Rhode Pocket Blush Tan Line?", "Tan Line is a pinky-bronze shade. On me it looks like a natural flush after a day in the sun."),
                 ("Is Rhode Pocket Blush good for sensitive skin?", "It doesn't irritate me at all, and I have sensitive, reactive skin with rosacea."),
                 ("How long does Rhode Pocket Blush last?", "On me it actually lasts quite a long time, which isn't always the case with cream blushes."),
@@ -678,6 +678,7 @@ ARTICLES_EN.update({
 <p><strong>A lovely blush.</strong> It blends easily, literally a few taps with your fingers and you're done, no patches and no edges.</p>
 <p>The most important thing for me is that it doesn't irritate me at all. With sensitive skin and rosacea every new cheek product is a small risk, and this one passed without any reaction.</p>
 <p>Tan Line is the colour of a natural flush from the sun: as if you've just come back from the beach, only without the sunburn. On my fair skin it looks fresh and not at all overdone. It also lasts quite a long time on me, which isn't a given with cream blushes.</p>
+<p>The only flop: there isn't much product. I didn't notice it at first, but since I use it every day, it really does run out fast.</p>
 <p>If you're wondering whether Rhode is worth the hype, Pocket Blush is my answer: yes.</p>
 
 <h2 id="who-is-it-for">Who is it for</h2>

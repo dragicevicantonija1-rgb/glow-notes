@@ -454,7 +454,7 @@ REVIEWS = [
         "title": "Rhode Pocket Blush Tan Line recenzija: kremasto rumenilo za osjetljivu kožu, iskustvo",
         "h1": "Rhode Pocket Blush u nijansi Tan Line: savršeno rumenilo",
         "description": "Recenzija Rhode Pocket Blush u nijansi Tan Line: kremasto rumenilo Hailey Bieber koje se lako razmazuje, izgleda kao prirodno rumenilo od sunca i ne iritira osjetljivu kožu. Ocjena 5/5.",
-        "excerpt": "Divno rumenilo koje se lako razmazuje, ništa mi ne izaziva i izgleda kao prirodno rumenilo od sunca. Na meni i dugo traje.",
+        "excerpt": "Divno rumenilo koje se lako razmazuje, ništa mi ne izaziva i izgleda kao prirodno rumenilo od sunca. Jedini minus: brzo se potroši.",
         "categories": ["sminka", "favoriti", "osjetljiva-koza"],
         "date": "2026-10-27",
         "kicker": "Recenzija",
@@ -462,7 +462,7 @@ REVIEWS = [
         "review": {
             "brand": "Rhode", "product": "Rhode Pocket Blush (Tan Line)", "rating": 5,
             "pros": ["Lako se razmazuje prstima", "Ništa mi ne izaziva, ni na koži s rozaceom", "Boja prirodnog rumenila od sunca", "Na meni dugo traje", "Malo pakiranje stane u svaki džep"],
-            "cons": ["Iskreno, nemam ih"],
+            "cons": ["Proizvoda ima malo i brzo se troši"],
         },
         "faq": [
             ("Kakva je nijansa Rhode Pocket Blush Tan Line?", "Tan Line je ružičasto-brončana nijansa. Na meni izgleda kao prirodno rumenilo nakon dana na suncu."),
@@ -485,6 +485,7 @@ REVIEWS = [
 <p><strong>Divno rumenilo.</strong> Lako se razmazuje, doslovno par tapkanja prstima i gotovo, bez mrlja i bez rubova.</p>
 <p>Za mene je najvažnije da mi ništa ne izaziva. S osjetljivom kožom i rozaceom svaki novi proizvod za obraze je mali rizik, a ovaj je prošao bez ikakve reakcije.</p>
 <p>Nijansa Tan Line je boja prirodnog rumenila na suncu: kao da ste se upravo vratile s plaže, samo bez opeklina. Na mojoj svijetloj koži izgleda svježe i nimalo napadno. I na meni čak i dosta traje, što kod kremastih rumenila nije pravilo.</p>
+<p>Jedini flop: proizvoda ima malo. Na početku to nisam primjećivala, ali kako ga koristim svaki dan, stvarno se brzo troši.</p>
 <p>Ako se pitate je li Rhode vrijedan hypea, Pocket Blush je za mene odgovor: da.</p>
 
 <h2 id="za-koga-je">Za koga je</h2>
