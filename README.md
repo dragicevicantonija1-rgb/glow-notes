@@ -47,3 +47,10 @@ Pokretanje: `python3 build.py` (treba samo Python 3, bez dodatnih paketa).
 ## Napomena o AdSense odobrenju
 
 Google obično traži više originalnog sadržaja prije odobrenja: realno 15–25 kvalitetnih članaka, plus stranice O meni, Kontakt i Politika privatnosti (već postoje).
+
+## SEO za ChatGPT, Perplexity, Gemini i Claude
+- `robots.txt` izričito dopušta AI tražilicama (OAI-SearchBot, ChatGPT-User, GPTBot, PerplexityBot, ClaudeBot, Google-Extended, Bingbot i dr.) čitanje stranice.
+- `/llms.txt` je kratki vodič kroz portal za AI modele, a `/llms-full.txt` sadrži sve članke kao čisti tekst. Oba se generiraju sama pri svakom buildu.
+- Svaki članak ima sekciju **Česta pitanja** s FAQPage shemom: kratki, izravni odgovori koje AI asistenti najlakše citiraju. Novi članak dobiva je kroz polje `"faq"` u `content.py`.
+- Autorica ima Person shemu (opis i teme), pa AI zna tko stoji iza recenzija.
+- **Bing Webmaster Tools** (bing.com/webmasters): ChatGPT pretraživanje se oslanja na Bingov indeks. Dodaj stranicu, upiši kod u `bing_site_verification` u `config.json` i pošalji `sitemap.xml`. Najbrže je uvesti stranicu izravno iz Google Search Consolea.
