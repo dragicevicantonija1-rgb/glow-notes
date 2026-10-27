@@ -67,3 +67,12 @@ U GA4: **Reports → Reports snapshot** (ili Realtime/Acquisition) → ikona **S
 - Svaki članak ima obrazac za komentare (Netlify Forms, obrazac "komentari"). Netlify ga prepozna sam nakon prvog deploya.
 - U Netlifyju: **Site configuration → Forms → Form notifications → Add notification → Email** da ti svaki novi komentar stigne na mail.
 - Komentari se ne objavljuju automatski (zaštita od spama). Odobrene upiši u `komentari.py` (ili ih pošalji Claudeu) i objave se na članku, s mogućnošću tvog odgovora.
+
+## Engleska verzija (EN)
+
+- Hrvatska verzija je na `glownotes.eu/`, engleska na `glownotes.eu/en/` s engleskim adresama (npr. `/en/articles/babe-mineral-spf-50-review/`).
+- Prijevodi su u `content_en.py` (ključ je hrvatski slug). **Novi članak = dodaj ga i u `content_en.py`**, inače build javlja grešku.
+- Svaka stranica ima hreflang poveznice (hr, en, x-default) i sitemap s obje verzije, pa Google zna koju verziju pokazati kome.
+- Gumb HR/EN u izborniku vodi na isti članak na drugom jeziku i pamti izbor (kolačić `nf_lang`).
+- Automatski jezik (u `netlify.toml`): posjetitelji iz Hrvatske, BiH, Srbije i Crne Gore ostaju na hrvatskom; ostali s engleskim ili drugim europskim jezikom preglednika idu na `/en/`.
+- Engleski komentari stižu u isti Netlify obrazac "komentari", a polje "clanak" počinje s `EN `.

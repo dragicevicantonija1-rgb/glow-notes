@@ -6,3 +6,26 @@
 [build.environment]
   PYTHON_VERSION = "3.12"
 # 404.html Netlify prikazuje automatski.
+
+# Automatski jezik na naslovnici: posjetitelji iz Hrvatske i susjednih zemalja ostaju na hrvatskom,
+# ostali s europskim ili engleskim jezikom preglednika idu na /en/. Googlebot ne šalje jezik pa indeksira obje verzije
+# preko hreflang poveznica. Ručni izbor (HR/EN gumb) sprema se u kolačić nf_lang koji Netlify poštuje.
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+  force = true
+  conditions = {Country = ["HR", "BA", "RS", "ME"]}
+
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 302
+  force = true
+  conditions = {Language = ["en", "de", "fr", "it", "es", "pt", "nl", "pl", "cs", "sk", "sl", "hu", "ro", "bg", "el", "sv", "da", "fi", "nb", "no", "et", "lv", "lt", "ga", "mt", "uk", "tr"]}
+
+[[redirects]]
+  from = "/*"
+  to = "/en/404.html"
+  status = 404
+  conditions = {Language = ["en", "de", "fr", "it", "es", "pt", "nl", "pl", "cs", "sk", "sl", "hu", "ro", "bg", "el", "sv", "da", "fi", "nb", "no", "et", "lv", "lt", "ga", "mt", "uk", "tr"]}
