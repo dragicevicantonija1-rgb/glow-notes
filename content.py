@@ -111,32 +111,37 @@ ARTICLES = [
   </div>
 </div>
 
-<!--IMG:foto-spf-tube|Šest tuba kreme za sunčanje poredanih od najveće do najmanje|Šest mineralnih SPF-ova, šest vrlo različitih iskustava.-->
 
 <h2 id="babe">1. Laboratorios Babé Super Fluid Sunscreen Color SPF 50 (mineralna verzija)</h2>
+<!--IMG:foto-spf-1|Ilustracija tube: Babé Super Fluid Sunscreen Color SPF 50|Ilustracija: Babé Super Fluid Sunscreen Color SPF 50 (nije originalno pakiranje).-->
 <p class="claim"><strong>Što brend tvrdi:</strong> ultralagana tekstura koja se brzo upija, obogaćena prebiotičkim sastojcima koji jačaju prirodnu barijeru i štite mikrobiom kože.</p>
 <p><strong>Moje iskustvo: sveti gral.</strong> Uvjerljivo najbolji mineralni SPF koji sam probala. Jako se lijepo razmazuje i uopće me ne peče za oči, što mi je ogroman plus. Jedina mana je što tonirana verzija nije za nas jako svijetle cure. Zato je miješam s običnom, netoniranom verzijom iz iste linije i tako dobijem savršenu nijansu.</p>
 <p class="tip"><strong>Savjet:</strong> naručujem ga sa španjolske stranice Care to Beauty jer je ondje puno jeftiniji nego u našim ljekarnama.</p>
 
 <h2 id="paulas-choice">2. Paula's Choice Super-Light Daily Wrinkle Defense SPF 30</h2>
+<!--IMG:foto-spf-2|Ilustracija tube: Paula's Choice Super-Light Daily Wrinkle Defense SPF 30|Ilustracija: Paula's Choice Super-Light Daily Wrinkle Defense SPF 30 (nije originalno pakiranje).-->
 <p class="claim"><strong>Što brend tvrdi:</strong> tonirana hidratantna krema s cinkovim oksidom koja ostavlja mat finiš i smiruje crvenilo.</p>
 <p><strong>Moje iskustvo:</strong> kozmetički izuzetno elegantan proizvod. Fino se razmazuje i ne ostavlja klasični bijeli odsjaj, ali prekrivenost je jako, jako slaba, tek toliko da izjednači ten. Najveći minus je cijena, preskup je. Uz to mi nakon cijelog dana zna isušiti lice i nakupiti se na suhim dijelovima.</p>
 
 <!--AD-->
 
 <h2 id="bioderma-nude-touch">3. Bioderma Photoderm Nude Touch SPF 50+ (nijansa Claire/Light)</h2>
+<!--IMG:foto-spf-3|Ilustracija tube: Bioderma Photoderm Nude Touch SPF 50+|Ilustracija: Bioderma Photoderm Nude Touch SPF 50+ (nije originalno pakiranje).-->
 <p class="claim"><strong>Što brend tvrdi:</strong> 100&nbsp;% mineralni filteri, kontrola sjaja do 8 sati i formula koja ujednačava ten.</p>
 <p><strong>Moje iskustvo:</strong> ovaj mi nažalost nikako ne stoji. Nijansa Claire nije topla, više vuče na rozo-neutralnu. Ni tekstura mi se ne sviđa: dosta se teško razmazuje i na licu ostaje mrljasta, nejednako se prima.</p>
 
 <h2 id="avene-tinted">4. Avène Tinted Mineral Fluid SPF 50+</h2>
+<!--IMG:foto-spf-4|Ilustracija tube: Avène Tinted Mineral Fluid SPF 50+|Ilustracija: Avène Tinted Mineral Fluid SPF 50+ (nije originalno pakiranje).-->
 <p class="claim"><strong>Što brend tvrdi:</strong> visoka zaštita za netolerantnu kožu, sa zlatnom nijansom koja ujednačava ten.</p>
 <p><strong>Moje iskustvo:</strong> puno, puno pretaman. Čak i curama koje nisu izrazito svijetle ovo će biti previše. Uz to se teško razmazuje. Za ovaj proizvod stvarno treba imati tamniju put ili već dobar ten.</p>
 
 <h2 id="avene-bez-boje">5. Avène Mineral Fluid SPF 50+ (bez boje)</h2>
+<!--IMG:foto-spf-5|Ilustracija tube: Avène Mineral Fluid SPF 50+|Ilustracija: Avène Mineral Fluid SPF 50+ (nije originalno pakiranje).-->
 <p class="claim"><strong>Što brend tvrdi:</strong> 100&nbsp;% mineralni filteri, fotostabilna zaštita bez kemijskih filtera i parfema.</p>
 <p><strong>Moje iskustvo:</strong> doslovno bijeli kreč, bez ikakvih dodatnih njegujućih sastojaka. Zadržala sam ga samo zato što je dobar i siguran izbor nakon jačih kozmetičkih tretmana, poput microneedlinga, kad koži treba zaštita koja sjedne na površinu. Za svakodnevno nošenje ispod šminke, zaboravite.</p>
 
 <h2 id="bioderma-mineral">6. Bioderma Photoderm Mineral SPF 50+ (bez boje)</h2>
+<!--IMG:foto-spf-6|Ilustracija tube: Bioderma Photoderm Mineral SPF 50+|Ilustracija: Bioderma Photoderm Mineral SPF 50+ (nije originalno pakiranje).-->
 <p class="claim"><strong>Što brend tvrdi:</strong> maksimalna učinkovitost protiv UVB i UVA zraka za kožu alergičnu na kemijske filtere.</p>
 <p><strong>Moje iskustvo: totalna katastrofa.</strong> Nešto najbjelje što sam ikad stavila na sebe. Problem je što se ta bjelina užasno preslikava: sve što sam dotaknula ostalo je umrljano i više se nije dalo oprati. Sjedalo u autu, neseser za šminku, čak i vrata od kuće. Završio je u smeću. A kao šlag na tortu, pakiranje curi na sve strane.</p>
 

@@ -178,6 +178,7 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
 
 .inline-fig { margin: 32px 0; }
 .inline-fig img { width: 100%; height: auto; border-radius: 22px; }
+.inline-fig--sm { max-width: 440px; margin-inline: auto; }
 .inline-fig figcaption { font-size: 0.85rem; color: var(--ink-soft); margin-top: 8px; font-style: italic; }
 .cover { margin: 8px 0 0; border-radius: 24px; overflow: hidden; }
 .cover img { width: 100%; height: auto; }

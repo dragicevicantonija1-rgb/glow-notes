@@ -295,7 +295,7 @@ def page_article(a):
     cr, cr_ld = crumbs([("/", "Naslovnica"), (f"/kategorije/{c['slug']}/", c["name"]), (None, a["h1"])])
     heads = re.findall(r'<h2 id="([^"]+)">(.*?)</h2>', a["body"])
     toc = "".join(f'<li><a href="#{i}">{t}</a></li>' for i, t in heads)
-    body = re.sub(r"<!--IMG:([\w-]+)\|([^|]*)\|([^>]*)-->", lambda m: f'<figure class="inline-fig">{picture(m.group(1), m.group(2), 1200, 750)}<figcaption>{m.group(3)}</figcaption></figure>', a["body"])
+    body = re.sub(r"<!--IMG:([\w-]+)\|([^|]*)\|([^>]*)-->", lambda m: f'<figure class="inline-fig{" inline-fig--sm" if m.group(1).startswith("foto-spf-") else ""}">{picture(m.group(1), m.group(2), 1200, 900 if m.group(1).startswith("foto-spf-") else 750)}<figcaption>{m.group(3)}</figcaption></figure>', a["body"])
     body = body.replace("<!--AD-->", ad_slot())
     ld = [cr_ld, {
         "@type": "BlogPosting", "headline": a["title"], "description": a["description"], "inLanguage": "hr-HR",
