@@ -82,6 +82,7 @@ ARTICLES = [
         "date": "2026-10-20",
         "updated": "2026-10-27",
         "kicker": "Poredak",
+        "faq": [('Koji je najbolji mineralni SPF za osjetljivu kožu s rozaceom?', 'Od šest mineralnih SPF-ova koje sam probala, najbolji mi je Laboratorios Babé Super Fluid Sunscreen Color SPF 50 (mineralna verzija). Lijepo se razmazuje i ne peče me za oči.'), ('Koji mineralni SPF ne ostavlja bijeli trag?', "Babé Super Fluid Sunscreen Color i Paula's Choice Super-Light Daily Wrinkle Defense SPF 30 kod mene ne ostavljaju bijeli trag. Najviše bijelog traga ostavio je Bioderma Photoderm Mineral SPF 50+, koji se uz to preslikavao na odjeću i predmete."), ('Je li tonirani Babé SPF dobar za jako svijetlu kožu?', 'Tonirana verzija je pretamna za jako svijetlu put. Zato je miješam s netoniranom verzijom iz iste linije i tako dobijem pravu nijansu.'), ('Gdje kupiti Babé SPF povoljnije?', 'Ja ga naručujem sa španjolske stranice Care to Beauty, gdje je puno jeftiniji nego u hrvatskim ljekarnama.'), ('Kada koristiti Avène Mineral Fluid SPF 50+ bez boje?', 'Ostavljam ga za razdoblje nakon jačih tretmana poput microneedlinga, kad koži treba zaštita koja ostaje na površini. Za svakodnevno nošenje ispod šminke mi je prebijel.')],
         "verdict": "Pobjednik: Babé Super Fluid Color SPF 50",
         "itemlist": [
             "Laboratorios Babé Super Fluid Sunscreen Color SPF 50 (mineralna verzija)",
@@ -160,6 +161,7 @@ ARTICLES = [
         "date": "2026-10-13",
         "updated": "2026-10-27",
         "kicker": "Antipreporuke",
+        "faq": [('Zašto CeraVe nije odgovarao mojoj koži s rozaceom?', 'Probala sam više CeraVe umivalica i njihovu hidratantnu kremu i nijedna mi nije sjela, iako su česta preporuka za osjetljivu kožu. Svaka koža je drugačija, pa nekome drugome mogu odgovarati.'), ('Koji sastojci najčešće iritiraju moju kožu s rozaceom?', 'Kod mene se ponavljaju isti okidači: salicilna kiselina (BHA), alkohol i jak miris te kemijski UV filteri.'), ('Je li azelaična kiselina dobra za rozaceu?', "Azelaična kiselina se često preporučuje kod rozacee, ali Paula's Choice Azelaic Acid Booster mi nije odgovarao, vjerojatno zato što sadrži i salicilnu kiselinu."), ('Kako uvoditi nove proizvode ako imate reaktivnu kožu?', 'Prije kupnje provjerim sastav, a nove proizvode uvodim jedan po jedan kako bih znala što točno izaziva reakciju.')],
         "verdict": "12 proizvoda koje ne bih ponovno kupila",
         "itemlist": [
             "CeraVe umivalice za lice", "CeraVe hidratantna krema", "Kiehl's vitamin C serum",
@@ -216,6 +218,7 @@ ARTICLES = [
         "date": "2026-10-06",
         "updated": "2026-10-27",
         "kicker": "Favoriti",
+        "faq": [('Koje proizvode za osjetljivu kožu s rozaceom kupujem iznova?', "Za lice iznova kupujem Olival hidrator u spreju, Kiehl's Ultra Facial Cream, Vichy Minéral serum, Babé mineralni tonirani SPF 50 i Skintegra Ros/Ac, među ostalima."), ('Koji SPF koristim svaki dan?', 'Laboratorios Babé mineralni tonirani fluid SPF 50. Među mineralnim SPF-ovima koje sam probala on mi je broj jedan.'), ('Koju šminku kupujem ponovno?', 'Catrice olovku za obrve, IT Cosmetics CC kremu (Original), NARS bronzer u nijansi Laguna i Sweed Lash maskaru.'), ('Koji proizvodi za kosu i tijelo su mi favoriti?', 'Za kosu Olaplex No. 3 i Kérastase Nutritive Masquintense, a za tijelo CeraVe SA kremu, iako mi CeraVe proizvodi za lice nisu odgovarali.')],
         "verdict": "16 proizvoda koje kupujem iznova",
         "itemlist": [
             "Olival hidrator u spreju", "Kiehl's Ultra Facial Cream", "Vichy Minéral serum",

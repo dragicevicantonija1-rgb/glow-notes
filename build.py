@@ -72,7 +72,8 @@ def jsonld(obj):
 
 ORG = {"@type": "Organization", "@id": BASE + "/#org", "name": CFG["site_name"], "url": BASE + "/",
        "logo": {"@type": "ImageObject", "url": BASE + "/brand/logo-512.png", "width": 512, "height": 512}}
-PERSON = {"@type": "Person", "@id": BASE + "/#autorica", "name": CFG["author"], "url": BASE + "/o-meni/"}
+PERSON = {"@type": "Person", "@id": BASE + "/#autorica", "name": CFG["author"], "url": BASE + "/o-meni/", "description": CFG["author_bio"],
+          "knowsAbout": ["osjetljiva koža", "rozacea", "reaktivna koža", "mineralni SPF", "njega lica", "šminka"]}
 
 
 def head(title, desc, path, og_type="website", extra_ld=None, noindex=False, full_title=True, image=None):
@@ -84,6 +85,8 @@ def head(title, desc, path, og_type="website", extra_ld=None, noindex=False, ful
         '<link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>'
         f"<style>{FONT_CSS}</style>")
     gsc = f'<meta name="google-site-verification" content="{e(CFG["google_site_verification"])}">' if CFG["google_site_verification"] else ""
+    if CFG.get("bing_site_verification"):
+        gsc += f'<meta name="msvalidate.01" content="{e(CFG["bing_site_verification"])}">'
     ads = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(CFG["adsense_client"])}" crossorigin="anonymous"></script>'
            if CFG["adsense_client"] and not PREVIEW else "")
     ph = posthog_snippet() if CFG["posthog_key"] and not PREVIEW else ""
@@ -289,6 +292,42 @@ def page_brand(x):
 """ + footer()
 
 
+# AI tražilice (ChatGPT, Perplexity, Claude, Gemini, Copilot) smiju čitati i citirati stranicu.
+AI_BOTS = ["OAI-SearchBot", "ChatGPT-User", "GPTBot", "PerplexityBot", "Perplexity-User", "ClaudeBot", "Claude-SearchBot",
+           "Claude-User", "Google-Extended", "Applebot-Extended", "Bingbot", "DuckAssistBot", "MistralAI-User"]
+
+
+def plain(html):
+    t = re.sub(r"<!--.*?-->", "", html, flags=re.S)
+    t = re.sub(r"<h2[^>]*>(.*?)</h2>", r"\n## \1\n", t)
+    t = re.sub(r"<li[^>]*>", "- ", t)
+    t = re.sub(r"</t[dh]>\s*(?=<t[dh])", " | ", t)
+    t = re.sub(r"</(p|li|tr|h3)>", "\n", t)
+    t = re.sub(r"<[^>]+>", "", t).replace("&nbsp;", " ").replace("&amp;", "&")
+    return re.sub(r"\n\s*\n+", "\n\n", "\n".join(l.strip() for l in t.splitlines())).strip()
+
+
+def llms_txt(full=False):
+    out = [f"# {CFG['site_name']}", "", f"> {CFG['tagline']}", "",
+           f"Iskrene beauty recenzije na hrvatskom jeziku. Autorica {CFG['author']} piše iz osobnog iskustva s osjetljivom, reaktivnom kožom sklonom rozacei. "
+           "Proizvodi su stvarno korišteni tjednima prije ocjene. Tekstovi ne zamjenjuju savjet dermatologa.", ""] + ([] if full else ["## Članci", ""])
+    for a in ARTICLES:
+        url = f"{BASE}/clanci/{a['slug']}/"
+        if not full:
+            out.append(f"- [{a['title']}]({url}): {a['description']}")
+            continue
+        out += [f"# {a['h1']}", "", f"URL: {url}", f"Autorica: {CFG['author']} · Objavljeno: {a['date']} · Ažurirano: {a.get('updated', a['date'])}", "",
+                f"Presuda: {a['verdict']}", "", plain(a["body"]), ""]
+        if a.get("faq"):
+            out += ["## Česta pitanja", ""] + [f"**{q}**\n{ans}\n" for q, ans in a["faq"]]
+        out.append("")
+    if not full:
+        out += ["", "## Kategorije", ""] + [f"- [{c['name']}]({BASE}/kategorije/{c['slug']}/): {c['description']}" for c in CATEGORIES]
+        out += ["", "## Ostalo", "", f"- [Brendovi]({BASE}/brendovi/): popis brendova o kojima pišem",
+                f"- [O meni]({BASE}/o-meni/): tko piše i kako nastaju recenzije", f"- [Svi tekstovi u jednoj datoteci]({BASE}/llms-full.txt)"]
+    return "\n".join(out) + "\n"
+
+
 def page_article(a):
     path = f"/clanci/{a['slug']}/"
     c = CAT[a["categories"][0]]
@@ -308,6 +347,11 @@ def page_article(a):
         ld.append({"@type": "ItemList", "name": a["h1"], "itemListOrder": "https://schema.org/ItemListOrderAscending",
                    "numberOfItems": len(a["itemlist"]),
                    "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": n} for i, n in enumerate(a["itemlist"])]})
+    if a.get("faq"):
+        ld.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": ans}} for q, ans in a["faq"]]})
+        toc += '<li><a href="#cesta-pitanja">Česta pitanja</a></li>'
+    faq = ('<section class="faq" aria-labelledby="cesta-pitanja"><h2 id="cesta-pitanja">Česta pitanja</h2>'
+           + "".join(f"<h3>{e(q)}</h3><p>{e(ans)}</p>" for q, ans in a["faq"]) + "</section>") if a.get("faq") else ""
     related = [x for x in ARTICLES if x is not a][:2]
     upd = f'<span>Ažurirano <time datetime="{a["updated"]}">{hr_date(a["updated"])}</time></span>' if a.get("updated") and a["updated"] != a["date"] else ""
     return head(a["title"], a["description"], path, "article", ld, image=f"/slike/{a['slug']}.jpg" if has_image(a["slug"]) else None) + header(None) + f"""
@@ -322,7 +366,7 @@ def page_article(a):
 </header>
 {('<figure class="cover">' + picture(a["slug"], a["h1"], 1200, 750, eager=True) + '</figure>') if has_image(a["slug"]) else ''}
 <details class="toc" open><summary>Sadržaj</summary><ul>{toc}</ul></details>
-<div class="prose">{body}</div>
+<div class="prose">{body}{faq}</div>
 {ad_slot()}
 {brand_chips(a)}
 <aside class="author">{mark()}<div><strong>{e(CFG['author'])}</strong><p>{e(CFG['author_bio'])}</p></div></aside>
@@ -459,7 +503,9 @@ def main():
     write("/404.html", page_404())
     write("/sitemap.xml", sitemap())
     write("/rss.xml", rss())
-    write("/robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
+    write("/robots.txt", "".join(f"User-agent: {bot}\nAllow: /\n\n" for bot in AI_BOTS) + f"User-agent: *\nAllow: /\n\nSitemap: {BASE}/sitemap.xml\n")
+    write("/llms.txt", llms_txt())
+    write("/llms-full.txt", llms_txt(full=True))
     if CFG["adsense_client"]:
         write("/ads.txt", f"google.com, {CFG['adsense_client'].replace('ca-', '')}, DIRECT, f08c47fec0942fa0\n")
     write("/site.webmanifest", json.dumps({"name": CFG["site_name"], "short_name": CFG["site_name"], "lang": "hr",

@@ -239,3 +239,6 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
   .hero__sticker { z-index: 1;  width: 92px; height: 92px; font-size: .9rem; }
   .hero__sticker--b { width: 80px; height: 80px; font-size: .8rem; }
 }
+.faq { margin-top: 48px; padding-top: 8px; border-top: 2px dashed var(--pink); }
+.faq h3 { font-family: var(--display); font-size: 1.15rem; margin: 24px 0 6px; color: var(--burgundy); }
+.faq p { margin: 0; }
