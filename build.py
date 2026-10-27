@@ -230,6 +230,8 @@ def page_home():
 <div class="cats cats--3">{tiles("proizvod")}</div>
 <div class="section__head" style="margin-top:56px"><h2>Po tipu kože</h2><p class="eyebrow">Moja specijalnost</p></div>
 <div class="cats">{tiles("koza")}</div>
+<div class="section__head" style="margin-top:56px"><h2>Favoriti i flopovi</h2><p class="eyebrow">Iskreno, bez uljepšavanja</p></div>
+<div class="cats cats--2">{tiles("presuda")}</div>
 </div></section>
 <section class="section" style="padding-top:0"><div class="wrap">
 <div class="section__head"><h2>Najnovije recenzije</h2></div>

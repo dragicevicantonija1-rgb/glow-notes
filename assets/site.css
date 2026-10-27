@@ -89,6 +89,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 900; font-variation-setti
 
 .cats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .cats--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cats--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .cat { display: flex; flex-direction: column; gap: 8px; padding: 24px 22px; text-decoration: none; color: #3b1a22; border-radius: 22px; transition: transform .15s; }
 .cat:hover { color: #3b1a22; transform: translateY(-3px); }
 .cat__dot { display: none; }
@@ -97,6 +98,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 900; font-variation-setti
 .cat__count { margin-top: auto; padding-top: 8px; font: 700 0.74rem/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: #7a1730; }
 .hue-mint { background: #d7efe2; } .hue-pink { background: #fbd0dc; } .hue-sun { background: var(--butter); }
 .hue-cobalt { background: #fde0cc; } .hue-sky { background: var(--sky); } .hue-tomato { background: #f8c3c8; } .hue-orange { background: #ffd9c2; }
+.hue-love { background: #fbdbe3; } .hue-flop { background: #ece6dd; }
 .hue-pink.cat, .hue-tomato.cat { background-image: repeating-linear-gradient(0deg, rgba(255,255,255,.4) 0 12px, transparent 12px 24px), repeating-linear-gradient(90deg, rgba(255,255,255,.4) 0 12px, transparent 12px 24px); }
 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1px solid rgba(122,23,48,.35); }
 
