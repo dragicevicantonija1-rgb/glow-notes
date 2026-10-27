@@ -535,24 +535,24 @@ REVIEWS = [
         "slug": "moj-glow-up-rutina-rozacea",
         "title": "Moj glow up: rutina za rozaceu s Omnilux LED maskom, Soolantrom i Skinorenom",
         "h1": "Moj glow up: rutina koja je promijenila moju kožu",
-        "description": "Moja rutina za kožu s rozaceom korak po korak: Omnilux Contour LED maska (specifikacije), Soolantra navečer, Skinoren gel ujutro, Bioderma Sensibio, Olival amino gel uz PMD uređaj i La Roche-Posay Cicaplast.",
+        "description": "Moja rutina za kožu s rozaceom korak po korak: Omnilux Contour LED maska (specifikacije), Soolantra navečer, Skinoren gel ujutro, Bioderma Sensibio, Olival amino gel uz PMD uređaj navečer i La Roche-Posay Cicaplast.",
         "excerpt": "Sve što koristim za kožu s rozaceom, korak po korak: od crvene LED maske Omnilux do Soolantre i Skinorena.",
         "categories": ["njega-lica", "rozacea", "osjetljiva-koza", "koza-30-plus", "favoriti"],
         "date": "2026-10-27",
         "kicker": "Rutina",
         "verdict": "Moja rutina u 6 koraka",
-        "itemlist": ["Bioderma Sensibio H2O micelarna voda", "Olival Professional amino gel za čišćenje i PMD uređaj za čišćenje", "Skinoren gel ujutro", "Soolantra navečer", "La Roche-Posay Cicaplast", "Omnilux Contour Face LED maska"],
+        "itemlist": ["Bioderma Sensibio H2O micelarna voda", "Olival Professional amino gel za čišćenje i PMD uređaj (navečer)", "Skinoren gel ujutro", "Soolantra navečer", "La Roche-Posay Cicaplast", "Omnilux Contour Face LED maska"],
         "faq": [
             ("Koje su specifikacije Omnilux Contour Face LED maske?", "Ima 132 LED diode koje istovremeno svijetle crvenim svjetlom valne duljine 633 nm i bliskim infracrvenim od 830 nm. Tretman traje 10 minuta, a proizvođač preporučuje 3 do 5 tretmana tjedno tijekom 4 do 6 tjedana. Fleksibilna je, od silikona, s punjivim kontrolerom, i ima FDA odobrenje za tretman bora."),
             ("Kada koristiti Soolantru, a kada Skinoren?", "Ja Soolantru koristim navečer, a Skinoren gel ujutro. Oba su lijekovi koje propisuje dermatolog, pa raspored i način primjene uvijek dogovorite s njim."),
-            ("Čime čistim lice ako imam rozaceu?", "Prvi korak mi je Bioderma Sensibio H2O micelarna voda, a zatim Olival Professional amino gel za čišćenje uz PMD uređaj za čišćenje."),
+            ("Čime čistim lice ako imam rozaceu?", "Prvi korak mi je Bioderma Sensibio H2O micelarna voda, a zatim Olival Professional amino gel za čišćenje. PMD uređaj za čišćenje koristim samo navečer."),
         ],
         "body": """
 <p class="lead">Najčešće pitanje koje dobivam je: što koristiš za kožu? Ovo je moja rutina za kožu s rozaceom, korak po korak, sa svim proizvodima i uređajima koji su zaslužni za moj glow up.</p>
 <p class="note-small">Soolantra i Skinoren su lijekovi koje propisuje dermatolog. Ovdje dijelim svoje iskustvo, a ne medicinski savjet: terapiju za rozaceu uvijek dogovorite s dermatologom.</p>
 
 <h2 id="ciscenje">1. Čišćenje: Bioderma Sensibio i Olival amino gel uz PMD</h2>
-<p>Prvi korak je uvijek <a href="/clanci/bioderma-sensibio-h2o-micelarna-voda-recenzija/">Bioderma Sensibio H2O micelarna voda</a>, moj dugogodišnji favorit. Nakon nje lice operem s <strong>Olival Professional amino gelom</strong>, nježnim gelom za čišćenje, a koristim ga uz <strong>PMD uređaj za čišćenje</strong> koji lice očisti temeljitije nego same ruke.</p>
+<p>Prvi korak je uvijek <a href="/clanci/bioderma-sensibio-h2o-micelarna-voda-recenzija/">Bioderma Sensibio H2O micelarna voda</a>, moj dugogodišnji favorit. Nakon nje lice operem s <strong>Olival Professional amino gelom</strong>, nježnim gelom za čišćenje, a navečer ga koristim uz <strong>PMD uređaj za čišćenje</strong>, koji lice očisti temeljitije nego same ruke. PMD koristim samo navečer.</p>
 
 <h2 id="skinoren">2. Ujutro: Skinoren gel</h2>
 <p><strong>Skinoren gel</strong> nanosim ujutro. Sadrži azelaičnu kiselinu i jedan je od lijekova koji se propisuju kod rozacee, a meni je stalni dio jutarnje rutine. Na njega ide hidratacija i obavezno mineralni SPF, poput mog <a href="/clanci/babe-mineralni-spf-50-recenzija/">Babé mineralnog SPF-a</a>.</p>
