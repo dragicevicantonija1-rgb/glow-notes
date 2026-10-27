@@ -9,6 +9,7 @@
   "posthog_host": "https://eu.i.posthog.com",
   "google_site_verification": "",
   "bing_site_verification": "",
+  "ga4_id": "",
   "adsense_client": "",
   "adsense_slot_in_article": "",
   "show_ad_placeholders": true

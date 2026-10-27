@@ -54,3 +54,16 @@ Google obično traži više originalnog sadržaja prije odobrenja: realno 15–2
 - Svaki članak ima sekciju **Česta pitanja** s FAQPage shemom: kratki, izravni odgovori koje AI asistenti najlakše citiraju. Novi članak dobiva je kroz polje `"faq"` u `content.py`.
 - Autorica ima Person shemu (opis i teme), pa AI zna tko stoji iza recenzija.
 - **Bing Webmaster Tools** (bing.com/webmasters): ChatGPT pretraživanje se oslanja na Bingov indeks. Dodaj stranicu, upiši kod u `bing_site_verification` u `config.json` i pošalji `sitemap.xml`. Najbrže je uvesti stranicu izravno iz Google Search Consolea.
+
+## Google Analytics 4
+1. Na analytics.google.com: **Admin → Create → Property** (vremenska zona Hrvatska, valuta EUR) → **Web stream** s adresom stranice.
+2. Kopiraj **Measurement ID** (oblik `G-XXXXXXXXXX`) i upiši ga u `ga4_id` u `config.json` (ili ga pošalji Claudeu).
+3. GA se učitava s Googleovim Consent Modeom: bez pristanka nema kolačića, nakon klika "Prihvaćam" mjeri normalno.
+
+### Dnevni izvještaj u 8:00 na e-mail
+U GA4: **Reports → Reports snapshot** (ili Realtime/Acquisition) → ikona **Share this report → Schedule email** → Frequency: **Daily**, vrijeme 8:00, primatelj tvoj e-mail.
+
+## Komentari
+- Svaki članak ima obrazac za komentare (Netlify Forms, obrazac "komentari"). Netlify ga prepozna sam nakon prvog deploya.
+- U Netlifyju: **Site configuration → Forms → Form notifications → Add notification → Email** da ti svaki novi komentar stigne na mail.
+- Komentari se ne objavljuju automatski (zaštita od spama). Odobrene upiši u `komentari.py` (ili ih pošalji Claudeu) i objave se na članku, s mogućnošću tvog odgovora.

@@ -309,6 +309,8 @@ BRANDS = [
     {"name": "Kérastase", "aliases": ["Kérastase", "Kerastase"]},
     {"name": "Kiehl's", "aliases": ["Kiehl's", "Kiehls"]},
     {"name": "L'Occitane", "aliases": ["L'Occitane", "Loccitane"]},
+    {"name": "La Roche-Posay", "aliases": ["La Roche-Posay", "LRP"]},
+    {"name": "Omnilux", "aliases": ["Omnilux"]},
     {"name": "Ladria", "aliases": ["Ladria"]},
     {"name": "NARS", "aliases": ["NARS"]},
     {"name": "Olaplex", "aliases": ["Olaplex"]},

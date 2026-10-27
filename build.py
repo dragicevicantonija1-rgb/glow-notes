@@ -9,6 +9,9 @@ Ključevi (PostHog, Search Console, AdSense) upisuju se samo u config.json.
 import html, json, math, os, re, shutil, sys
 from datetime import date
 from content import ARTICLES, BRANDS, CATEGORIES
+from content_recenzije import REVIEWS
+from komentari import KOMENTARI
+ARTICLES = sorted(REVIEWS, key=lambda r: r["kicker"] != "Rutina") + ARTICLES
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PREVIEW = "--preview" in sys.argv
@@ -90,6 +93,12 @@ def head(title, desc, path, og_type="website", extra_ld=None, noindex=False, ful
     ads = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(CFG["adsense_client"])}" crossorigin="anonymous"></script>'
            if CFG["adsense_client"] and not PREVIEW else "")
     ph = posthog_snippet() if CFG["posthog_key"] and not PREVIEW else ""
+    if CFG.get("ga4_id") and not PREVIEW:
+        ph += (f'<script async src="https://www.googletagmanager.com/gtag/js?id={e(CFG["ga4_id"])}"></script><script>'
+               'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}'
+               'var g="denied";try{if(localStorage.getItem("mk-consent")==="da")g="granted"}catch(_){}'
+               'gtag("consent","default",{ad_storage:g,ad_user_data:g,ad_personalization:g,analytics_storage:g});'
+               f'gtag("js",new Date());gtag("config",{json.dumps(CFG["ga4_id"])});</script>')
     ld = [ORG, {"@type": "WebSite", "@id": BASE + "/#web", "url": BASE + "/", "name": CFG["site_name"],
                 "inLanguage": "hr-HR", "publisher": {"@id": BASE + "/#org"}}] + (extra_ld or [])
     return f"""<!doctype html>
@@ -140,7 +149,8 @@ posthog.init(%s,{api_host:%s,person_profiles:"identified_only",persistence:mkCon
 </script>""" % (json.dumps(CFG["posthog_key"]), json.dumps(CFG["posthog_host"]))
 
 
-NAV = [("/", "Naslovnica")] + [(f"/kategorije/{c['slug']}/", c.get("nav", c["name"])) for c in CATEGORIES] + [("/brendovi/", "Brendovi"), ("/o-meni/", "O meni")]
+NAV = [("/", "Naslovnica"), ("/brendovi/", "Brendovi"), ("/kategorije/favoriti/", "Favoriti"), ("/kategorije/flop/", "Flop"),
+       ("/kategorije/njega-lica/", "Njega"), ("/kategorije/sminka/", "Šminka"), ("/o-meni/", "O meni")]
 
 
 def header(active):
@@ -170,6 +180,7 @@ def footer():
 (function(){{var b=document.getElementById("mk-consent"),v=null;try{{v=localStorage.getItem("mk-consent")}}catch(_){{}}
 if(!v)b.hidden=false;
 function set(x){{try{{localStorage.setItem("mk-consent",x)}}catch(_){{}}b.hidden=true;
+if(window.gtag){{var g=x==="da"?"granted":"denied";gtag("consent","update",{{ad_storage:g,ad_user_data:g,ad_personalization:g,analytics_storage:g}})}}
 if(window.posthog&&posthog.set_config){{if(x==="da"){{posthog.set_config({{persistence:"localStorage+cookie"}});posthog.opt_in_capturing()}}else{{posthog.set_config({{persistence:"memory"}})}}}}}}
 document.getElementById("mk-consent-yes").onclick=function(){{set("da")}};
 document.getElementById("mk-consent-no").onclick=function(){{set("ne")}};
@@ -202,7 +213,7 @@ def post_row(a, feature=False):
            if has_image(a["slug"]) else "")
     return f"""<article class="post{' post--feature' if feature else ''}{' post--img' if img else ''}">{img}
 <div><div class="post__meta"><span class="eyebrow">{e(a['kicker'])}</span><time datetime="{a['date']}">{hr_date(a['date'])}</time><span>{reading_time(a['body'])} min čitanja</span></div>
-<h3><a href="/clanci/{a['slug']}/">{e(a['h1'])}</a></h3><p>{e(a['excerpt'])}</p>
+<h3><a href="/clanci/{a['slug']}/">{e(a['h1'])}</a></h3>{('<p class="post__stars">' + stars(a['review']['rating']) + '</p>') if a.get('review') else ''}<p>{e(a['excerpt'])}</p>
 <div class="tags">{''.join(f'<a class="tag" href="/kategorije/{s}/"><span class="dot hue-{CAT[s]["hue"]}"></span>{e(CAT[s]["name"])}</a>' for s in a['categories'])}</div></div>
 </article>"""
 
@@ -330,6 +341,40 @@ def llms_txt(full=False):
     return "\n".join(out) + "\n"
 
 
+def fmt_rating(n):
+    return (f"{n:g}").replace(".", ",")
+
+
+def stars(n, cls="stars"):
+    return (f'<span class="{cls}" role="img" aria-label="Ocjena {fmt_rating(n)} od 5"><span aria-hidden="true">★★★★★</span>'
+            f'<span class="stars__on" aria-hidden="true" style="width:{n / 5 * 100:g}%">★★★★★</span></span>')
+
+
+def review_block(r):
+    li = lambda xs: "".join(f"<li>{e(x)}</li>" for x in xs)
+    return f"""<section class="topflop" aria-labelledby="top-i-flop"><h2 id="top-i-flop">Top i flop</h2>
+<div class="topflop__grid"><div class="topflop__col topflop__col--top"><h3>Top</h3><ul>{li(r['pros'])}</ul></div>
+<div class="topflop__col topflop__col--flop"><h3>Flop</h3><ul>{li(r['cons'])}</ul></div></div></section>
+<section class="rating" aria-labelledby="ocjena"><h2 id="ocjena">Ocjena</h2>
+<p class="rating__row">{stars(r['rating'], 'stars stars--big')}<strong>{fmt_rating(r['rating'])}/5</strong></p><p class="rating__name">{e(r['product'])}</p></section>"""
+
+
+def comments_block(a):
+    cs = KOMENTARI.get(a["slug"], [])
+    lst = "".join(f'<li class="comment"><p class="comment__meta"><strong>{e(c["ime"])}</strong> <time datetime="{c["datum"]}">{hr_date(c["datum"])}</time></p><p>{e(c["tekst"])}</p>'
+                  + (f'<p class="comment__reply"><strong>{e(CFG["author"])}:</strong> {e(c["odgovor"])}</p>' if c.get("odgovor") else "") + "</li>" for c in cs)
+    return f"""<section class="comments" aria-labelledby="komentari"><h2 id="komentari">Komentari{f' ({len(cs)})' if cs else ''}</h2>
+{f'<ol class="comment-list">{lst}</ol>' if cs else '<p>Još nema komentara. Budi prva koja će podijeliti svoje iskustvo!</p>'}
+<form class="comment-form" name="komentari" method="POST" action="/hvala-na-komentaru/" data-netlify="true" netlify-honeypot="web-stranica">
+<input type="hidden" name="form-name" value="komentari"><input type="hidden" name="clanak" value="{a['slug']}">
+<p class="hp" hidden><label>Ne ispunjavaj: <input name="web-stranica"></label></p>
+<div class="comment-form__row"><label>Ime ili nadimak<input name="ime" required maxlength="60" autocomplete="nickname"></label>
+<label>E-mail <span>(ne objavljuje se)</span><input type="email" name="email" maxlength="120" autocomplete="email"></label></div>
+<label>Komentar<textarea name="komentar" required rows="5" maxlength="3000"></textarea></label>
+<p class="comment-form__note">Komentari se objavljuju nakon odobrenja. Slanjem prihvaćaš <a href="/politika-privatnosti/">politiku privatnosti</a>.</p>
+<button class="btn" type="submit">Pošalji komentar</button></form></section>"""
+
+
 def page_article(a):
     path = f"/clanci/{a['slug']}/"
     c = CAT[a["categories"][0]]
@@ -349,12 +394,22 @@ def page_article(a):
         ld.append({"@type": "ItemList", "name": a["h1"], "itemListOrder": "https://schema.org/ItemListOrderAscending",
                    "numberOfItems": len(a["itemlist"]),
                    "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": n} for i, n in enumerate(a["itemlist"])]})
+    r = a.get("review")
+    if r:
+        img = BASE + f"/slike/{a['slug']}.jpg"
+        ld.append({"@type": "Review", "name": a["title"], "author": PERSON, "datePublished": a["date"], "inLanguage": "hr-HR",
+                   "publisher": {"@id": BASE + "/#org"}, "url": BASE + path,
+                   "itemReviewed": {"@type": "Product", "name": r["product"], "image": img, "brand": {"@type": "Brand", "name": r["brand"]}},
+                   "reviewRating": {"@type": "Rating", "ratingValue": r["rating"], "bestRating": 5, "worstRating": 1},
+                   "positiveNotes": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": x} for i, x in enumerate(r["pros"])]},
+                   "negativeNotes": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": x} for i, x in enumerate(r["cons"])]}})
+        toc += '<li><a href="#top-i-flop">Top i flop</a></li><li><a href="#ocjena">Ocjena</a></li>'
     if a.get("faq"):
         ld.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": ans}} for q, ans in a["faq"]]})
         toc += '<li><a href="#cesta-pitanja">Česta pitanja</a></li>'
     faq = ('<section class="faq" aria-labelledby="cesta-pitanja"><h2 id="cesta-pitanja">Česta pitanja</h2>'
            + "".join(f"<h3>{e(q)}</h3><p>{e(ans)}</p>" for q, ans in a["faq"]) + "</section>") if a.get("faq") else ""
-    related = [x for x in ARTICLES if x is not a][:2]
+    related = sorted((x for x in ARTICLES if x is not a), key=lambda x: -len(set(x["categories"]) & set(a["categories"])))[:2]
     upd = f'<span>Ažurirano <time datetime="{a["updated"]}">{hr_date(a["updated"])}</time></span>' if a.get("updated") and a["updated"] != a["date"] else ""
     return head(a["title"], a["description"], path, "article", ld, image=f"/slike/{a['slug']}.jpg" if has_image(a["slug"]) else None) + header(None) + f"""
 {cr}
@@ -366,10 +421,11 @@ def page_article(a):
 <div class="tags">{''.join(f'<a class="tag" href="/kategorije/{s}/"><span class="dot hue-{CAT[s]["hue"]}"></span>{e(CAT[s]["name"])}</a>' for s in a['categories'])}</div>
 <p class="verdict">{mark()}{e(a['verdict'])}</p>
 </header>
-{('<figure class="cover">' + picture(a["slug"], a["h1"], 1200, 750, eager=True) + '</figure>') if has_image(a["slug"]) else ''}
+{('<figure class="cover">' + picture(a["slug"], a.get("review", {}).get("product", a["h1"]), 1200, 900 if a.get("review") else 750, eager=True) + ('<figcaption>Ilustracija proizvoda, nije originalno pakiranje.</figcaption>' if a.get("review") else '') + '</figure>') if has_image(a["slug"]) else ''}
 <details class="toc" open><summary>Sadržaj</summary><ul>{toc}</ul></details>
-<div class="prose">{body}{faq}</div>
+<div class="prose">{body}{review_block(a["review"]) if a.get("review") else ""}{faq}</div>
 {ad_slot()}
+{comments_block(a)}
 {brand_chips(a)}
 <aside class="author">{mark()}<div><strong>{e(CFG['author'])}</strong><p>{e(CFG['author_bio'])}</p></div></aside>
 <p class="disclosure">Proizvode sam kupila sama ili ih dobila na dar, a mišljenje je uvijek moje. Tekst opisuje osobno iskustvo i ne zamjenjuje savjet dermatologa.</p>
@@ -420,11 +476,13 @@ CONTACT = f"""<p>Imate pitanje, prijedlog proizvoda za recenziju ili ispravak? P
 
 PRIVACY = f"""<p class="lead">Ova stranica objašnjava koje podatke {e(CFG['site_name'])} prikuplja i zašto, u skladu s Općom uredbom o zaštiti podataka (GDPR).</p>
 <h2 id="voditelj">Voditelj obrade</h2><p>{e(CFG['author'])}, {e(CFG['site_name'])}. Kontakt: {e(CFG['contact_email'])}.</p>
+<h2 id="google-analytics">Analitika (Google Analytics)</h2><p>Koristimo i Google Analytics 4 s Googleovim načinom pristanka (Consent Mode). Bez vašeg pristanka Google Analytics ne sprema kolačiće, a Googleu se šalju samo anonimni signali bez identifikatora. Ako pristanete, sprema kolačiće _ga kojima mjerimo posjećenost.</p>
 <h2 id="analitika">Analitika (PostHog)</h2><p>Za mjerenje posjećenosti koristimo PostHog s poslužiteljima u Europskoj uniji. Bez vašeg pristanka analitika radi bez kolačića i ne pamti vas između posjeta. Ako pristanete, PostHog sprema anonimni identifikator u kolačić i lokalnu pohranu preglednika kako bismo razumjeli koji su članci korisni.</p>
 <h2 id="oglasi">Oglasi (Google AdSense)</h2><p>Portal prikazuje oglase putem usluge Google AdSense. Google i njegovi partneri mogu koristiti kolačiće za prikaz oglasa na temelju vaših prethodnih posjeta ovoj i drugim stranicama. Za posjetitelje iz EU pristanak za oglase prikuplja se putem Googleove platforme za upravljanje pristankom. Personalizirane oglase možete isključiti u <a href="https://adssettings.google.com" rel="nofollow noopener">Googleovim postavkama oglasa</a>. Više o tome kako Google koristi podatke: <a href="https://policies.google.com/technologies/partner-sites" rel="nofollow noopener">policies.google.com/technologies/partner-sites</a>.</p>
 <h2 id="kolacici">Kolačići i lokalna pohrana</h2><ul>
 <li><strong>mk-consent</strong> (lokalna pohrana, nužno): pamti vaš izbor o kolačićima.</li>
 <li><strong>ph_*</strong> (PostHog, analitika): samo uz pristanak.</li>
+<li><strong>_ga, _ga_*</strong> (Google Analytics, analitika): samo uz pristanak.</li>
 <li><strong>Google AdSense kolačići</strong> (oglašavanje): prema postavkama pristanka.</li></ul>
 <p>Svoj izbor možete promijeniti bilo kad putem poveznice “Postavke kolačića” na dnu stranice.</p>
 <h2 id="prava">Vaša prava</h2><p>Imate pravo na pristup, ispravak i brisanje podataka te pravo na prigovor Agenciji za zaštitu osobnih podataka (azop.hr).</p>
@@ -441,7 +499,7 @@ def page_404():
 # ---------- pomoćne datoteke ----------
 
 def sitemap():
-    urls = [("/", ARTICLES[0]["updated"], "1.0")]
+    urls = [("/", max(x.get("updated", x["date"]) for x in ARTICLES), "1.0")]
     urls += [(f"/kategorije/{c['slug']}/", max(a.get("updated", a["date"]) for a in ARTICLES if c["slug"] in a["categories"]), "0.8") for c in CATEGORIES]
     urls += [(f"/clanci/{a['slug']}/", a.get("updated", a["date"]), "0.9") for a in ARTICLES]
     urls += [("/brendovi/", date.today().isoformat(), "0.7")]
@@ -500,8 +558,10 @@ def main():
     for x in BRANDS:
         write(f"/brendovi/{x['slug']}/", page_brand(x))
     write("/o-meni/", page_simple("o-meni", "O meni", f"Tko piše {CFG['site_name']} i kako nastaju recenzije kozmetike za osjetljivu kožu i rozaceu.", "O meni", ABOUT))
+    write("/hvala-na-komentaru/", page_simple("hvala-na-komentaru", "Hvala na komentaru", "Komentar je poslan i objavit će se nakon odobrenja.", "Hvala na komentaru!",
+          '<p>Tvoj komentar je stigao i objavit ću ga čim ga pročitam. Hvala što dijeliš svoje iskustvo!</p><p><a class="btn" href="/">Natrag na naslovnicu</a></p>'))
     write("/kontakt/", page_simple("kontakt", "Kontakt", "Kontakt za pitanja, prijedloge i suradnje.", "Kontakt", CONTACT))
-    write("/politika-privatnosti/", page_simple("politika-privatnosti", "Politika privatnosti i kolačića", f"Kako {CFG['site_name']} koristi kolačiće, PostHog analitiku i Google AdSense oglase.", "Privatnost i kolačići", PRIVACY))
+    write("/politika-privatnosti/", page_simple("politika-privatnosti", "Politika privatnosti i kolačića", f"Kako {CFG['site_name']} koristi kolačiće, Google Analytics, PostHog analitiku i Google AdSense oglase.", "Privatnost i kolačići", PRIVACY))
     write("/404.html", page_404())
     write("/sitemap.xml", sitemap())
     write("/rss.xml", rss())
