@@ -558,13 +558,15 @@ REVIEWS = [
 <h2 id="skinoren">2. Ujutro: Skinoren gel</h2>
 <p><strong>Skinoren gel</strong> nanosim ujutro. Sadrži azelaičnu kiselinu i jedan je od lijekova koji se propisuju kod rozacee, a meni je stalni dio jutarnje rutine. Na njega ide hidratacija i obavezno mineralni SPF, poput mog <a href="/clanci/babe-mineralni-spf-50-recenzija/">Babé mineralnog SPF-a</a>.</p>
 
+<!--IMG:foto-vecernja-rutina|Ruke nanose bijelu kremu iz tube uz svijeće u kupaonici|AI ilustracija večernje rutine.-->
+
 <h2 id="soolantra">3. Navečer: Soolantra</h2>
 <p><strong>Soolantra</strong> je krema s ivermektinom koju dermatolozi propisuju za rozaceu s papulama i pustulama. Ja je koristim navečer, kao zadnji aktivni korak prije spavanja.</p>
 
 <h2 id="cicaplast">4. Za obnovu: La Roche-Posay Cicaplast</h2>
 <p>Kad je koži potrebno smirivanje i obnova barijere, posežem za <strong>La Roche-Posay Cicaplastom</strong>. To je moj sigurni izbor kad je koža nadražena ili suha.</p>
 
-<!--IMG:foto-led-maska|Ilustracija bijele fleksibilne LED maske s crvenim diodama|Ilustracija LED maske za lice, nije originalni proizvod.-->
+<!--IMG:foto-led-maska|Žena s bijelom LED maskom koja svijetli crveno opušta se navečer na kauču|AI ilustracija LED maske za lice, nije originalni proizvod.-->
 
 <h2 id="omnilux">5. Omnilux Contour Face LED maska</h2>
 <p>Najveća investicija u mojoj rutini je <strong>Omnilux Contour Face</strong>, LED maska s crvenim i bliskim infracrvenim svjetlom. Evo specifikacija prema proizvođaču:</p>

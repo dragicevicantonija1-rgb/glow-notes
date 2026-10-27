@@ -741,13 +741,15 @@ ARTICLES_EN.update({
 <h2 id="skinoren">2. Morning: Skinoren gel</h2>
 <p>I apply <strong>Skinoren gel</strong> in the morning. It contains azelaic acid and is one of the medicines prescribed for rosacea, and it's a permanent part of my morning routine. Hydration goes on top, and always a mineral SPF, such as my <a href="/clanci/babe-mineralni-spf-50-recenzija/">Babé mineral SPF</a>.</p>
 
+<!--IMG:foto-vecernja-rutina|Hands applying white cream from a tube by candlelight in a bathroom|AI illustration of an evening routine.-->
+
 <h2 id="soolantra">3. Night: Soolantra</h2>
 <p><strong>Soolantra</strong> is an ivermectin cream that dermatologists prescribe for rosacea with papules and pustules. I use it at night, as the last active step before bed.</p>
 
 <h2 id="cicaplast">4. For repair: La Roche-Posay Cicaplast</h2>
 <p>When my skin needs calming and barrier repair, I reach for <strong>La Roche-Posay Cicaplast</strong>. It's my safe choice when my skin is irritated or dry.</p>
 
-<!--IMG:foto-led-maska|Illustration of a white flexible LED mask with red diodes|Illustration of an LED face mask, not the original product.-->
+<!--IMG:foto-led-maska|A woman relaxing on a sofa in the evening wearing a white LED mask glowing red|AI illustration of an LED face mask, not the original product.-->
 
 <h2 id="omnilux">5. Omnilux Contour Face LED mask</h2>
 <p>The biggest investment in my routine is the <strong>Omnilux Contour Face</strong>, an LED mask with red and near-infrared light. Here are the specs according to the manufacturer:</p>
