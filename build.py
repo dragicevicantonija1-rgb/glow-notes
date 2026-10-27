@@ -11,6 +11,7 @@ from datetime import date
 from content import ARTICLES, BRANDS, CATEGORIES
 from content_recenzije import REVIEWS
 from komentari import KOMENTARI
+from content_kvizovi import QUIZZES
 import content_en
 ARTICLES = sorted(REVIEWS, key=lambda r: r["kicker"] != "Rutina") + ARTICLES
 LANG = "hr"  # main() gradi prvo hrvatsku verziju u /, zatim englesku u /en/
@@ -168,7 +169,7 @@ posthog.init(%s,{api_host:%s,person_profiles:"identified_only",persistence:mkCon
 
 
 NAV = [("/", "Naslovnica", "Home"), ("/brendovi/", "Brendovi", "Brands"), ("/kategorije/favoriti/", "Favoriti", "Favourites"), ("/kategorije/flop/", "Flop", "Flops"),
-       ("/kategorije/njega-lica/", "Njega", "Skincare"), ("/kategorije/sminka/", "Šminka", "Make-up"), ("/o-meni/", "O meni", "About")]
+       ("/kategorije/njega-lica/", "Njega", "Skincare"), ("/kategorije/sminka/", "Šminka", "Make-up"), ("/kvizovi/", "Kvizovi", "Quizzes"), ("/o-meni/", "O meni", "About")]
 
 
 def header(active):
@@ -263,6 +264,10 @@ def page_home():
 <div class="cats">{tiles("koza")}</div>
 <div class="section__head" style="margin-top:56px"><h2>{T('Favoriti i flopovi', 'Favourites and flops')}</h2><p class="eyebrow">{T('Iskreno, bez uljepšavanja', 'Honest, no sugar-coating')}</p></div>
 <div class="cats cats--2">{tiles("presuda")}</div>
+</div></section>
+<section class="section" style="padding-top:0"><div class="wrap">
+<div class="section__head"><h2>{T('Beauty kvizovi', 'Beauty quizzes')}</h2><p class="eyebrow">{T('Minuta do odgovora', 'One minute to an answer')}</p></div>
+<div class="cats cats--3">{quiz_tiles()}</div>
 </div></section>
 <section class="section" style="padding-top:0"><div class="wrap">
 <div class="section__head"><h2>{T('Najnovije recenzije', 'Latest reviews')}</h2></div>
@@ -592,6 +597,76 @@ var m=location.search.match(/[?&]q=([^&]*)/);if(m){{q.value=decodeURIComponent(m
 """ + footer()
 
 
+QUIZ_HUES = ["pink", "sun", "tomato"]
+
+
+def quiz_tiles():
+    return "".join(f"""<a class="cat hue-{QUIZ_HUES[i % 3]}" href="/kvizovi/{q['slug']}/"><span class="cat__dot"></span>
+<h3>{e(T(*q['h1']))}</h3><p>{e(T(*q['short']))}</p><span class="cat__count">{T('Riješi kviz', 'Take the quiz')} →</span></a>""" for i, q in enumerate(QUIZZES))
+
+
+def link_label(path):
+    m = re.fullmatch(r"/(clanci|kategorije)/([a-z0-9-]+)/", path)
+    if m and m.group(1) == "clanci":
+        return next(a["h1"] for a in ARTICLES if a["slug"] == m.group(2))
+    return CAT[m.group(2)]["name"]
+
+
+def page_quizzes():
+    path = "/kvizovi/"
+    cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), (None, T("Kvizovi", "Quizzes"))])
+    ld = [cr_ld, {"@type": "CollectionPage", "name": T("Beauty kvizovi", "Beauty quizzes"), "url": BASE + path, "inLanguage": lang_tag(),
+                  "hasPart": [{"@type": "Quiz", "name": T(*q["title"]), "url": f"{BASE}/kvizovi/{q['slug']}/"} for q in QUIZZES]}]
+    return head(T("Beauty kvizovi – tip kože, SPF i crvenilo", "Beauty quizzes – skin type, SPF and redness"),
+                T("Kratki beauty kvizovi: saznaj svoj tip kože, koji SPF ti odgovara i je li ti koža sklona crvenilu, uz preporuke iz iskrenih recenzija.",
+                  "Short beauty quizzes: find your skin type, the SPF that suits you and whether your skin is prone to redness, with picks from honest reviews."),
+                path, extra_ld=ld) + header(path) + f"""
+{cr}<div class="wrap"><header class="page-head"><p class="eyebrow">{T('Minuta do odgovora', 'One minute to an answer')}</p><h1>{T('Beauty kvizovi', 'Beauty quizzes')}</h1>
+<p class="page-sub">{T('Odgovori na nekoliko pitanja i saznaj što tvojoj koži odgovara, uz proizvode koje sam stvarno isprobala.', 'Answer a few questions and find out what suits your skin, with products I have actually tried.')}</p></header>
+<div class="cats cats--3" style="margin-bottom:64px">{quiz_tiles()}</div></div>
+""" + footer()
+
+
+def page_quiz(q):
+    path = f"/kvizovi/{q['slug']}/"
+    cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), ("/kvizovi/", T("Kvizovi", "Quizzes")), (None, T(*q["h1"]))])
+    order = list(q["results"])
+    qs = "".join(f"""<fieldset class="quiz__q"><legend><span class="quiz__n">{i + 1}/{len(q['questions'])}</span> {e(T(*qt))}</legend>
+{''.join(f'<label class="quiz__a"><input type="radio" name="q{i}" value="{key}" required> <span>{e(T(*at))}</span></label>' for at, key in ans)}</fieldset>"""
+                 for i, (qt, ans) in enumerate(q["questions"]))
+    res = "".join(f"""<section class="quiz__result" id="rezultat-{key}" hidden tabindex="-1"><p class="eyebrow">{T('Tvoj rezultat', 'Your result')}</p>
+<h2>{e(T(*rv['title']))}</h2><p>{e(T(*rv['text']))}</p><h3>{T('Pročitaj dalje', 'Read next')}</h3>
+<ul>{''.join(f'<li><a href="{l}">{e(link_label(l))}</a></li>' for l in rv['links'])}</ul></section>""" for key, rv in q["results"].items())
+    others = "".join(f'<li><a href="/kvizovi/{o["slug"]}/">{e(T(*o["h1"]))}</a></li>' for o in QUIZZES if o is not q)
+    ld = [cr_ld, {"@type": "Quiz", "name": T(*q["title"]), "description": T(*q["description"]), "url": BASE + path, "inLanguage": lang_tag(),
+                  "author": person(), "publisher": {"@id": BASE + "/#org"},
+                  "hasPart": [{"@type": "Question", "name": T(*qt), "eduQuestionType": "Multiple choice",
+                               "suggestedAnswer": [{"@type": "Answer", "text": T(*at)} for at, _ in ans]} for qt, ans in q["questions"]]}]
+    return head(T(*q["title"]), T(*q["description"]), path, extra_ld=ld) + header("/kvizovi/") + f"""
+{cr}<div class="wrap read"><header class="page-head"><p class="eyebrow">{T('Kviz', 'Quiz')}</p><h1>{e(T(*q['h1']))}</h1>
+<p class="page-sub">{e(T(*q['intro']))}</p></header>
+<form class="quiz" id="quiz" data-order="{' '.join(order)}">{qs}
+<p class="quiz__err" id="quiz-err" hidden>{T('Odgovori na sva pitanja pa klikni ponovno.', 'Answer every question, then click again.')}</p>
+<button class="btn" type="submit">{T('Pokaži rezultat', 'Show my result')}</button></form>
+{res}
+<p class="quiz__again" id="quiz-again" hidden><button type="button" class="btn-link" id="quiz-reset">{T('Riješi ponovno', 'Take it again')}</button></p>
+<p class="disclosure">{T('Kviz je informativan i ne zamjenjuje pregled kod dermatologa.', 'This quiz is for information only and does not replace a visit to a dermatologist.')}</p>
+<div class="brands-in"><p class="eyebrow">{T('Ostali kvizovi', 'More quizzes')}</p><ul>{others}</ul></div></div>
+<script>
+(function(){{var f=document.getElementById("quiz"),order=f.dataset.order.split(" "),err=document.getElementById("quiz-err"),again=document.getElementById("quiz-again");
+function hideAll(){{order.forEach(function(k){{document.getElementById("rezultat-"+k).hidden=true}})}}
+f.addEventListener("submit",function(ev){{ev.preventDefault();var n=f.querySelectorAll("fieldset").length,c={{}},done=0;
+for(var i=0;i<n;i++){{var x=f.querySelector('input[name="q'+i+'"]:checked');if(x){{done++;c[x.value]=(c[x.value]||0)+1}}}}
+if(done<n){{err.hidden=false;return}}err.hidden=true;
+var best=order[0];order.forEach(function(k){{if((c[k]||0)>(c[best]||0))best=k}});
+hideAll();var r=document.getElementById("rezultat-"+best);r.hidden=false;again.hidden=false;r.focus();r.scrollIntoView({{behavior:"smooth",block:"start"}});
+if(window.posthog&&posthog.capture)posthog.capture("kviz_rezultat",{{kviz:{json.dumps(q['slug'])},rezultat:best}});
+if(window.gtag)gtag("event","quiz_result",{{quiz:{json.dumps(q['slug'])},result:best}})}});
+document.getElementById("quiz-reset").onclick=function(){{f.reset();hideAll();again.hidden=true;f.scrollIntoView({{behavior:"smooth"}})}};}})();
+</script>
+""" + footer()
+
+
 def page_404():
     return head(T("Stranica nije pronađena", "Page not found"), T("Tražena stranica ne postoji.", "The page you are looking for does not exist."), "/404.html", noindex=True) + header(None) + f"""
 <div class="wrap read"><header class="page-head"><h1>{T('Ova stranica ne postoji', 'This page does not exist')}</h1></header>
@@ -605,7 +680,8 @@ def sitemap():
     urls = [("/", max(x.get("updated", x["date"]) for x in ARTICLES), "1.0")]
     urls += [(f"/kategorije/{c['slug']}/", max(a.get("updated", a["date"]) for a in ARTICLES if c["slug"] in a["categories"]), "0.8") for c in CATEGORIES]
     urls += [(f"/clanci/{a['slug']}/", a.get("updated", a["date"]), "0.9") for a in ARTICLES]
-    urls += [("/brendovi/", date.today().isoformat(), "0.7")]
+    urls += [("/brendovi/", date.today().isoformat(), "0.7"), ("/kvizovi/", date.today().isoformat(), "0.7")]
+    urls += [(f"/kvizovi/{q['slug']}/", date.today().isoformat(), "0.7") for q in QUIZZES]
     urls += [(f"/brendovi/{x['slug']}/", max(a.get("updated", a["date"]) for a in x["articles"]), "0.6") for x in BRANDS if x["articles"]]
     urls += [("/o-meni/", date.today().isoformat(), "0.4"), ("/kontakt/", date.today().isoformat(), "0.3"),
              ("/politika-privatnosti/", date.today().isoformat(), "0.2")]
@@ -650,10 +726,11 @@ def relativize(doc, path):
 # Hrvatski je na korijenu, engleski pod /en/ s engleskim slugovima. Kod stranica radi s hrvatskim putanjama,
 # a write() ih u engleskoj verziji prepisuje (en_path) i dodaje hreflang poveznice.
 
-EN_SECTION = {"trazi": "search", "clanci": "articles", "kategorije": "categories", "brendovi": "brands", "o-meni": "about",
+EN_SECTION = {"kvizovi": "quizzes", "trazi": "search", "clanci": "articles", "kategorije": "categories", "brendovi": "brands", "o-meni": "about",
               "kontakt": "contact", "politika-privatnosti": "privacy", "hvala-na-komentaru": "thank-you"}
 EN_SLUG = {k: v["slug"] for k, v in content_en.ARTICLES_EN.items()}
 EN_SLUG.update({k: v["slug"] for k, v in content_en.CATEGORIES_EN.items()})
+EN_SLUG.update({q["slug"]: q["en_slug"] for q in QUIZZES})
 HR_PATH_RE = re.compile(r"(?<![\w/.-])(" + re.escape(BASE) + r")?(/(?:" + "|".join(map(re.escape, EN_SECTION)) + r")/(?:[a-z0-9-]+/)?)")
 
 
@@ -731,6 +808,9 @@ def write_pages():
                                                   f"How {CFG['site_name']} uses cookies, Google Analytics, PostHog analytics and Google AdSense ads."),
                                                 T("Privatnost i kolačići", "Privacy and cookies"), T(privacy_hr(), privacy_en())))
     write("/trazi/", page_search())
+    write("/kvizovi/", page_quizzes())
+    for q in QUIZZES:
+        write(f"/kvizovi/{q['slug']}/", page_quiz(q))
     write("/404.html", page_404())
     write("/rss.xml", rss())
     write("/llms.txt", llms_txt())

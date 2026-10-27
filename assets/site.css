@@ -285,3 +285,18 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
 .search input:focus { outline: 3px solid var(--rose); outline-offset: 2px; }
 .search__count { margin: 18px 0 8px; font-size: .95rem; opacity: .8; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Kvizovi */
+.quiz { margin: 8px 0 32px; }
+.quiz__q { border: 0; margin: 0 0 26px; padding: 0; }
+.quiz__q legend { font: 700 1.2rem/1.35 var(--display); color: var(--burgundy); margin-bottom: 12px; padding: 0; }
+.quiz__n { display: inline-block; font: 700 .72rem/1 var(--body); letter-spacing: .12em; color: var(--rose); margin-right: 6px; vertical-align: middle; }
+.quiz__a { display: flex; gap: 12px; align-items: center; padding: 12px 16px; margin: 8px 0; border: 1.5px solid var(--field-line, #f2c4d0); border-radius: 16px; cursor: pointer; background: var(--paper); }
+.quiz__a:hover { border-color: var(--rose); }
+.quiz__a:has(input:checked) { background: var(--blush); border-color: var(--rose); }
+.quiz__a input { accent-color: var(--rose); width: 18px; height: 18px; flex: none; }
+.quiz__err { color: var(--bad, #c0392b); font-weight: 600; }
+.quiz__result { background: var(--blush); border-radius: 24px; padding: 24px 28px; margin: 8px 0 16px; outline: none; }
+.quiz__result h2 { margin: 4px 0 10px; }
+.quiz__result h3 { margin: 18px 0 6px; font-size: 1rem; }
+.quiz__again { margin: 0 0 24px; }
