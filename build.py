@@ -175,7 +175,7 @@ def header(active):
     links = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == active else ""}>{e(T(n, en))}</a>' for h, n, en in NAV[1:])
     return f"""<header class="site-header"><div class="wrap">
 <a class="brand" href="/" aria-label="{e(CFG['site_name'])}, {T('naslovnica', 'home')}">{mark()}<span class="brand__name">{e(CFG['site_name'])}</span></a>
-<nav class="nav" aria-label="{T('Glavna navigacija', 'Main navigation')}">{links}<!--LANGSW--></nav>
+<nav class="nav" aria-label="{T('Glavna navigacija', 'Main navigation')}">{links}<a class="nav__search" href="/trazi/" aria-label="{T('Pretraži', 'Search')}"{" aria-current=\"page\"" if active == "/trazi/" else ""}><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></a><!--LANGSW--></nav>
 </div></header>
 <main id="sadrzaj">"""
 
@@ -558,6 +558,40 @@ def privacy_en():
 <p><em>Last updated: {hr_date(date.today().isoformat())}</em></p>"""
 
 
+def page_search():
+    path = "/trazi/"
+    norm = lambda t: re.sub(r"\s+", " ", t).strip()
+    idx = [{"t": a["h1"], "u": f"/clanci/{a['slug']}/", "x": a["excerpt"], "k": a["kicker"],
+            "r": fmt_rating(a["review"]["rating"]) if a.get("review") else "",
+            "s": norm(" ".join([a["title"], a["description"], a.get("review", {}).get("product", ""), " ".join(CAT[c]["name"] for c in a["categories"]),
+                                " ".join(a.get("itemlist", [])), plain(a["body"])]))} for a in ARTICLES]
+    data = json.dumps(idx, ensure_ascii=False).replace("</", "<\\/")
+    cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), (None, T("Pretraži", "Search"))])
+    return head(T("Pretraži recenzije", "Search reviews"), T("Pretraži sve recenzije po proizvodu, brendu ili tipu kože.", "Search all reviews by product, brand or skin type."),
+                path, extra_ld=[cr_ld], noindex=True) + header(path) + f"""
+{cr}<div class="wrap read"><header class="page-head"><h1>{T('Pretraži recenzije', 'Search reviews')}</h1></header>
+<form class="search" role="search" action="/trazi/" onsubmit="return false"><label class="sr-only" for="q">{T('Pojam za pretragu', 'Search term')}</label>
+<input id="q" name="q" type="search" autocomplete="off" autofocus placeholder="{T('npr. mineralni SPF, Rhode, rozacea', 'e.g. mineral SPF, Rhode, rosacea')}"></form>
+<p class="search__count" id="search-count" aria-live="polite"></p><div class="posts" id="search-results"></div>
+<a id="search-root" href="/favicon.svg" hidden></a></div>
+<script id="search-data" type="application/json">{data}</script>
+<script>
+(function(){{var D=JSON.parse(document.getElementById("search-data").textContent),q=document.getElementById("q"),out=document.getElementById("search-results"),cnt=document.getElementById("search-count");
+var root=document.getElementById("search-root").getAttribute("href").replace("favicon.svg",""),pre=root!=="/";
+function n(t){{return t.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").replace(/đ/g,"d")}}
+D.forEach(function(d){{d.n=n(d.s);d.nt=n(d.t)}});
+function esc(t){{return t.replace(/[&<>"]/g,function(c){{return {{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}}[c]}})}}
+function run(){{var v=n(q.value).trim(),w=v.split(/\\s+/).filter(Boolean);
+if(!w.length){{out.innerHTML="";cnt.textContent="";return}}
+var hits=D.filter(function(d){{return w.every(function(x){{return d.n.indexOf(x)>-1}})}}).sort(function(a,b){{return w.filter(function(x){{return b.nt.indexOf(x)>-1}}).length-w.filter(function(x){{return a.nt.indexOf(x)>-1}}).length}});
+cnt.textContent=hits.length?hits.length+" {T('rezultata', 'results')}":"{T('Nema rezultata. Probaj s nazivom brenda ili proizvoda.', 'No results. Try a brand or product name.')}";
+out.innerHTML=hits.map(function(d){{var u=root+d.u.slice(1)+(pre?"index.html":"");return '<article class="post"><div><div class="post__meta"><span class="eyebrow">'+esc(d.k)+'</span>'+(d.r?'<span>★ '+d.r+'/5</span>':'')+'</div><h3><a href="'+u+'">'+esc(d.t)+'</a></h3><p>'+esc(d.x)+'</p></div></article>'}}).join("")}}
+q.addEventListener("input",function(){{run();try{{history.replaceState(null,"","?q="+encodeURIComponent(q.value))}}catch(_){{}}}});
+var m=location.search.match(/[?&]q=([^&]*)/);if(m){{q.value=decodeURIComponent(m[1].replace(/\\+/g," "));run()}}}})();
+</script>
+""" + footer()
+
+
 def page_404():
     return head(T("Stranica nije pronađena", "Page not found"), T("Tražena stranica ne postoji.", "The page you are looking for does not exist."), "/404.html", noindex=True) + header(None) + f"""
 <div class="wrap read"><header class="page-head"><h1>{T('Ova stranica ne postoji', 'This page does not exist')}</h1></header>
@@ -616,7 +650,7 @@ def relativize(doc, path):
 # Hrvatski je na korijenu, engleski pod /en/ s engleskim slugovima. Kod stranica radi s hrvatskim putanjama,
 # a write() ih u engleskoj verziji prepisuje (en_path) i dodaje hreflang poveznice.
 
-EN_SECTION = {"clanci": "articles", "kategorije": "categories", "brendovi": "brands", "o-meni": "about",
+EN_SECTION = {"trazi": "search", "clanci": "articles", "kategorije": "categories", "brendovi": "brands", "o-meni": "about",
               "kontakt": "contact", "politika-privatnosti": "privacy", "hvala-na-komentaru": "thank-you"}
 EN_SLUG = {k: v["slug"] for k, v in content_en.ARTICLES_EN.items()}
 EN_SLUG.update({k: v["slug"] for k, v in content_en.CATEGORIES_EN.items()})
@@ -696,6 +730,7 @@ def write_pages():
                                                 T(f"Kako {CFG['site_name']} koristi kolačiće, Google Analytics, PostHog analitiku i Google AdSense oglase.",
                                                   f"How {CFG['site_name']} uses cookies, Google Analytics, PostHog analytics and Google AdSense ads."),
                                                 T("Privatnost i kolačići", "Privacy and cookies"), T(privacy_hr(), privacy_en())))
+    write("/trazi/", page_search())
     write("/404.html", page_404())
     write("/rss.xml", rss())
     write("/llms.txt", llms_txt())

@@ -276,3 +276,10 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
 .comment-form__note { font-size: .85rem; color: var(--ink-soft); margin: 0; }
 .comment-form .btn { justify-self: start; border: 0; cursor: pointer; }
 @media (max-width: 640px) { .topflop__grid, .comment-form__row { grid-template-columns: minmax(0, 1fr); } }
+
+/* Tražilica */
+.nav a.nav__search { display: inline-flex; align-items: center; }
+.search input { width: 100%; font: 400 1.1rem/1.4 var(--body); padding: 14px 18px; border: 2px solid var(--rose); border-radius: 999px; background: var(--paper, #fff); color: var(--burgundy); }
+.search input:focus { outline: 3px solid var(--rose); outline-offset: 2px; }
+.search__count { margin: 18px 0 8px; font-size: .95rem; opacity: .8; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
