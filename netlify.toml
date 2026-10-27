@@ -1,0 +1,8 @@
+# Netlify: svaki push na GitHub automatski gradi i objavljuje stranicu.
+[build]
+  command = "python3 build.py"
+  publish = "dist"
+
+[build.environment]
+  PYTHON_VERSION = "3.12"
+# 404.html Netlify prikazuje automatski.
