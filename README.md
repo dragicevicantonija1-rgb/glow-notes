@@ -19,8 +19,8 @@ Pokretanje: `python3 build.py` (treba samo Python 3, bez dodatnih paketa).
 
 ## Prije objave: što treba upisati u `config.json`
 
-1. **Domena** – `base_url`, npr. `https://www.glownotes.hr` (provjeriti dostupnost na domene.hr / CARNET registru).
-2. **E-mail** – `contact_email` (sad je privremeno `info@glownotes.hr`).
+1. **Domena** – `base_url`, sada `https://glownotes.eu` (kupuje se na Porkbunu, nameserveri na Netlify).
+2. **E-mail** – `contact_email` (sad je privremeno `info@glownotes.eu`, sandučić tek treba otvoriti).
 3. **PostHog** – na eu.posthog.com napraviti projekt (EU poslužitelji, zbog GDPR-a), kopirati *Project API key* (`phc_...`) u `posthog_key`.
 4. **Google Search Console** – dodati svojstvo, odabrati *HTML tag*, kopirati samo vrijednost `content="..."` u `google_site_verification`. (Još bolje: verifikacija preko DNS-a za cijelu domenu.) Nakon verifikacije poslati `https://DOMENA/sitemap.xml`.
 5. **AdSense** – nakon prijave upisati `ca-pub-...` u `adsense_client`; nakon odobrenja napraviti *In-article* oglasnu jedinicu i njen broj upisati u `adsense_slot_in_article`. `ads.txt` se generira sam. U AdSenseu uključiti **Privacy & messaging → GDPR poruku** (Googleov certificirani CMP, obavezan za EU).
