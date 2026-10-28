@@ -12,6 +12,8 @@ from content import ARTICLES, BRANDS, CATEGORIES
 from content_recenzije import REVIEWS
 from komentari import KOMENTARI
 from content_kvizovi import QUIZZES
+from content_kvizovi_znanje import KNOWLEDGE_QUIZZES
+import random
 import content_en
 ARTICLES = sorted(REVIEWS, key=lambda r: r["kicker"] != "Rutina") + ARTICLES
 LANG = "hr"  # main() gradi prvo hrvatsku verziju u /, zatim englesku u /en/
@@ -268,6 +270,7 @@ def page_home():
 <section class="section" style="padding-top:0"><div class="wrap">
 <div class="section__head"><h2>{T('Beauty kvizovi', 'Beauty quizzes')}</h2><p class="eyebrow">{T('Minuta do odgovora', 'One minute to an answer')}</p></div>
 <div class="cats cats--3">{quiz_tiles()}</div>
+<p style="margin-top:20px"><a class="btn" href="/kvizovi/#znanje">{T('Kvizovi znanja o kozmetici', 'Beauty knowledge quizzes')} ({len(KNOWLEDGE_QUIZZES)}) →</a></p>
 </div></section>
 <section class="section" style="padding-top:0"><div class="wrap">
 <div class="section__head"><h2>{T('Najnovije recenzije', 'Latest reviews')}</h2></div>
@@ -600,9 +603,72 @@ var m=location.search.match(/[?&]q=([^&]*)/);if(m){{q.value=decodeURIComponent(m
 QUIZ_HUES = ["pink", "sun", "tomato"]
 
 
-def quiz_tiles():
-    return "".join(f"""<a class="cat hue-{QUIZ_HUES[i % 3]}" href="/kvizovi/{q['slug']}/"><span class="cat__dot"></span>
-<h3>{e(T(*q['h1']))}</h3><p>{e(T(*q['short']))}</p><span class="cat__count">{T('Riješi kviz', 'Take the quiz')} →</span></a>""" for i, q in enumerate(QUIZZES))
+def quiz_tiles(qs=None, hues=QUIZ_HUES):
+    return "".join(f"""<a class="cat hue-{hues[i % len(hues)]}" href="/kvizovi/{q['slug']}/"><span class="cat__dot"></span>
+<h3>{e(T(*q['h1']).replace('Kviz: ', '').replace('Quiz: ', ''))}</h3><p>{e(T(*q['short']))}</p><span class="cat__count">{T('Riješi kviz', 'Take the quiz')} →</span></a>""" for i, q in enumerate(qs or QUIZZES))
+
+
+def TT(x):
+    return x if isinstance(x, str) else T(*x)
+
+
+def page_kquiz(q):
+    path = f"/kvizovi/{q['slug']}/"
+    n = len(q["questions"])
+    cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), ("/kvizovi/", T("Kvizovi", "Quizzes")), (None, T(*q["h1"]))])
+    blocks, qld = [], []
+    for i, (qt, opts, expl) in enumerate(q["questions"]):
+        order = list(range(len(opts)))
+        random.Random(qt[0]).shuffle(order)
+        btns = "".join(f'<button type="button" class="kq__opt"{" data-ok" if k == 0 else ""}>{e(TT(opts[k]))}</button>' for k in order)
+        blocks.append(f"""<fieldset class="kq__q"><legend><span class="quiz__n">{i + 1}/{n}</span> {e(TT(qt))}</legend>
+<div class="kq__opts">{btns}</div><p class="kq__expl" hidden><strong class="kq__verdict"></strong> {e(TT(expl))}</p></fieldset>""")
+        qld.append({"@type": "Question", "name": TT(qt), "eduQuestionType": "Multiple choice",
+                    "acceptedAnswer": {"@type": "Answer", "text": TT(opts[0])},
+                    "suggestedAnswer": [{"@type": "Answer", "text": TT(o)} for o in opts[1:]]})
+    others = "".join(f'<li><a href="/kvizovi/{o["slug"]}/">{e(T(*o["h1"]))}</a></li>' for o in KNOWLEDGE_QUIZZES if o is not q)
+    ld = [cr_ld, {"@type": "Quiz", "name": T(*q["title"]), "description": T(*q["description"]), "url": BASE + path, "inLanguage": lang_tag(),
+                  "author": person(), "publisher": {"@id": BASE + "/#org"}, "hasPart": qld}]
+    msgs = json.dumps({"ok": T("Točno!", "Correct!"), "no": T("Netočno.", "Not quite."),
+                       "hi": T("Prava si beauty stručnjakinja! 🎆", "You're a true beauty expert! 🎆"),
+                       "mid": T("Odlično, znaš puno! Još malo do vatrometa.", "Great, you know a lot! Just a little more for fireworks."),
+                       "lo": T("Dobar početak! Pročitaj recenzije pa pokušaj ponovno.", "Good start! Read the reviews and try again.")}, ensure_ascii=False)
+    return head(T(*q["title"]), T(*q["description"]), path, extra_ld=ld) + header("/kvizovi/") + f"""
+{cr}<div class="wrap read"><header class="page-head"><p class="eyebrow">{T('Kviz znanja', 'Knowledge quiz')} · {n} {T('pitanja', 'questions')}</p><h1>{e(T(*q['h1']))}</h1>
+<p class="page-sub">{e(T(*q['description']))} {T('Za više od 85 % točnih odgovora čeka te vatromet.', 'Score over 85% and you get fireworks.')}</p></header>
+<p class="kq__score" id="kq-score" aria-live="polite">{T('Točno', 'Correct')}: <strong>0</strong> / {n}</p>
+<div class="kq" id="kq">{''.join(blocks)}</div>
+<section class="quiz__result" id="kq-result" hidden tabindex="-1"><p class="eyebrow">{T('Tvoj rezultat', 'Your result')}</p>
+<h2 id="kq-pct"></h2><p id="kq-msg"></p><p><button type="button" class="btn" id="kq-reset">{T('Riješi ponovno', 'Try again')}</button></p></section>
+<div class="brands-in"><p class="eyebrow">{T('Ostali kvizovi znanja', 'More knowledge quizzes')}</p><ul>{others}</ul></div></div>
+<canvas id="kq-fw" class="kq__fw" aria-hidden="true"></canvas>
+<script>
+(function(){{var M={msgs},root=document.getElementById("kq"),qs=root.querySelectorAll(".kq__q"),n=qs.length,ok=0,done=0,
+sc=document.querySelector("#kq-score strong"),res=document.getElementById("kq-result");
+qs.forEach(function(f){{var bs=f.querySelectorAll(".kq__opt"),ex=f.querySelector(".kq__expl");
+bs.forEach(function(b){{b.addEventListener("click",function(){{if(f.dataset.done)return;f.dataset.done=1;done++;
+var good=b.hasAttribute("data-ok");if(good)ok++;bs.forEach(function(x){{x.disabled=true;if(x.hasAttribute("data-ok"))x.classList.add("is-ok")}});
+if(!good)b.classList.add("is-no");ex.querySelector(".kq__verdict").textContent=good?M.ok:M.no;ex.hidden=false;sc.textContent=ok;
+if(done===n)finish()}})}})}});
+function finish(){{var p=Math.round(ok/n*100);document.getElementById("kq-pct").textContent=ok+" / "+n+" ("+p+" %)";
+document.getElementById("kq-msg").textContent=p>85?M.hi:p>=60?M.mid:M.lo;res.hidden=false;res.focus();res.scrollIntoView({{behavior:"smooth",block:"center"}});
+if(window.posthog&&posthog.capture)posthog.capture("kviz_znanja",{{kviz:{json.dumps(q['slug'])},postotak:p}});
+if(window.gtag)gtag("event","quiz_score",{{quiz:{json.dumps(q['slug'])},score:p}});
+if(p>85)fireworks()}}
+document.getElementById("kq-reset").onclick=function(){{ok=0;done=0;sc.textContent=0;res.hidden=true;
+qs.forEach(function(f){{delete f.dataset.done;f.querySelector(".kq__expl").hidden=true;f.querySelectorAll(".kq__opt").forEach(function(x){{x.disabled=false;x.classList.remove("is-ok","is-no")}})}});
+window.scrollTo({{top:root.offsetTop-120,behavior:"smooth"}})}};
+function fireworks(){{if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+var c=document.getElementById("kq-fw"),x=c.getContext("2d"),W,H,P=[],t0=performance.now(),col=["#f4a7bb","#ff5d8f","#ffd45c","#7b1730","#ffffff","#ff9ab2","#6fe0a8"];
+function size(){{W=c.width=innerWidth;H=c.height=innerHeight}}size();c.style.display="block";
+function burst(){{var cx=W*(.2+Math.random()*.6),cy=H*(.15+Math.random()*.35),k=col[Math.floor(Math.random()*col.length)];
+for(var i=0;i<90;i++){{var a=Math.random()*6.283,s=2+Math.random()*5;P.push({{x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:1,c:Math.random()<.3?col[Math.floor(Math.random()*col.length)]:k}})}}}}
+var nb=0;(function loop(now){{if(now-t0<3200&&nb<(now-t0)/320){{burst();nb++}}x.clearRect(0,0,W,H);
+P=P.filter(function(p){{p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.vx*=.985;p.l-=.012;if(p.l<=0)return false;x.globalAlpha=p.l;x.fillStyle=p.c;x.beginPath();x.arc(p.x,p.y,3.2,0,6.283);x.fill();return true}});
+if(P.length||now-t0<3200)requestAnimationFrame(loop);else c.style.display="none"}})(t0)}}}})();
+</script>
+""" + footer()
+
 
 
 def link_label(path):
@@ -616,14 +682,17 @@ def page_quizzes():
     path = "/kvizovi/"
     cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), (None, T("Kvizovi", "Quizzes"))])
     ld = [cr_ld, {"@type": "CollectionPage", "name": T("Beauty kvizovi", "Beauty quizzes"), "url": BASE + path, "inLanguage": lang_tag(),
-                  "hasPart": [{"@type": "Quiz", "name": T(*q["title"]), "url": f"{BASE}/kvizovi/{q['slug']}/"} for q in QUIZZES]}]
+                  "hasPart": [{"@type": "Quiz", "name": T(*q["title"]), "url": f"{BASE}/kvizovi/{q['slug']}/"} for q in QUIZZES + KNOWLEDGE_QUIZZES]}]
     return head(T("Beauty kvizovi – tip kože, SPF i crvenilo", "Beauty quizzes – skin type, SPF and redness"),
                 T("Kratki beauty kvizovi: saznaj svoj tip kože, koji SPF ti odgovara i je li ti koža sklona crvenilu, uz preporuke iz iskrenih recenzija.",
                   "Short beauty quizzes: find your skin type, the SPF that suits you and whether your skin is prone to redness, with picks from honest reviews."),
                 path, extra_ld=ld) + header(path) + f"""
 {cr}<div class="wrap"><header class="page-head"><p class="eyebrow">{T('Minuta do odgovora', 'One minute to an answer')}</p><h1>{T('Beauty kvizovi', 'Beauty quizzes')}</h1>
 <p class="page-sub">{T('Odgovori na nekoliko pitanja i saznaj što tvojoj koži odgovara, uz proizvode koje sam stvarno isprobala.', 'Answer a few questions and find out what suits your skin, with products I have actually tried.')}</p></header>
-<div class="cats cats--3" style="margin-bottom:64px">{quiz_tiles()}</div></div>
+<div class="section__head"><h2>{T('Upoznaj svoju kožu', 'Get to know your skin')}</h2></div>
+<div class="cats cats--3" style="margin-bottom:56px">{quiz_tiles()}</div>
+<div class="section__head" id="znanje"><h2>{T('Kvizovi znanja o kozmetici', 'Beauty knowledge quizzes')}</h2><p class="eyebrow">{T('Vatromet za više od 85 %', 'Fireworks for over 85%')}</p></div>
+<div class="cats cats--3" style="margin-bottom:64px">{quiz_tiles(KNOWLEDGE_QUIZZES, ["mint", "love", "sky", "sun", "cobalt"])}</div></div>
 """ + footer()
 
 
@@ -681,7 +750,7 @@ def sitemap():
     urls += [(f"/kategorije/{c['slug']}/", max(a.get("updated", a["date"]) for a in ARTICLES if c["slug"] in a["categories"]), "0.8") for c in CATEGORIES]
     urls += [(f"/clanci/{a['slug']}/", a.get("updated", a["date"]), "0.9") for a in ARTICLES]
     urls += [("/brendovi/", date.today().isoformat(), "0.7"), ("/kvizovi/", date.today().isoformat(), "0.7")]
-    urls += [(f"/kvizovi/{q['slug']}/", date.today().isoformat(), "0.7") for q in QUIZZES]
+    urls += [(f"/kvizovi/{q['slug']}/", date.today().isoformat(), "0.7") for q in QUIZZES + KNOWLEDGE_QUIZZES]
     urls += [(f"/brendovi/{x['slug']}/", max(a.get("updated", a["date"]) for a in x["articles"]), "0.6") for x in BRANDS if x["articles"]]
     urls += [("/o-meni/", date.today().isoformat(), "0.4"), ("/kontakt/", date.today().isoformat(), "0.3"),
              ("/politika-privatnosti/", date.today().isoformat(), "0.2")]
@@ -730,7 +799,7 @@ EN_SECTION = {"kvizovi": "quizzes", "trazi": "search", "clanci": "articles", "ka
               "kontakt": "contact", "politika-privatnosti": "privacy", "hvala-na-komentaru": "thank-you"}
 EN_SLUG = {k: v["slug"] for k, v in content_en.ARTICLES_EN.items()}
 EN_SLUG.update({k: v["slug"] for k, v in content_en.CATEGORIES_EN.items()})
-EN_SLUG.update({q["slug"]: q["en_slug"] for q in QUIZZES})
+EN_SLUG.update({q["slug"]: q["en_slug"] for q in QUIZZES + KNOWLEDGE_QUIZZES})
 HR_PATH_RE = re.compile(r"(?<![\w/.-])(" + re.escape(BASE) + r")?(/(?:" + "|".join(map(re.escape, EN_SECTION)) + r")/(?:[a-z0-9-]+/)?)")
 
 
@@ -811,6 +880,8 @@ def write_pages():
     write("/kvizovi/", page_quizzes())
     for q in QUIZZES:
         write(f"/kvizovi/{q['slug']}/", page_quiz(q))
+    for q in KNOWLEDGE_QUIZZES:
+        write(f"/kvizovi/{q['slug']}/", page_kquiz(q))
     write("/404.html", page_404())
     write("/rss.xml", rss())
     write("/llms.txt", llms_txt())
