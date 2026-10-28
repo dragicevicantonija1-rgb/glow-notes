@@ -76,3 +76,7 @@ U GA4: **Reports → Reports snapshot** (ili Realtime/Acquisition) → ikona **S
 - Gumb HR/EN u izborniku vodi na isti članak na drugom jeziku i pamti izbor (kolačić `nf_lang`).
 - Automatski jezik (u `netlify.toml`): posjetitelji iz Hrvatske, BiH, Srbije i Crne Gore ostaju na hrvatskom; ostali s engleskim ili drugim europskim jezikom preglednika idu na `/en/`.
 - Engleski komentari stižu u isti Netlify obrazac "komentari", a polje "clanak" počinje s `EN `.
+
+## Pravilo rada
+
+Promjene ostaju lokalno i u pregledu. Na GitHub (i time na Netlify) idu tek kad Antonija kaže da ide live.
