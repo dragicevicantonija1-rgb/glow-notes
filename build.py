@@ -495,7 +495,7 @@ def page_article(a):
 <div class="tags">{''.join(f'<a class="tag" href="/kategorije/{s}/"><span class="dot hue-{CAT[s]["hue"]}"></span>{e(CAT[s]["name"])}</a>' for s in a['categories'])}</div>
 <p class="verdict">{mark()}{e(a['verdict'])}</p>
 </header>
-{('<figure class="cover">' + picture(a["slug"], a.get("review", {}).get("product", a["h1"]), 1200, 900 if a.get("review") else 750, eager=True) + (f'<figcaption>{T("AI ilustracija proizvoda, nije originalno pakiranje.", "AI product illustration, not the original packaging.")}</figcaption>' if a.get("review") else '') + '</figure>') if has_image(a["slug"]) else ''}
+{('<figure class="cover">' + picture(a["slug"], a.get("review", {}).get("product", a["h1"]), 1200, 900 if a.get("review") else 750, eager=True) + (f'<figcaption>{T("Fotografija proizvoda", "Product photo")}: {e(a["review"]["brand"])}</figcaption>' if a.get("review") else '') + '</figure>') if has_image(a["slug"]) else ''}
 <details class="toc" open><summary>{T('Sadržaj', 'Contents')}</summary><ul>{toc}</ul></details>
 <div class="prose">{body}{review_block(a["review"]) if a.get("review") else ""}{faq}</div>
 {ad_slot()}
