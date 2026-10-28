@@ -63,7 +63,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 900; font-variation-setti
 .nav { display: flex; flex-wrap: wrap; gap: 2px 20px; font: 700 0.78rem/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; }
 .nav a { color: var(--burgundy); text-decoration: none; padding: 8px 0; border-bottom: 2px solid transparent; }
 .nav a:hover, .nav a[aria-current="page"] { border-bottom-color: var(--rose); color: var(--burgundy); }
-.nav a.lang { border: 1.5px solid var(--rose); border-radius: 999px; padding: 6px 10px; margin-left: 4px; }
+.nav a.lang { display: inline-flex; align-items: center; justify-content: center; align-self: center; border: 1.5px solid var(--rose); border-radius: 999px; padding: 7px 8px 7px 10px; margin-left: 4px; line-height: 1; }
 .nav a.lang:hover { background: var(--rose); color: var(--burgundy); }
 
 /* Značka */
