@@ -97,6 +97,21 @@ h1, h2, h3 { font-family: var(--display); font-weight: 900; font-variation-setti
 .cat { display: flex; flex-direction: column; gap: 8px; padding: 24px 22px; text-decoration: none; color: #3b1a22; border-radius: 22px; transition: transform .15s; }
 .cat:hover { color: #3b1a22; transform: translateY(-3px); }
 .cat__dot { display: none; }
+.cat__img { display: block; margin: -10px -8px 8px; }
+.cat__img img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 16px; }
+.pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 32px; font: 700 0.8rem/1 var(--body); letter-spacing: 0.12em; text-transform: uppercase; }
+.pager__nums { display: flex; gap: 6px; margin-inline: auto; }
+.pager__num, .pager__step { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; height: 40px; padding: 0 14px; border-radius: 99px; text-decoration: none; color: var(--burgundy); border: 1px solid var(--hair); }
+.pager__num[aria-current] { background: var(--burgundy); color: var(--paper); border-color: var(--burgundy); }
+.pager a:hover { background: var(--rose); color: #fffbf7; border-color: var(--rose); }
+.about-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 32px 0; }
+.about-grid figure { margin: 0; }
+.about-grid img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 22px; }
+.about-grid figcaption { font-size: 0.85rem; color: var(--ink-soft); margin-top: 8px; font-style: italic; }
+.about-facts { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.prose .about-facts li { margin: 0; padding: 16px 18px; border-radius: 18px; background: var(--blush); color: var(--ink); }
+.about-facts strong { display: block; font-family: var(--display); color: var(--burgundy); font-size: 1.05rem; margin-bottom: 4px; }
+@media (max-width: 640px) { .about-grid, .about-facts { grid-template-columns: minmax(0, 1fr); } }
 .cat h3 { font-size: var(--step-2); color: #7a1730; }
 .cat p { margin: 0; font-size: var(--step--1); line-height: 1.5; }
 .cat__count { margin-top: auto; padding-top: 8px; font: 700 0.74rem/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: #7a1730; }

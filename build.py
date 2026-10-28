@@ -239,13 +239,48 @@ def post_row(a, feature=False):
 </article>"""
 
 
+PER_PAGE = 8
+
+
+def pages(items, base):
+    """[(path, broj, stavke)]: prva stranica na base, ostale na base + stranica/N/."""
+    n = max(1, math.ceil(len(items) / PER_PAGE))
+    return [(base if i == 1 else f"{base}stranica/{i}/", i, items[(i - 1) * PER_PAGE:i * PER_PAGE]) for i in range(1, n + 1)]
+
+
+def pager(base, cur, total):
+    if total < 2:
+        return ""
+    url = lambda i: base if i == 1 else f"{base}stranica/{i}/"
+    prev = f'<a class="pager__step" rel="prev" href="{url(cur - 1)}">← {T("Novije", "Newer")}</a>' if cur > 1 else ""
+    nxt = f'<a class="pager__step" rel="next" href="{url(cur + 1)}">{T("Starije", "Older")} →</a>' if cur < total else ""
+    nums = "".join(f'<span class="pager__num" aria-current="page">{i}</span>' if i == cur else f'<a class="pager__num" href="{url(i)}">{i}</a>'
+                   for i in range(1, total + 1))
+    return f'<nav class="pager" aria-label="{T("Stranice", "Pages")}">{prev}<span class="pager__nums">{nums}</span>{nxt}</nav>'
+
+
+def page_suffix(i):
+    return T(f" – stranica {i}", f" – page {i}") if i > 1 else ""
+
+
 # ---------- stranice ----------
 
 def page_home():
+    used = set()
+
+    def tile_img(c):
+        # Slika najnovijeg članka iz kategorije, po mogućnosti ona koja se još nije pojavila na drugoj kartici.
+        withimg = [a for a in ARTICLES if c["slug"] in a["categories"] and has_image(a["slug"])]
+        a = next((a for a in withimg if a["slug"] not in used), withimg[0] if withimg else None)
+        if not a:
+            return ""
+        used.add(a["slug"])
+        return picture(a["slug"], "", 600, 375, "cat__img")
+
     def tiles(group):
-        return "".join(f"""<a class="cat hue-{c['hue']}" href="/kategorije/{c['slug']}/"><span class="cat__dot"></span>
+        return "".join(f"""<a class="cat hue-{c['hue']}" href="/kategorije/{c['slug']}/">{tile_img(c)}<span class="cat__dot"></span>
 <h3>{e(c['name'])}</h3><p>{e(c['short'])}</p><span class="cat__count">{plural(sum(c['slug'] in a['categories'] for a in ARTICLES))} →</span></a>""" for c in CATEGORIES if c["group"] == group)
-    posts = "".join(post_row(a, i == 0) for i, a in enumerate(ARTICLES))
+    posts = "".join(post_row(a, i == 0) for i, a in enumerate(ARTICLES[:6]))
     return head(T(f"{CFG['site_name']} – iskrene beauty recenzije na hrvatskom", f"{CFG['site_name']} – honest beauty reviews for sensitive skin"),
                 T("Beauty recenzije na hrvatskom: njega, šminka i SPF, od Rhode i Chanela do ljekarničke kozmetike. Testirano na osjetljivoj koži, bez plaćenih recenzija.",
                   "Honest beauty reviews from Europe: skincare, make-up and SPF, from Rhode and Chanel to pharmacy brands. Tested on sensitive skin with rosacea, no paid reviews."),
@@ -275,6 +310,7 @@ def page_home():
 <section class="section" style="padding-top:0"><div class="wrap">
 <div class="section__head"><h2>{T('Najnovije recenzije', 'Latest reviews')}</h2></div>
 <div class="posts">{posts}</div>
+<p style="margin-top:28px"><a class="btn" href="/clanci/">{T('Sve recenzije', 'All reviews')} ({len(ARTICLES)}) →</a></p>
 </div></section>
 <section class="section principles"><div class="wrap">
 <div class="section__head"><h2>{T('Kako recenziram', 'How I review')}</h2></div>
@@ -473,20 +509,38 @@ def page_article(a):
 """ + footer()
 
 
-def page_category(c):
-    path = f"/kategorije/{c['slug']}/"
-    arts = [a for a in ARTICLES if c["slug"] in a["categories"]]
-    cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), (None, c["name"])])
-    ld = [cr_ld, {"@type": "CollectionPage", "name": c["title"], "url": BASE + path, "description": c["description"],
+def page_category(c, path, num, total, arts):
+    base = f"/kategorije/{c['slug']}/"
+    cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), (None, c["name"])] if num == 1 else
+                       [("/", T("Naslovnica", "Home")), (base, c["name"]), (None, T(f"Stranica {num}", f"Page {num}"))])
+    ld = [cr_ld, {"@type": "CollectionPage", "name": c["title"] + page_suffix(num), "url": BASE + path, "description": c["description"],
                   "inLanguage": lang_tag(), "hasPart": [{"@type": "BlogPosting", "headline": a["title"], "url": f"{BASE}/clanci/{a['slug']}/"} for a in arts]}]
-    return head(c["title"], c["description"], path, extra_ld=ld) + header(path) + f"""
+    intro = f'<div class="page-intro prose">{c["intro"]}</div>' if num == 1 else ""
+    return head(c["title"] + page_suffix(num), c["description"], path, extra_ld=ld) + header(base) + f"""
 {cr}
 <div class="wrap read">
-<header class="page-head"><p class="eyebrow"><span class="dot hue-{c['hue']}"></span> {T('Kategorija', 'Category')}</p><h1>{e(c['name'])}</h1></header>
-<div class="page-intro prose">{c['intro']}</div>
+<header class="page-head"><p class="eyebrow"><span class="dot hue-{c['hue']}"></span> {T('Kategorija', 'Category')}</p><h1>{e(c['name'])}{page_suffix(num)}</h1></header>
+{intro}
 </div>
 <section class="section"><div class="wrap read"><div class="section__head"><h2>{T('Recenzije i liste', 'Reviews and lists')}</h2></div>
-<div class="posts">{''.join(post_row(a) for a in arts)}</div></div></section>
+<div class="posts">{''.join(post_row(a) for a in arts)}</div>{pager(base, num, total)}</div></section>
+""" + footer()
+
+
+def page_archive(path, num, total, arts):
+    base = "/clanci/"
+    cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), (None, T("Sve recenzije", "All reviews"))] if num == 1 else
+                       [("/", T("Naslovnica", "Home")), (base, T("Sve recenzije", "All reviews")), (None, T(f"Stranica {num}", f"Page {num}"))])
+    title = T("Sve beauty recenzije", "All beauty reviews") + page_suffix(num)
+    ld = [cr_ld, {"@type": "CollectionPage", "name": title, "url": BASE + path, "inLanguage": lang_tag(),
+                  "hasPart": [{"@type": "BlogPosting", "headline": a["title"], "url": f"{BASE}/clanci/{a['slug']}/"} for a in arts]}]
+    return head(title, T("Sve recenzije kozmetike na Glow Notes, od najnovijih: njega lica, šminka i SPF testirani na osjetljivoj koži s rozaceom.",
+                         "Every beauty review on Glow Notes, newest first: skincare, make-up and SPF tested on sensitive skin with rosacea."),
+                path, extra_ld=ld) + header(base) + f"""
+{cr}
+<div class="wrap read"><header class="page-head"><p class="eyebrow">{T('Arhiva', 'Archive')}</p><h1>{e(title)}</h1></header></div>
+<section class="section" style="padding-top:24px"><div class="wrap read">
+<div class="posts">{''.join(post_row(a) for a in arts)}</div>{pager(base, num, total)}</div></section>
 """ + footer()
 
 
@@ -499,16 +553,31 @@ def page_simple(slug, title, desc, h1, body, noindex=False):
 
 
 def about_hr():
-    return f"""<figure class="inline-fig">{picture("foto-polica", "Kozmetika na svijetloplavoj podlozi: krema, serum, tonik, SPF i ruž", 1200, 750)}</figure>
-<p class="lead">Bok, ja sam {e(CFG['author'])}. Imam osjetljivu, reaktivnu kožu s rozaceom i ten svijetao kao sir, kako to volim reći.</p>
-<p>Godinama tražim kozmetiku koja moju kožu neće razljutiti. Usput sam potrošila previše novca na proizvode koji se “preporučuju za osjetljivu kožu”, a meni su izazvali crvenilo, peckanje ili ljuštenje. {e(CFG['site_name'])} je nastao da drugima taj put bude kraći, i da o svakom proizvodu, od Rhode do Chanela, dobijete iskreno mišljenje na hrvatskom.</p>
-<h2 id="kako">Kako pišem recenzije</h2>
-<ul><li>Pišem samo o proizvodima koje sam stvarno koristila, i to dovoljno dugo da znam kako se ponašaju.</li>
-<li>Uz svaki proizvod navodim što brend tvrdi, a što sam iskusila.</li>
-<li>Pišem i o promašajima, jer iz njih se najviše nauči.</li>
-<li>Ne primam novac za recenzije. Portal se financira oglasima (Google AdSense).</li></ul>
+    return f"""<p class="lead">Bok, ja sam {e(CFG['author'])}. Moja koža crveni se na vjetar, na vruć čaj, na stres i, iskreno, ponekad i bez ikakvog razloga. Zato je {e(CFG['site_name'])} nastao kao dnevnik nekoga tko kozmetiku ne može kupovati naslijepo.</p>
+<ul class="about-facts">
+<li><strong>Tip kože</strong>osjetljiva, reaktivna, s rozaceom i tenom svijetlim kao sir</li>
+<li><strong>Najveći neprijatelj</strong>parfem u kremi i “osvježavajući” mentol</li>
+<li><strong>Najveća ljubav</strong>mineralni SPF koji ne ostavlja bijeli trag</li>
+<li><strong>Pravilo</strong>nijedan proizvod ne dobije ocjenu prije četiri tjedna na mom licu</li></ul>
+<div class="about-grid">
+<figure>{picture("foto-vecernja-rutina", "Nanošenje kreme iz tube na nadlanicu, uz svijeću i ružičaste pločice u kupaonici", 1200, 750)}<figcaption>Patch test na ruci prije lica. Uvijek.</figcaption></figure>
+<figure>{picture("foto-led-maska", "Žena se odmara na kauču s crvenom LED maskom na licu", 1200, 750)}<figcaption>Večer s LED maskom: dio moje rutine za crvenilo.</figcaption></figure></div>
+<h2 id="prica">Kako je sve počelo</h2>
+<p>Godinama sam vjerovala natpisima “za osjetljivu kožu” i godinama se budila s crvenim obrazima, peckanjem i suhim mrljama. Ladica mi je bila puna skupih promašaja. U jednom trenutku počela sam bilježiti što sam stavila na lice i kako je koža reagirala, dan po dan. Te bilješke su s vremenom postale ovaj portal.</p>
+<p>Danas isprobavam sve, od hit proizvoda s TikToka i luksuznih klasika poput Chanela do ljekarničke kozmetike za par eura, i pišem što je stvarno vrijedilo, a što je završilo u smeću.</p>
+<h2 id="kako">Kako testiram</h2>
+<ul><li><strong>Patch test prvo.</strong> Svaki proizvod najprije ide na ruku ili iza uha, tek onda na lice.</li>
+<li><strong>Četiri tjedna minimum.</strong> Toliko treba da vidim kako se proizvod ponaša, a ne samo kako izgleda prvi dan.</li>
+<li><strong>Jedna novost u isto vrijeme.</strong> Ako se pojavi crvenilo, točno znam tko je kriv.</li>
+<li><strong>Tvrdnje brenda naspram stvarnosti.</strong> Uz svaki proizvod pišem što obećava i što sam ja iskusila.</li>
+<li><strong>I promašaji dobiju tekst.</strong> Iz njih se najviše nauči, pa imaju i vlastitu kategoriju <a href="/kategorije/flop/">Flop</a>.</li></ul>
+<h2 id="sto">Što ćeš ovdje naći</h2>
+<p>Recenzije po tipu kože (<a href="/kategorije/rozacea/">rozacea</a>, <a href="/kategorije/osjetljiva-koza/">osjetljiva</a>, <a href="/kategorije/reaktivna-koza/">reaktivna</a> i <a href="/kategorije/koza-30-plus/">koža 30+</a>), poretke SPF-ova, moje <a href="/kategorije/favoriti/">favorite</a> i <a href="/kvizovi/">kratke kvizove</a> koji ti u minuti kažu što tvojoj koži treba.</p>
+<h2 id="novac">Tko plaća?</h2>
+<p>Nitko za recenzije. Brendovi ne plaćaju ocjene i ne čitaju tekstove prije objave. Portal se financira oglasima (Google AdSense), a proizvode uglavnom kupujem sama.</p>
 <h2 id="napomena">Važna napomena</h2>
-<p>Nisam liječnica ni dermatologinja. Sadržaj na portalu temelji se na osobnom iskustvu i informativne je naravi. Za dijagnozu i liječenje rozacee ili bilo kojeg stanja kože obratite se dermatologu.</p>"""
+<p>Nisam liječnica ni dermatologinja. Sadržaj na portalu temelji se na osobnom iskustvu i informativne je naravi. Za dijagnozu i liječenje rozacee ili bilo kojeg stanja kože obrati se dermatologu.</p>
+<p>Imaš proizvod koji bih trebala isprobati? <a href="/kontakt/">Javi mi se.</a></p>"""
 
 def contact_hr():
     return f"""<p>Imate pitanje, prijedlog proizvoda za recenziju ili ispravak? Pišite mi na <strong>{e(CFG['contact_email'])}</strong>.</p>
@@ -532,17 +601,31 @@ def privacy_hr():
 
 
 def about_en():
-    return f"""<figure class="inline-fig">{picture("foto-polica", "Beauty products on a light blue background: cream, serum, toner, SPF and lipstick", 1200, 750)}</figure>
-<p class="lead">Hi, I'm {e(CFG['author'])}. I have sensitive, reactive skin with rosacea and a complexion as pale as cheese, as I like to say.</p>
-<p>For years I've been looking for skincare that won't upset my skin. Along the way I've spent far too much money on products “recommended for sensitive skin” that gave me redness, stinging or peeling. {e(CFG['site_name'])} exists to make that road shorter for others, and to give you an honest opinion on every product, from Rhode to Chanel. I'm from Croatia and write in Croatian and English.</p>
-<h2 id="how">How I write reviews</h2>
-<ul><li>I only write about products I've actually used, and long enough to know how they behave.</li>
-<li>For every product I list what the brand claims and what I experienced.</li>
-<li>I write about flops too, because that's where you learn the most.</li>
-<li>I don't accept money for reviews. The site is funded by ads (Google AdSense).</li></ul>
+    return f"""<p class="lead">Hi, I'm {e(CFG['author'])}. My skin goes red in the wind, over hot tea, under stress and, honestly, sometimes for no reason at all. That's why {e(CFG['site_name'])} started as the diary of someone who can't buy skincare blind.</p>
+<ul class="about-facts">
+<li><strong>Skin type</strong>sensitive, reactive, with rosacea and a complexion as pale as cheese</li>
+<li><strong>Worst enemy</strong>fragrance in moisturiser and “refreshing” menthol</li>
+<li><strong>True love</strong>mineral SPF that leaves no white cast</li>
+<li><strong>The rule</strong>no product gets a rating before four weeks on my face</li></ul>
+<div class="about-grid">
+<figure>{picture("foto-vecernja-rutina", "Squeezing cream from a tube onto the back of a hand, with a candle and pink bathroom tiles", 1200, 750)}<figcaption>Patch test on my hand before my face. Always.</figcaption></figure>
+<figure>{picture("foto-led-maska", "Woman relaxing on a sofa wearing a red LED face mask", 1200, 750)}<figcaption>An evening with the LED mask: part of my routine for redness.</figcaption></figure></div>
+<h2 id="story">How it started</h2>
+<p>For years I trusted “for sensitive skin” labels and for years I woke up with red cheeks, stinging and dry patches. My drawer was full of expensive mistakes. At some point I started writing down what I put on my face and how my skin reacted, day by day. Those notes slowly became this site.</p>
+<p>Today I test everything, from TikTok hits and luxury classics like Chanel to pharmacy skincare for a few euros, and write about what was worth it and what ended up in the bin. I'm from Croatia and write in Croatian and English.</p>
+<h2 id="how">How I test</h2>
+<ul><li><strong>Patch test first.</strong> Every product goes on my arm or behind my ear before it touches my face.</li>
+<li><strong>Four weeks minimum.</strong> That's how long it takes to see how a product behaves, not just how it looks on day one.</li>
+<li><strong>One new thing at a time.</strong> If redness shows up, I know exactly who to blame.</li>
+<li><strong>Brand claims versus reality.</strong> For every product I list what it promises and what I experienced.</li>
+<li><strong>Flops get written up too.</strong> That's where you learn the most, so they have their own <a href="/kategorije/flop/">Flop</a> category.</li></ul>
+<h2 id="find">What you'll find here</h2>
+<p>Reviews by skin type (<a href="/kategorije/rozacea/">rosacea</a>, <a href="/kategorije/osjetljiva-koza/">sensitive</a>, <a href="/kategorije/reaktivna-koza/">reactive</a> and <a href="/kategorije/koza-30-plus/">30+ skin</a>), SPF rankings, my <a href="/kategorije/favoriti/">favourites</a> and <a href="/kvizovi/">short quizzes</a> that tell you in a minute what your skin needs.</p>
+<h2 id="money">Who pays?</h2>
+<p>Nobody pays for reviews. Brands don't pay for ratings or read reviews before they go live. The site is funded by ads (Google AdSense), and I buy most products myself.</p>
 <h2 id="note">Important note</h2>
-<p>I'm not a doctor or a dermatologist. The content on this site is based on personal experience and is for information only. For diagnosis and treatment of rosacea or any skin condition, see a dermatologist.</p>"""
-
+<p>I'm not a doctor or a dermatologist. The content on this site is based on personal experience and is for information only. For diagnosis and treatment of rosacea or any skin condition, see a dermatologist.</p>
+<p>Got a product I should try? <a href="/kontakt/">Get in touch.</a></p>"""
 
 def contact_en():
     return f"""<p>Got a question, a product suggestion for a review or a correction? Email me at <strong>{e(CFG['contact_email'])}</strong>. You can write in English or Croatian.</p>
@@ -749,7 +832,7 @@ def sitemap():
     urls = [("/", max(x.get("updated", x["date"]) for x in ARTICLES), "1.0")]
     urls += [(f"/kategorije/{c['slug']}/", max(a.get("updated", a["date"]) for a in ARTICLES if c["slug"] in a["categories"]), "0.8") for c in CATEGORIES]
     urls += [(f"/clanci/{a['slug']}/", a.get("updated", a["date"]), "0.9") for a in ARTICLES]
-    urls += [("/brendovi/", date.today().isoformat(), "0.7"), ("/kvizovi/", date.today().isoformat(), "0.7")]
+    urls += [("/clanci/", ARTICLES[0].get("updated", ARTICLES[0]["date"]), "0.7"), ("/brendovi/", date.today().isoformat(), "0.7"), ("/kvizovi/", date.today().isoformat(), "0.7")]
     urls += [(f"/kvizovi/{q['slug']}/", date.today().isoformat(), "0.7") for q in QUIZZES + KNOWLEDGE_QUIZZES]
     urls += [(f"/brendovi/{x['slug']}/", max(a.get("updated", a["date"]) for a in x["articles"]), "0.6") for x in BRANDS if x["articles"]]
     urls += [("/o-meni/", date.today().isoformat(), "0.4"), ("/kontakt/", date.today().isoformat(), "0.3"),
@@ -800,10 +883,13 @@ EN_SECTION = {"kvizovi": "quizzes", "trazi": "search", "clanci": "articles", "ka
 EN_SLUG = {k: v["slug"] for k, v in content_en.ARTICLES_EN.items()}
 EN_SLUG.update({k: v["slug"] for k, v in content_en.CATEGORIES_EN.items()})
 EN_SLUG.update({q["slug"]: q["en_slug"] for q in QUIZZES + KNOWLEDGE_QUIZZES})
-HR_PATH_RE = re.compile(r"(?<![\w/.-])(" + re.escape(BASE) + r")?(/(?:" + "|".join(map(re.escape, EN_SECTION)) + r")/(?:[a-z0-9-]+/)?)")
+HR_PATH_RE = re.compile(r"(?<![\w/.-])(" + re.escape(BASE) + r")?(/(?:" + "|".join(map(re.escape, EN_SECTION)) + r")/(?:(?!stranica/)[a-z0-9-]+/)?(?:stranica/\d+/)?)")
 
 
 def en_path(p):
+    m = re.fullmatch(r"(/.*)stranica/(\d+)/", p)
+    if m:
+        return en_path(m.group(1)) + f"page/{m.group(2)}/"
     if p == "/":
         return "/en/"
     m = re.fullmatch(r"/([a-z-]+)/(?:([a-z0-9-]+)/)?", p)
@@ -856,7 +942,12 @@ def write_pages():
     for a in ARTICLES:
         write(f"/clanci/{a['slug']}/", page_article(a))
     for c in CATEGORIES:
-        write(f"/kategorije/{c['slug']}/", page_category(c))
+        pp = pages([a for a in ARTICLES if c["slug"] in a["categories"]], f"/kategorije/{c['slug']}/")
+        for path, num, arts in pp:
+            write(path, page_category(c, path, num, len(pp), arts))
+    pp = pages(ARTICLES, "/clanci/")
+    for path, num, arts in pp:
+        write(path, page_archive(path, num, len(pp), arts))
     write("/brendovi/", page_brands())
     for x in BRANDS:
         write(f"/brendovi/{x['slug']}/", page_brand(x))
