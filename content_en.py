@@ -4,7 +4,7 @@
 
 SITE_EN = {
     "tagline": "Honest beauty reviews from Rhode to Chanel, tested on sensitive skin",
-    "author_bio": "I have sensitive, reactive skin with rosacea and a fair complexion. I've been testing skincare and make-up on my own skin for years and only write about products I've actually used.",
+    "author_bio": "I'm in my thirties, a beauty lover with sensitive, reactive skin with rosacea and a fair complexion. I've been testing skincare and make-up on my own skin for years and only write about products I've actually used.",
 }
 
 CATEGORIES_EN = {

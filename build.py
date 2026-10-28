@@ -553,12 +553,14 @@ def page_simple(slug, title, desc, h1, body, noindex=False):
 
 
 def about_hr():
-    return f"""<p class="lead">Bok, ja sam {e(CFG['author'])}. Moja koža crveni se na vjetar, na vruć čaj, na stres i, iskreno, ponekad i bez ikakvog razloga. Zato je {e(CFG['site_name'])} nastao kao dnevnik nekoga tko kozmetiku ne može kupovati naslijepo.</p>
+    return f"""<p class="lead">Bok, ja sam {e(CFG['author'])}, imam 30+ godina i bezuvjetno sam zaljubljena u kozmetiku. Moja koža crveni se na vjetar, na vruć čaj, na stres i, iskreno, ponekad i bez ikakvog razloga. Zato je {e(CFG['site_name'])} nastao kao dnevnik nekoga tko kozmetiku ne može kupovati naslijepo.</p>
 <ul class="about-facts">
+<li><strong>Godine</strong>30+, pa uz crvenilo pratim i prve bore i gubitak sjaja</li>
 <li><strong>Tip kože</strong>osjetljiva, reaktivna, s rozaceom i tenom svijetlim kao sir</li>
 <li><strong>Najveći neprijatelj</strong>parfem u kremi i “osvježavajući” mentol</li>
 <li><strong>Najveća ljubav</strong>mineralni SPF koji ne ostavlja bijeli trag</li>
-<li><strong>Pravilo</strong>nijedan proizvod ne dobije ocjenu prije četiri tjedna na mom licu</li></ul>
+<li><strong>Pravilo</strong>nijedan proizvod ne dobije ocjenu prije četiri tjedna na mom licu</li>
+<li><strong>Slabost</strong>nova lansiranja: police u drogeriji obilazim kao drugi izloge cipela</li></ul>
 <div class="about-grid">
 <figure>{picture("foto-vecernja-rutina", "Nanošenje kreme iz tube na nadlanicu, uz svijeću i ružičaste pločice u kupaonici", 1200, 750)}<figcaption>Patch test na ruci prije lica. Uvijek.</figcaption></figure>
 <figure>{picture("foto-led-maska", "Žena se odmara na kauču s crvenom LED maskom na licu", 1200, 750)}<figcaption>Večer s LED maskom: dio moje rutine za crvenilo.</figcaption></figure></div>
@@ -601,12 +603,14 @@ def privacy_hr():
 
 
 def about_en():
-    return f"""<p class="lead">Hi, I'm {e(CFG['author'])}. My skin goes red in the wind, over hot tea, under stress and, honestly, sometimes for no reason at all. That's why {e(CFG['site_name'])} started as the diary of someone who can't buy skincare blind.</p>
+    return f"""<p class="lead">Hi, I'm {e(CFG['author'])}, I'm in my thirties and hopelessly in love with beauty products. My skin goes red in the wind, over hot tea, under stress and, honestly, sometimes for no reason at all. That's why {e(CFG['site_name'])} started as the diary of someone who can't buy skincare blind.</p>
 <ul class="about-facts">
+<li><strong>Age</strong>30+, so besides redness I'm watching the first fine lines and lost glow</li>
 <li><strong>Skin type</strong>sensitive, reactive, with rosacea and a complexion as pale as cheese</li>
 <li><strong>Worst enemy</strong>fragrance in moisturiser and “refreshing” menthol</li>
 <li><strong>True love</strong>mineral SPF that leaves no white cast</li>
-<li><strong>The rule</strong>no product gets a rating before four weeks on my face</li></ul>
+<li><strong>The rule</strong>no product gets a rating before four weeks on my face</li>
+<li><strong>Weakness</strong>new launches: I browse drugstore shelves the way others browse shoe shops</li></ul>
 <div class="about-grid">
 <figure>{picture("foto-vecernja-rutina", "Squeezing cream from a tube onto the back of a hand, with a candle and pink bathroom tiles", 1200, 750)}<figcaption>Patch test on my hand before my face. Always.</figcaption></figure>
 <figure>{picture("foto-led-maska", "Woman relaxing on a sofa wearing a red LED face mask", 1200, 750)}<figcaption>An evening with the LED mask: part of my routine for redness.</figcaption></figure></div>
