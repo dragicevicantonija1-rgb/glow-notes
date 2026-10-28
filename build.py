@@ -269,8 +269,8 @@ def page_home():
 </div></section>
 <section class="section" style="padding-top:0"><div class="wrap">
 <div class="section__head"><h2>{T('Beauty kvizovi', 'Beauty quizzes')}</h2><p class="eyebrow">{T('Minuta do odgovora', 'One minute to an answer')}</p></div>
-<div class="cats cats--3">{quiz_tiles()}</div>
-<p style="margin-top:20px"><a class="btn" href="/kvizovi/#znanje">{T('Kvizovi znanja o kozmetici', 'Beauty knowledge quizzes')} ({len(KNOWLEDGE_QUIZZES)}) →</a></p>
+<div class="cats cats--3">{quiz_tiles(KNOWLEDGE_QUIZZES, ["mint", "love", "sky", "sun", "cobalt"])}</div>
+<p style="margin-top:20px"><a class="btn" href="/kvizovi/#koza">{T('Kvizovi o koži', 'Skin quizzes')} ({len(QUIZZES)}) →</a></p>
 </div></section>
 <section class="section" style="padding-top:0"><div class="wrap">
 <div class="section__head"><h2>{T('Najnovije recenzije', 'Latest reviews')}</h2></div>
@@ -683,16 +683,16 @@ def page_quizzes():
     cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), (None, T("Kvizovi", "Quizzes"))])
     ld = [cr_ld, {"@type": "CollectionPage", "name": T("Beauty kvizovi", "Beauty quizzes"), "url": BASE + path, "inLanguage": lang_tag(),
                   "hasPart": [{"@type": "Quiz", "name": T(*q["title"]), "url": f"{BASE}/kvizovi/{q['slug']}/"} for q in QUIZZES + KNOWLEDGE_QUIZZES]}]
-    return head(T("Beauty kvizovi – tip kože, SPF i crvenilo", "Beauty quizzes – skin type, SPF and redness"),
-                T("Kratki beauty kvizovi: saznaj svoj tip kože, koji SPF ti odgovara i je li ti koža sklona crvenilu, uz preporuke iz iskrenih recenzija.",
-                  "Short beauty quizzes: find your skin type, the SPF that suits you and whether your skin is prone to redness, with picks from honest reviews."),
+    return head(T("Beauty kvizovi – znanje o kozmetici i tip kože", "Beauty quizzes – beauty knowledge and skin type"),
+                T("Kvizovi znanja o sastojcima, celebrity brendovima, SPF-u i povijesti kozmetike, plus kratki kvizovi o tipu kože, SPF-u i crvenilu.",
+                  "Knowledge quizzes on ingredients, celebrity brands, SPF and beauty history, plus short quizzes on skin type, SPF and redness."),
                 path, extra_ld=ld) + header(path) + f"""
 {cr}<div class="wrap"><header class="page-head"><p class="eyebrow">{T('Minuta do odgovora', 'One minute to an answer')}</p><h1>{T('Beauty kvizovi', 'Beauty quizzes')}</h1>
 <p class="page-sub">{T('Odgovori na nekoliko pitanja i saznaj što tvojoj koži odgovara, uz proizvode koje sam stvarno isprobala.', 'Answer a few questions and find out what suits your skin, with products I have actually tried.')}</p></header>
-<div class="section__head"><h2>{T('Upoznaj svoju kožu', 'Get to know your skin')}</h2></div>
-<div class="cats cats--3" style="margin-bottom:56px">{quiz_tiles()}</div>
 <div class="section__head" id="znanje"><h2>{T('Kvizovi znanja o kozmetici', 'Beauty knowledge quizzes')}</h2><p class="eyebrow">{T('Vatromet za više od 85 %', 'Fireworks for over 85%')}</p></div>
-<div class="cats cats--3" style="margin-bottom:64px">{quiz_tiles(KNOWLEDGE_QUIZZES, ["mint", "love", "sky", "sun", "cobalt"])}</div></div>
+<div class="cats cats--3" style="margin-bottom:56px">{quiz_tiles(KNOWLEDGE_QUIZZES, ["mint", "love", "sky", "sun", "cobalt"])}</div>
+<div class="section__head" id="koza"><h2>{T('Upoznaj svoju kožu', 'Get to know your skin')}</h2></div>
+<div class="cats cats--3" style="margin-bottom:64px">{quiz_tiles()}</div></div>
 """ + footer()
 
 
