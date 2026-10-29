@@ -471,12 +471,13 @@ def page_article(a):
     r = a.get("review")
     if r:
         img = BASE + f"/slike/{a['slug']}.jpg"
-        ld.append({"@type": "Review", "name": a["title"], "author": person(), "datePublished": a["date"], "inLanguage": lang_tag(),
-                   "publisher": {"@id": BASE + "/#org"}, "url": BASE + path,
-                   "itemReviewed": {"@type": "Product", "name": r["product"], "image": img, "brand": {"@type": "Brand", "name": r["brand"]}},
-                   "reviewRating": {"@type": "Rating", "ratingValue": r["rating"], "bestRating": 5, "worstRating": 1},
-                   "positiveNotes": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": x} for i, x in enumerate(r["pros"])]},
-                   "negativeNotes": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": x} for i, x in enumerate(r["cons"])]}})
+        # Product na vrhu s ugniježđenom recenzijom: Google za Product traži offers, review ili aggregateRating.
+        ld.append({"@type": "Product", "name": r["product"], "image": img, "brand": {"@type": "Brand", "name": r["brand"]},
+                   "review": {"@type": "Review", "name": a["title"], "author": person(), "datePublished": a["date"], "inLanguage": lang_tag(),
+                              "publisher": {"@id": BASE + "/#org"}, "url": BASE + path,
+                              "reviewRating": {"@type": "Rating", "ratingValue": r["rating"], "bestRating": 5, "worstRating": 1},
+                              "positiveNotes": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": x} for i, x in enumerate(r["pros"])]},
+                              "negativeNotes": {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": x} for i, x in enumerate(r["cons"])]}}})
         toc += f'<li><a href="#top-i-flop">{T("Top i flop", "Tops and flops")}</a></li><li><a href="#ocjena">{T("Ocjena", "Rating")}</a></li>'
     if a.get("faq"):
         ld.append({"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": ans}} for q, ans in a["faq"]]})
