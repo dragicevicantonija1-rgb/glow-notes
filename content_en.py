@@ -719,6 +719,41 @@ ARTICLES_EN.update({
 <p>For Rhode fans who like a soft, blurred lip look and have a medium to deeper skin tone. If you want a precise liner or have very fair skin, skip it.</p>
 """,
     },
+    "la-roche-posay-cicaplast-baume-b5-recenzija": {
+        "slug": "la-roche-posay-cicaplast-baume-b5-review",
+        "title": "La Roche-Posay Cicaplast Baume B5+ review: a soothing balm as a moisturiser for rosacea and sensitive skin",
+        "h1": "La Roche-Posay Cicaplast Baume B5+: instant calm and glass skin",
+        "description": "Review of La Roche-Posay Cicaplast Baume B5+ on sensitive skin with rosacea: instant soothing, a glass skin effect, using it as a moisturiser morning and night, occlusiveness on acne-prone skin and a 4.5/5 rating.",
+        "excerpt": "It instantly calms my sensitive rosacea skin and gives a real glass skin effect. I use it as my moisturiser morning and night. Rating 4.5/5.",
+        "kicker": "Review",
+        "verdict": "Rating 4.5/5: my moisturiser morning and night",
+        "review": {"product": "La Roche-Posay Cicaplast Baume B5+",
+                   "pros": ["Instantly calms sensitive skin with rosacea", "Gives a glass skin effect", "Enough as a moisturiser morning and night", "Fragrance-free"],
+                   "cons": ["It's occlusive, so it can cause breakouts on acne-prone skin"]},
+        "faq": [("Is Cicaplast Baume B5+ good for rosacea?", "For me it's excellent: it instantly calms my sensitive skin with rosacea. The brand recommends it for irritated and damaged skin, and rosacea is always worth following with a dermatologist too."),
+                ("Can Cicaplast Baume B5+ be used as a face moisturiser?", "Yes. Lately I've been using it as my moisturiser morning and night, and my skin looks smooth and dewy, with a glass skin effect."),
+                ("Can Cicaplast Baume B5+ cause breakouts?", "It can if your skin is acne-prone. The balm is occlusive, meaning it forms a protective layer on the skin, so for some people it can clog pores.")],
+        "body": """
+<p class="lead">I already mentioned Cicaplast in <a href="/clanci/moj-glow-up-rutina-rozacea/">my rosacea routine</a> as my safe choice when my skin is irritated. Lately I've been using it every day, so it's time for a proper review.</p>
+
+<h2 id="what-the-brand-says">What the brand says</h2>
+<ul class="claims">
+  <li>An ultra-repairing, soothing balm for irritated or damaged skin, for adults, children and babies.</li>
+  <li>5&nbsp;% panthenol (vitamin B5) and madecassoside, which soothe the skin and support its repair.</li>
+  <li>Tribioma, a complex from the Microbiome Science line that supports the balance of the skin's microbiome, with La Roche-Posay thermal spring water.</li>
+  <li>Fragrance-free.</li>
+</ul>
+
+<h2 id="my-experience">My experience</h2>
+<p><strong>Instant calm.</strong> As soon as I apply it, my sensitive rosacea skin calms down. That's what matters most to me: no stinging, no flushing, it simply settles.</p>
+<p><strong>Glass skin.</strong> It really gives that glass skin effect. My skin looks smooth, hydrated and dewy, as if it's healthy from within.</p>
+<p>Lately I've been using it as my face moisturiser, morning and night. I haven't needed any other cream alongside it.</p>
+<p><strong>The downside.</strong> The balm is occlusive and forms a protective layer on the skin. That works for me, but if your skin is acne-prone, it may cause breakouts.</p>
+
+<h2 id="who-is-it-for">Who is it for</h2>
+<p>For sensitive, reactive skin and rosacea that needs quick calming and barrier repair. If your skin is acne-prone, be careful because of the occlusiveness, or use it only on dry and irritated areas. Hence 4.5/5, but for my skin it's currently one of the best moisturisers.</p>
+""",
+    },
     "moj-glow-up-rutina-rozacea": {
         "slug": "my-glow-up-rosacea-routine",
         "title": "My glow up: rosacea routine with Omnilux LED mask, Soolantra and Skinoren",
@@ -747,7 +782,7 @@ ARTICLES_EN.update({
 <p><strong>Soolantra</strong> is an ivermectin cream that dermatologists prescribe for rosacea with papules and pustules. I use it at night, as the last active step before bed.</p>
 
 <h2 id="cicaplast">4. For repair: La Roche-Posay Cicaplast</h2>
-<p>When my skin needs calming and barrier repair, I reach for <strong>La Roche-Posay Cicaplast</strong>. It's my safe choice when my skin is irritated or dry.</p>
+<p>When my skin needs calming and barrier repair, I reach for <a href="/clanci/la-roche-posay-cicaplast-baume-b5-recenzija/"><strong>La Roche-Posay Cicaplast</strong></a>. It's my safe choice when my skin is irritated or dry.</p>
 
 <!--IMG:foto-led-maska|A woman relaxing on a sofa in the evening wearing a white LED mask glowing red|AI illustration of an LED face mask, not the original product.-->
 

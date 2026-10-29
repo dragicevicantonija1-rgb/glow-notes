@@ -533,6 +533,47 @@ REVIEWS = [
 """,
     },
     {
+        "slug": "la-roche-posay-cicaplast-baume-b5-recenzija",
+        "title": "La Roche-Posay Cicaplast Baume B5+ recenzija: umirujući balzam kao krema za rozaceu i osjetljivu kožu",
+        "h1": "La Roche-Posay Cicaplast Baume B5+: instant smirenje i glass skin",
+        "description": "Recenzija La Roche-Posay Cicaplast Baume B5+ na osjetljivoj koži s rozaceom: instant umirivanje, glass skin efekt, korištenje kao krema ujutro i navečer, okluzivnost kod kože sklone aknama i ocjena 4,5/5.",
+        "excerpt": "Instant umiruje moju osjetljivu kožu s rozaceom i daje pravi glass skin efekt. Koristim ga kao kremu ujutro i navečer. Ocjena 4,5/5.",
+        "categories": ["njega-lica", "favoriti", "osjetljiva-koza", "rozacea"],
+        "date": "2026-10-29",
+        "kicker": "Recenzija",
+        "verdict": "Ocjena 4,5/5: moja krema ujutro i navečer",
+        "review": {
+            "brand": "La Roche-Posay", "product": "La Roche-Posay Cicaplast Baume B5+", "rating": 4.5,
+            "pros": ["Instant umiruje osjetljivu kožu s rozaceom", "Daje glass skin efekt", "Dovoljan kao krema ujutro i navečer", "Bez parfema"],
+            "cons": ["Okluzivan je, pa koži sklonoj aknama može izazvati prištiće"],
+        },
+        "faq": [
+            ("Je li Cicaplast Baume B5+ dobar za rozaceu?", "Meni je odličan: instant umiruje moju osjetljivu kožu s rozaceom. Brend ga preporučuje za nadraženu i oštećenu kožu, a rozaceu uvijek vrijedi pratiti i s dermatologom."),
+            ("Može li se Cicaplast Baume B5+ koristiti kao krema za lice?", "Može. Ja ga u zadnje vrijeme koristim kao svoju kremu ujutro i navečer i koža mi izgleda glatko i sjajno, s glass skin efektom."),
+            ("Može li Cicaplast Baume B5+ izazvati prištiće?", "Može, ako vam je koža sklona aknama. Balzam je okluzivan, odnosno stvara zaštitni sloj na koži, pa kod nekih zna začepiti pore."),
+        ],
+        "body": """
+<p class="lead">Cicaplast sam već spomenula u <a href="/clanci/moj-glow-up-rutina-rozacea/">svojoj rutini za rozaceu</a> kao siguran izbor kad je koža nadražena. U zadnje vrijeme ga koristim svaki dan, pa je vrijeme za pravu recenziju.</p>
+
+<h2 id="sto-kaze-proizvodac">Što kaže proizvođač</h2>
+<ul class="claims">
+  <li>Ultra obnavljajući, umirujući balzam za nadraženu ili oštećenu kožu, za odrasle, djecu i bebe.</li>
+  <li>5&nbsp;% pantenola (vitamin B5) i madekasozid, koji umiruju kožu i pomažu njezinoj obnovi.</li>
+  <li>Tribioma, kompleks iz linije Microbiome Science koji podržava ravnotežu mikrobioma kože, uz termalnu vodu La Roche-Posay.</li>
+  <li>Bez parfema.</li>
+</ul>
+
+<h2 id="moje-iskustvo">Moje iskustvo</h2>
+<p><strong>Instant smirenje.</strong> Čim ga nanesem, moja osjetljiva koža s rozaceom se smiri. Za mene je to najvažnije: ne peče, ne crveni se, nego se doslovno umiri.</p>
+<p><strong>Glass skin.</strong> Stvarno daje taj glass skin efekt. Koža izgleda glatko, hidratizirano i sjajno, kao da je iznutra zdrava.</p>
+<p>U zadnje vrijeme ga koristim kao svoju kremu za lice, i ujutro i navečer. Nije mi trebala nikakva druga krema uz njega.</p>
+<p><strong>Mana.</strong> Balzam je okluzivan, stvara zaštitni sloj na koži. Meni to odgovara, ali ako vam je koža sklona aknama, može vam izazvati prištiće.</p>
+
+<h2 id="za-koga-je">Za koga je</h2>
+<p>Za osjetljivu, reaktivnu kožu i rozaceu kojoj treba brzo smirenje i obnova barijere. Ako imate kožu sklonu aknama, budite oprezni zbog okluzivnosti, ili ga koristite samo na suhim i nadraženim mjestima. Zbog toga 4,5/5, ali za moju kožu je trenutno jedna od najboljih krema.</p>
+""",
+    },
+    {
         "slug": "moj-glow-up-rutina-rozacea",
         "title": "Moj glow up: rutina za rozaceu s Omnilux LED maskom, Soolantrom i Skinorenom",
         "h1": "Moj glow up: rutina koja je promijenila moju kožu",
@@ -564,7 +605,7 @@ REVIEWS = [
 <p><strong>Soolantra</strong> je krema s ivermektinom koju dermatolozi propisuju za rozaceu s papulama i pustulama. Ja je koristim navečer, kao zadnji aktivni korak prije spavanja.</p>
 
 <h2 id="cicaplast">4. Za obnovu: La Roche-Posay Cicaplast</h2>
-<p>Kad je koži potrebno smirivanje i obnova barijere, posežem za <strong>La Roche-Posay Cicaplastom</strong>. To je moj sigurni izbor kad je koža nadražena ili suha.</p>
+<p>Kad je koži potrebno smirivanje i obnova barijere, posežem za <a href="/clanci/la-roche-posay-cicaplast-baume-b5-recenzija/"><strong>La Roche-Posay Cicaplastom</strong></a>. To je moj sigurni izbor kad je koža nadražena ili suha.</p>
 
 <!--IMG:foto-led-maska|Žena s bijelom LED maskom koja svijetli crveno opušta se navečer na kauču|AI ilustracija LED maske za lice, nije originalni proizvod.-->
 

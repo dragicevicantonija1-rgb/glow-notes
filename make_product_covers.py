@@ -29,6 +29,7 @@ COVERS = {
     "erborian-cc-red-correct-recenzija": ("erborian-cc.jpg", "fit"),
     "rhode-pocket-blush-tan-line-recenzija": ("rhode-blush.jpg", "cover"),
     "rhode-peptide-lip-shape-recenzija": ("rhode-lip.jpg", "fit"),
+    "la-roche-posay-cicaplast-baume-b5-recenzija": ("cicaplast.jpg", "fit"),
 }
 
 
