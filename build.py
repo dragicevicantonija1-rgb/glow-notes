@@ -691,8 +691,21 @@ var m=location.search.match(/[?&]q=([^&]*)/);if(m){{q.value=decodeURIComponent(m
 QUIZ_HUES = ["pink", "sun", "tomato"]
 
 
+QUIZ_IMAGES = {
+    "kviz-sastojci": "foto-vecernja-rutina", "kviz-celebrity-brendovi": "rhode-peptide-lip-shape-recenzija",
+    "kviz-odakle-je-kozmetika": "foto-polica", "kviz-spf-i-sunce": "foto-spf-1",
+    "kviz-beauty-povijest": "chanel-water-fresh-tint-recenzija", "kviz-tip-koze": "foto-led-maska",
+    "kviz-koji-spf": "foto-spf-3", "kviz-crvenilo-rozacea": "avene-termalna-voda-rozacea-recenzija",
+}
+
+
+def quiz_img(q):
+    slug = QUIZ_IMAGES.get(q["slug"])
+    return picture(slug, "", 600, 375, "cat__img") if slug and has_image(slug) else ""
+
+
 def quiz_tiles(qs=None, hues=QUIZ_HUES):
-    return "".join(f"""<a class="cat hue-{hues[i % len(hues)]}" href="/kvizovi/{q['slug']}/"><span class="cat__dot"></span>
+    return "".join(f"""<a class="cat hue-{hues[i % len(hues)]}" href="/kvizovi/{q['slug']}/">{quiz_img(q)}<span class="cat__dot"></span>
 <h3>{e(T(*q['h1']).replace('Kviz: ', '').replace('Quiz: ', ''))}</h3><p>{e(T(*q['short']))}</p><span class="cat__count">{T('Riješi kviz', 'Take the quiz')} →</span></a>""" for i, q in enumerate(qs or QUIZZES))
 
 
