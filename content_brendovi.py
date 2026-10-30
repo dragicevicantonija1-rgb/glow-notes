@@ -108,6 +108,16 @@ BRAND_INFO = {
 <p>The original CC cream is one of my repurchases. If chemical filters bother your skin, check the ingredient list of the version sold in your country before buying.</p>
 <p><strong>Patents and testing (according to the brand):</strong> IT Cosmetics doesn't claim a patent or sensitive-skin benefits for CC+ Cream, only consumer tests (e.g. 98% say it quickly covers acne marks), without giving the number of people.</p>"""),
     },
+    "jane iredale": {
+        "desc": ("jane iredale recenzije: mineralna šminka za osjetljivu kožu, HydroPure tonirani i zeleni serum protiv crvenila, iskreno testirani na koži s rozaceom.",
+                 "jane iredale reviews: mineral makeup for sensitive skin, HydroPure tinted and green redness-correcting serums honestly tested on skin with rosacea."),
+        "about": ("""<p>jane iredale je američki brend mineralne šminke koji je osnovala Jane Iredale, sa sjedištem u Massachusettsu. Sebe opisuje kao „šminku koja je njega kože”: formule s mineralnim pigmentima i sastojcima za njegu, bez testiranja na životinjama (PETA i Leaping Bunny). Za osjetljivu kožu i crvenilo zanimljiva je linija HydroPure, tonirani i zeleni korektivni serum s hijaluronskom kiselinom i CoQ10.</p>
+<p>Moje iskustvo je solidno: HydroPure zeleni serum lijepo neutralizira crvenilo bez da mi je koža poslije crvenija, a tonirani serum je lagan i bez težine. Oba moraju ići na potpuno suhu kožu, a kao tonirani proizvod mi je Chanel Water-Fresh Tint i dalje draži. Dobar izbor ako tražite mineralnu šminku za reaktivnu kožu.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> jane iredale za HydroPure serume ne navodi patente ni kliničke testove s brojem ispitanika. Brend navodi da je u SAD-u linija šminke koju dermatolozi i plastični kirurzi najčešće preporučuju te da Skin Cancer Foundation preporučuje sedam njihovih SPF proizvoda.</p>""",
+                  """<p>jane iredale is an American mineral makeup brand founded by Jane Iredale and based in Massachusetts. It calls itself "the skincare makeup": formulas with mineral pigments and skincare ingredients, cruelty-free (recognised by PETA and Leaping Bunny). For sensitive skin and redness the most interesting line is HydroPure, a tinted serum and a green colour-correcting serum with hyaluronic acid and CoQ10.</p>
+<p>My experience is solid: the HydroPure green serum neutralises redness nicely without leaving my skin redder afterwards, and the tinted serum is light and weightless. Both have to go on completely dry skin, and as a tint I still prefer Chanel Water-Fresh Tint. A good choice if you want mineral makeup for reactive skin.</p>
+<p><strong>Patents and testing (according to the brand):</strong> jane iredale doesn't cite patents or clinical tests with subject numbers for the HydroPure serums. The brand says it is the makeup line most recommended by dermatologists and plastic surgeons in the US, and that the Skin Cancer Foundation recommends seven of its SPF products.</p>"""),
+    },
     "Kérastase": {
         "desc": ("Kérastase recenzije: luksuzna njega kose i maska Nutritive Masquintense iz perspektive osjetljive kože lica i vlasišta.",
                  "Kérastase reviews: luxury hair care and the Nutritive Masquintense mask from the point of view of sensitive facial skin and scalp."),
