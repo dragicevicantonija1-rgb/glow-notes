@@ -6,7 +6,7 @@
 
 Ključevi (PostHog, Search Console, AdSense) upisuju se samo u config.json.
 """
-import html, json, math, os, re, shutil, sys
+import html, json, math, os, re, shutil, sys, urllib.parse
 from datetime import date
 from content import ARTICLES, BRANDS, CATEGORIES
 from content_recenzije import REVIEWS
@@ -118,7 +118,7 @@ def head(title, desc, path, og_type="website", extra_ld=None, noindex=False, ful
                'window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}'
                'var g="denied";try{if(localStorage.getItem("mk-consent")==="da")g="granted"}catch(_){}'
                'gtag("consent","default",{ad_storage:g,ad_user_data:g,ad_personalization:g,analytics_storage:g});'
-               f'gtag("js",new Date());gtag("config",{json.dumps(CFG["ga4_id"])});</script>')
+               f'gtag("js",new Date());if(location.hostname==={json.dumps(LIVE_HOST)}||location.hostname==="www."+{json.dumps(LIVE_HOST)})gtag("config",{json.dumps(CFG["ga4_id"])});</script>')
     ld = [ORG, {"@type": "WebSite", "@id": BASE + "/#web", "url": BASE + "/", "name": CFG["site_name"],
                 "inLanguage": lang_tag(), "publisher": {"@id": BASE + "/#org"}}] + (extra_ld or [])
     return f"""<!doctype html>
@@ -161,13 +161,17 @@ def head(title, desc, path, og_type="website", extra_ld=None, noindex=False, ful
 """
 
 
+# Analitika se uključuje samo na pravoj domeni, da localhost i Netlify pregledi ne kvare brojke.
+LIVE_HOST = urllib.parse.urlparse(CFG["base_url"]).hostname
+
+
 def posthog_snippet():
     # Bez kolačića dok posjetitelj ne pristane (persistence: memory), zatim localStorage+cookie.
     return """<script>
 !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
 var mkConsent=null;try{mkConsent=localStorage.getItem("mk-consent")}catch(_){}
-posthog.init(%s,{api_host:%s,person_profiles:"identified_only",persistence:mkConsent==="da"?"localStorage+cookie":"memory",capture_pageview:true,capture_pageleave:true});
-</script>""" % (json.dumps(CFG["posthog_key"]), json.dumps(CFG["posthog_host"]))
+if(location.hostname===%s||location.hostname==="www."+%s)posthog.init(%s,{api_host:%s,person_profiles:"identified_only",persistence:mkConsent==="da"?"localStorage+cookie":"memory",capture_pageview:true,capture_pageleave:true});
+</script>""" % (json.dumps(LIVE_HOST), json.dumps(LIVE_HOST), json.dumps(CFG["posthog_key"]), json.dumps(CFG["posthog_host"]))
 
 
 NAV = [("/", "Naslovnica", "Home"), ("/brendovi/", "Brendovi", "Brands"), ("/kategorije/favoriti/", "Favoriti", "Favourites"), ("/kategorije/flop/", "Flop", "Flops"),
