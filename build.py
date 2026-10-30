@@ -13,6 +13,7 @@ from content_recenzije import REVIEWS
 from komentari import KOMENTARI
 from content_kvizovi import QUIZZES
 from content_kvizovi_znanje import KNOWLEDGE_QUIZZES
+from content_brendovi import BRAND_INFO
 import random
 import content_en
 ARTICLES = sorted(REVIEWS, key=lambda r: r["kicker"] != "Rutina") + ARTICLES
@@ -330,6 +331,24 @@ def brand_chips(a):
         f'<a class="tag" href="/brendovi/{x["slug"]}/">{e(x["name"])}</a>' for x in bs) + "</div></div>"
 
 
+def review_brand(a):
+    rb = a["review"]["brand"].lower() if a.get("review") else ""
+    return next((b for b in BRANDS if rb and any(al.lower() in rb for al in b["aliases"])), None)
+
+
+def brand_tag(a):
+    x = review_brand(a)
+    return f'<a class="tag tag--brand" href="/brendovi/{x["slug"]}/">{T("Brend", "Brand")}: {e(x["name"])}</a>' if x else ""
+
+
+def brand_about_box(a):
+    x = review_brand(a)
+    if not x or x["name"] not in BRAND_INFO:
+        return ""
+    return (f'<details class="brand-box"><summary>{T("O brendu", "About the brand")} {e(x["name"])}: {T("osjetljiva koža i rozacea", "sensitive skin and rosacea")}</summary>'
+            f'<div class="brand-box__body">{T(*BRAND_INFO[x["name"]]["about"])}<p><a href="/brendovi/{x["slug"]}/">{T("Sve recenzije brenda", "All reviews of")} {e(x["name"])} →</a></p></div></details>')
+
+
 def page_brands():
     path = "/brendovi/"
     cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), (None, T("Brendovi", "Brands"))])
@@ -364,12 +383,17 @@ def page_brand(x):
         intro = T(f"<p>Detaljna recenzija proizvoda brenda {e(x['name'])} stiže uskoro. Pratite portal ili mi javite koji vas proizvod najviše zanima.</p>",
                   f"<p>A detailed {e(x['name'])} review is coming soon. Follow the site or tell me which product interests you most.</p>")
         lst = ""
-    desc = T(f"{x['name']} recenzije na hrvatskom: iskrena iskustva s proizvodima brenda {x['name']} na osjetljivoj koži sklonoj crvenilu.",
-             f"{x['name']} reviews: honest experiences with {x['name']} products on sensitive skin prone to redness.")
-    ld = [cr_ld, {"@type": "CollectionPage", "name": T(f"{x['name']} recenzije", f"{x['name']} reviews"), "url": BASE + path, "about": {"@type": "Brand", "name": x["name"]}}]
+    info = BRAND_INFO.get(x["name"])
+    desc = T(*info["desc"]) if info else T(f"{x['name']} recenzije na hrvatskom: iskrena iskustva s proizvodima brenda {x['name']} na osjetljivoj koži sklonoj crvenilu.",
+                                         f"{x['name']} reviews: honest experiences with {x['name']} products on sensitive skin prone to redness.")
+    about = ("<h2>" + e(x["name"]) + T(" za osjetljivu kožu i rozaceu", " for sensitive skin and rosacea") + "</h2>" + T(*info["about"])) if info else ""
+    brand_ld = {"@type": "Brand", "name": x["name"]}
+    if info:
+        brand_ld["description"] = re.sub(r"<[^>]+>", "", T(*info["about"]).split("</p>")[0])
+    ld = [cr_ld, {"@type": "CollectionPage", "name": T(f"{x['name']} recenzije", f"{x['name']} reviews"), "url": BASE + path, "description": desc, "about": brand_ld}]
     return head(T(f"{x['name']} recenzije i iskustva", f"{x['name']} reviews and experiences"), desc, path, extra_ld=ld, noindex=not arts) + header("/brendovi/") + f"""
 {cr}<div class="wrap read"><header class="page-head"><p class="eyebrow">{T('Brend', 'Brand')}</p><h1>{e(x['name'])}</h1></header>
-<div class="page-intro prose">{x.get('intro') or intro}</div></div>
+<div class="page-intro prose">{x.get('intro') or intro}</div>{f'<div class="prose brand-about">{about}</div>' if about else ''}</div>
 <section class="section" style="padding-top:24px"><div class="wrap read">{lst}<p style="margin-top:28px"><a href="/brendovi/">← {T('Svi brendovi', 'All brands')}</a></p></div></section>
 """ + footer()
 
@@ -493,12 +517,12 @@ def page_article(a):
 <p class="eyebrow">{e(a['kicker'])}</p>
 <h1>{e(a['h1'])}</h1>
 <div class="byline"><span>{T('Piše', 'By')} <a href="/o-meni/">{e(CFG['author'])}</a></span><time datetime="{a['date']}">{hr_date(a['date'])}</time>{upd}<span>{reading_time(a['body'])} {T('min čitanja', 'min read')}</span></div>
-<div class="tags">{''.join(f'<a class="tag" href="/kategorije/{s}/"><span class="dot hue-{CAT[s]["hue"]}"></span>{e(CAT[s]["name"])}</a>' for s in a['categories'])}</div>
+<div class="tags">{brand_tag(a)}{''.join(f'<a class="tag" href="/kategorije/{s}/"><span class="dot hue-{CAT[s]["hue"]}"></span>{e(CAT[s]["name"])}</a>' for s in a['categories'])}</div>
 <p class="verdict">{mark()}{e(a['verdict'])}</p>
 </header>
 {('<figure class="cover">' + picture(a["slug"], a.get("review", {}).get("product", a["h1"]), 1200, 900 if a.get("review") else 750, eager=True) + (f'<figcaption>{T("Fotografija proizvoda", "Product photo")}: {e(a["review"]["brand"])}</figcaption>' if a.get("review") else '') + '</figure>') if has_image(a["slug"]) else ''}
 <details class="toc" open><summary>{T('Sadržaj', 'Contents')}</summary><ul>{toc}</ul></details>
-<div class="prose">{body}{review_block(a["review"]) if a.get("review") else ""}{faq}</div>
+<div class="prose">{body}{review_block(a["review"]) if a.get("review") else ""}{brand_about_box(a) if a.get("review") else ""}{faq}</div>
 {ad_slot()}
 {comments_block(a)}
 {brand_chips(a)}

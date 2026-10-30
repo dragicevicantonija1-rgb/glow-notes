@@ -152,6 +152,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 900; font-variation-setti
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .tag { display: inline-flex; align-items: center; gap: 6px; font: 700 0.72rem/1 var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--burgundy); text-decoration: none; padding: 8px 12px; border: 1px solid var(--hair); border-radius: 99px; }
 .tag:hover { background: var(--blush); color: var(--burgundy); }
+.tag--brand { background: var(--burgundy); color: #fff; border-color: var(--burgundy); }
+.tag--brand:hover { background: var(--blush); color: var(--burgundy); }
 .verdict { display: flex; gap: 12px; align-items: center; margin-top: 22px; font: italic 800 1.15rem/1.3 var(--display); color: var(--burgundy); background: var(--blush); border-radius: 99px; padding: 10px 22px 10px 10px; width: fit-content; max-width: 100%; }
 .verdict svg { width: 40px; height: 40px; flex: none; }
 
@@ -205,6 +207,10 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
 .cover img { width: 100%; height: auto; border-radius: 24px; display: block; }
 .brands-in { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--hair); }
 .brands-in .tags { margin-top: 10px; }
+.brand-box { margin: 32px 0; border: 1px solid var(--hair); border-radius: 16px; padding: 0 20px; }
+.brand-box summary { cursor: pointer; padding: 16px 0; font-weight: 600; list-style-position: inside; }
+.brand-box[open] summary { border-bottom: 1px solid var(--hair); }
+.brand-box__body { padding: 8px 0 12px; }
 .page-sub { color: var(--ink-soft); font-size: var(--step-1); max-width: 52ch; margin: 12px 0 0; }
 
 /* Brendovi A–Ž */
@@ -214,6 +220,7 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
 .brand-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
 .brand-tile { display: flex; flex-direction: column; gap: 4px; padding: 16px 18px; border-radius: 18px; background: var(--blush); text-decoration: none; color: var(--burgundy); transition: transform .15s, background .15s; }
 .brand-tile:hover { transform: translateY(-2px); background: var(--pink); color: #7a1730; }
+.brand-tile:hover .brand-tile__count { color: #7a1730; opacity: .75; }
 .brand-tile__name { font: 900 1.25rem/1.15 var(--display); font-variation-settings: "SOFT" 100; }
 .brand-tile__count { font: 700 0.7rem/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
 .brand-tile--soon { background: var(--card); border: 1px dashed var(--hair); }
