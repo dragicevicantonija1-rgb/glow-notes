@@ -331,6 +331,15 @@ def brand_chips(a):
         f'<a class="tag" href="/brendovi/{x["slug"]}/">{e(x["name"])}</a>' for x in bs) + "</div></div>"
 
 
+def brand_about_box(a):
+    rb = a["review"]["brand"].lower()
+    x = next((b for b in BRANDS if any(al.lower() in rb for al in b["aliases"]) and b["name"] in BRAND_INFO), None)
+    if not x:
+        return ""
+    return (f'<details class="brand-box"><summary>{T("O brendu", "About the brand")} {e(x["name"])}: {T("osjetljiva koža i rozacea", "sensitive skin and rosacea")}</summary>'
+            f'<div class="brand-box__body">{T(*BRAND_INFO[x["name"]]["about"])}<p><a href="/brendovi/{x["slug"]}/">{T("Sve recenzije brenda", "All reviews of")} {e(x["name"])} →</a></p></div></details>')
+
+
 def page_brands():
     path = "/brendovi/"
     cr, cr_ld = crumbs([("/", T("Naslovnica", "Home")), (None, T("Brendovi", "Brands"))])
@@ -504,7 +513,7 @@ def page_article(a):
 </header>
 {('<figure class="cover">' + picture(a["slug"], a.get("review", {}).get("product", a["h1"]), 1200, 900 if a.get("review") else 750, eager=True) + (f'<figcaption>{T("Fotografija proizvoda", "Product photo")}: {e(a["review"]["brand"])}</figcaption>' if a.get("review") else '') + '</figure>') if has_image(a["slug"]) else ''}
 <details class="toc" open><summary>{T('Sadržaj', 'Contents')}</summary><ul>{toc}</ul></details>
-<div class="prose">{body}{review_block(a["review"]) if a.get("review") else ""}{faq}</div>
+<div class="prose">{body}{review_block(a["review"]) if a.get("review") else ""}{brand_about_box(a) if a.get("review") else ""}{faq}</div>
 {ad_slot()}
 {comments_block(a)}
 {brand_chips(a)}

@@ -205,6 +205,10 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
 .cover img { width: 100%; height: auto; border-radius: 24px; display: block; }
 .brands-in { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--hair); }
 .brands-in .tags { margin-top: 10px; }
+.brand-box { margin: 32px 0; border: 1px solid var(--hair); border-radius: 16px; padding: 0 20px; }
+.brand-box summary { cursor: pointer; padding: 16px 0; font-weight: 600; list-style-position: inside; }
+.brand-box[open] summary { border-bottom: 1px solid var(--hair); }
+.brand-box__body { padding: 8px 0 12px; }
 .page-sub { color: var(--ink-soft); font-size: var(--step-1); max-width: 52ch; margin: 12px 0 0; }
 
 /* Brendovi A–Ž */
