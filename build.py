@@ -331,10 +331,19 @@ def brand_chips(a):
         f'<a class="tag" href="/brendovi/{x["slug"]}/">{e(x["name"])}</a>' for x in bs) + "</div></div>"
 
 
+def review_brand(a):
+    rb = a["review"]["brand"].lower() if a.get("review") else ""
+    return next((b for b in BRANDS if rb and any(al.lower() in rb for al in b["aliases"])), None)
+
+
+def brand_tag(a):
+    x = review_brand(a)
+    return f'<a class="tag tag--brand" href="/brendovi/{x["slug"]}/">{T("Brend", "Brand")}: {e(x["name"])}</a>' if x else ""
+
+
 def brand_about_box(a):
-    rb = a["review"]["brand"].lower()
-    x = next((b for b in BRANDS if any(al.lower() in rb for al in b["aliases"]) and b["name"] in BRAND_INFO), None)
-    if not x:
+    x = review_brand(a)
+    if not x or x["name"] not in BRAND_INFO:
         return ""
     return (f'<details class="brand-box"><summary>{T("O brendu", "About the brand")} {e(x["name"])}: {T("osjetljiva koža i rozacea", "sensitive skin and rosacea")}</summary>'
             f'<div class="brand-box__body">{T(*BRAND_INFO[x["name"]]["about"])}<p><a href="/brendovi/{x["slug"]}/">{T("Sve recenzije brenda", "All reviews of")} {e(x["name"])} →</a></p></div></details>')
@@ -508,7 +517,7 @@ def page_article(a):
 <p class="eyebrow">{e(a['kicker'])}</p>
 <h1>{e(a['h1'])}</h1>
 <div class="byline"><span>{T('Piše', 'By')} <a href="/o-meni/">{e(CFG['author'])}</a></span><time datetime="{a['date']}">{hr_date(a['date'])}</time>{upd}<span>{reading_time(a['body'])} {T('min čitanja', 'min read')}</span></div>
-<div class="tags">{''.join(f'<a class="tag" href="/kategorije/{s}/"><span class="dot hue-{CAT[s]["hue"]}"></span>{e(CAT[s]["name"])}</a>' for s in a['categories'])}</div>
+<div class="tags">{brand_tag(a)}{''.join(f'<a class="tag" href="/kategorije/{s}/"><span class="dot hue-{CAT[s]["hue"]}"></span>{e(CAT[s]["name"])}</a>' for s in a['categories'])}</div>
 <p class="verdict">{mark()}{e(a['verdict'])}</p>
 </header>
 {('<figure class="cover">' + picture(a["slug"], a.get("review", {}).get("product", a["h1"]), 1200, 900 if a.get("review") else 750, eager=True) + (f'<figcaption>{T("Fotografija proizvoda", "Product photo")}: {e(a["review"]["brand"])}</figcaption>' if a.get("review") else '') + '</figure>') if has_image(a["slug"]) else ''}

@@ -152,6 +152,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 900; font-variation-setti
 .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 .tag { display: inline-flex; align-items: center; gap: 6px; font: 700 0.72rem/1 var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--burgundy); text-decoration: none; padding: 8px 12px; border: 1px solid var(--hair); border-radius: 99px; }
 .tag:hover { background: var(--blush); color: var(--burgundy); }
+.tag--brand { background: var(--burgundy); color: #fff; border-color: var(--burgundy); }
+.tag--brand:hover { background: var(--blush); color: var(--burgundy); }
 .verdict { display: flex; gap: 12px; align-items: center; margin-top: 22px; font: italic 800 1.15rem/1.3 var(--display); color: var(--burgundy); background: var(--blush); border-radius: 99px; padding: 10px 22px 10px 10px; width: fit-content; max-width: 100%; }
 .verdict svg { width: 40px; height: 40px; flex: none; }
 
