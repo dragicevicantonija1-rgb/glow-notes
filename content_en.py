@@ -754,6 +754,82 @@ ARTICLES_EN.update({
 <p>For sensitive, reactive skin and rosacea that needs quick calming and barrier repair. If your skin is acne-prone, be careful because of the occlusiveness, or use it only on dry and irritated areas. Hence 4.5/5, but for my skin it's currently one of the best moisturisers.</p>
 """,
     },
+    "jane-iredale-hydropure-tinted-serum-recenzija": {
+        "slug": "jane-iredale-hydropure-tinted-serum-review",
+        "title": "jane iredale HydroPure Tinted Serum review: tinted serum with hyaluronic acid and CoQ10 vs Chanel Water-Fresh Tint",
+        "h1": "jane iredale HydroPure Tinted Serum: weightless, but I prefer Chanel",
+        "description": "Review of jane iredale HydroPure Tinted Serum on sensitive skin: very sheer coverage, hyaluronic acid and CoQ10, applying it on dry skin, pairing it with the green serum and a comparison with Chanel Water-Fresh Tint. Rating 3.5/5.",
+        "excerpt": "Very sheer, weightless coverage and great paired with the green serum from the same line. But it has to go on dry skin, and I still prefer Chanel Water-Fresh Tint. Rating 3.5/5.",
+        "kicker": "Review",
+        "verdict": "Rating 3.5/5: good, but not the best tint I own",
+        "review": {"product": "jane iredale HydroPure Tinted Serum with Hyaluronic Acid & CoQ10",
+                   "pros": ["Very sheer coverage", "Weightless, you can't feel it on the skin", "Hyaluronic acid gives a plump look", "CoQ10 as an anti-ageing bonus", "Great paired with the green HydroPure serum for redness"],
+                   "cons": ["Has to go on completely dry skin, otherwise it won't spread", "A bit more visible on the skin than Chanel Water-Fresh Tint", "No SPF"]},
+        "faq": [("How much coverage does jane iredale HydroPure Tinted Serum give?", "Very sheer. It evens out the skin tone but doesn't hide the skin. For more coverage the brand suggests a mineral powder on top."),
+                ("How do you apply HydroPure Tinted Serum so it spreads well?", "On completely dry skin. I wait until my moisturiser has fully sunk in, because on damp skin it doesn't spread properly. The brand suggests two pumps, mixed with the fingers and blended with fingers or a brush."),
+                ("Which is better, jane iredale HydroPure Tinted Serum or Chanel Water-Fresh Tint?", "I prefer Chanel. My skin looks healthier with it, the coverage is even lighter and I got more compliments. HydroPure is a little more visible on the skin."),
+                ("Does HydroPure Tinted Serum have SPF?", "No, so I always apply SPF underneath.")],
+        "body": """
+<p class="lead">jane iredale is mineral makeup that often gets recommended for sensitive skin, so I tried their HydroPure Tinted Serum. Naturally, I compared it straight away with my favourite, <a href="/clanci/chanel-water-fresh-tint-recenzija/">Chanel Water-Fresh Tint</a>.</p>
+
+<h2 id="what-the-brand-says">What the brand says</h2>
+<ul class="claims">
+  <li>An ultra-hydrating tinted serum that hydrates, soothes, blurs lines and evens out skin tone.</li>
+  <li>2% hyaluronic acid for instant hydration and a smoother look, plus CoQ10 as an antioxidant.</li>
+  <li>Olive squalane for the barrier, with calendula, algae, willow bark extract and aloe to calm the skin.</li>
+  <li>Sheer coverage and a dewy finish, eight shades, airless pump.</li>
+  <li>No SPF and not vegan (it contains beeswax).</li>
+</ul>
+
+<h2 id="my-experience">My experience</h2>
+<p><strong>Very sheer coverage.</strong> You can't feel it on the skin at all, it's weightless. The hyaluronic acid gives the skin that plump look, and CoQ10 is a nice anti-ageing bonus.</p>
+<p>It works best for me paired with the green serum from the same line, the <a href="/clanci/jane-iredale-hydropure-color-correcting-serum-recenzija/">HydroPure Color Correcting Serum</a>, which neutralises redness. Green first, then the tint, and my skin tone is even without that mask feeling.</p>
+<p><strong>The downside: dry skin only.</strong> It has to go on completely dry skin, otherwise it doesn't spread properly. So I wait until my moisturiser has fully sunk in.</p>
+
+<h3>Compared with Chanel Water-Fresh Tint</h3>
+<p>I still prefer Chanel. With Chanel my skin looks healthier, the coverage is even lighter, my skin looks like it drank water and I got more compliments. HydroPure is a little more visible on the skin. It's not bad, Chanel is just better.</p>
+
+<h2 id="who-its-for">Who it's for</h2>
+<p>For sensitive skin that wants light mineral coverage with hydration, especially with the green serum from the same line if you have redness. If you're after the <em>your skin but better</em> effect and budget isn't an issue, I'd pick Chanel. Rating 3.5/5.</p>
+""",
+    },
+    "jane-iredale-hydropure-color-correcting-serum-recenzija": {
+        "slug": "jane-iredale-hydropure-color-correcting-serum-review",
+        "title": "jane iredale HydroPure Color Correcting Serum review: a green serum for redness, rosacea and sensitive skin",
+        "h1": "jane iredale HydroPure Color Correcting Serum: a green serum that calms redness",
+        "description": "Review of jane iredale HydroPure Color Correcting Serum on rosacea-prone skin: the green tint neutralises redness, hyaluronic acid and CoQ10, mineral makeup for sensitive skin, applying it on dry skin and a comparison with Erborian CC Red Correct. Rating 3.5/5.",
+        "excerpt": "It nicely neutralises redness, not quite like Erborian CC Red Correct, but it helps. Hyaluronic acid and CoQ10 are a plus, the downside is that it pills on damp skin. Rating 3.5/5.",
+        "kicker": "Review",
+        "verdict": "Rating 3.5/5: helps with redness, dry skin only",
+        "review": {"product": "jane iredale HydroPure Color Correcting Serum with Hyaluronic Acid & CoQ10",
+                   "pros": ["Nicely neutralises redness", "Hyaluronic acid gives a plump look", "CoQ10 as an anti-ageing bonus", "Mineral makeup that suits sensitive skin", "Great under HydroPure Tinted Serum"],
+                   "cons": ["Doesn't cover redness like Erborian CC Red Correct", "Has to go on completely dry skin, otherwise it pills", "No SPF"]},
+        "faq": [("Does jane iredale HydroPure Color Correcting Serum cover redness?", "It neutralises it nicely, but not completely. Erborian CC Red Correct covers more, but my skin was redder after it, so HydroPure is the better choice for my rosacea."),
+                ("Is HydroPure Color Correcting Serum good for rosacea?", "It helps with my redness and didn't irritate me. The brand says it's made for mild to moderate redness and isn't meant to treat skin conditions, so keep following your rosacea with a dermatologist."),
+                ("Why does the HydroPure green serum pill?", "For me it happens when I apply it on skin that isn't completely dry. When I wait for my moisturiser to sink in, it blends beautifully."),
+                ("What should I wear over the green serum?", "I wear HydroPure Tinted Serum over it. The brand recommends a foundation or mineral SPF on top, since the serum has no SPF.")],
+        "body": """
+<p class="lead">Green redness correctors are my weak spot, but after <a href="/clanci/erborian-cc-red-correct-recenzija/">Erborian CC Red Correct</a> I became careful. jane iredale HydroPure Color Correcting Serum is a mineral alternative I tried on my rosacea-prone skin.</p>
+
+<h2 id="what-the-brand-says">What the brand says</h2>
+<ul class="claims">
+  <li>A hybrid of makeup and an ultra-hydrating serum with a sheer green tint that visually neutralises mild to moderate redness. It's worn under foundation.</li>
+  <li>2% hyaluronic acid for hydration, CoQ10 as an antioxidant and allantoin to soothe.</li>
+  <li>Olive squalane for the barrier, with calendula, algae, willow bark extract and aloe.</li>
+  <li>Mineral pigments in encapsulated liposomes, dewy finish.</li>
+  <li>No SPF, not vegan, and the brand points out it isn't meant to treat skin conditions.</li>
+</ul>
+
+<h2 id="my-experience">My experience</h2>
+<p><strong>It nicely neutralises redness.</strong> Not fully like Erborian CC Red Correct, but it helps, and without my skin being redder afterwards. For me that matters more than stronger coverage.</p>
+<p>The hyaluronic acid gives the skin a plump look, and CoQ10 is an anti-ageing bonus. Overall I find jane iredale good mineral makeup for sensitive skin.</p>
+<p>It works best for me under the <a href="/clanci/jane-iredale-hydropure-tinted-serum-recenzija/">HydroPure Tinted Serum</a>: the green one neutralises redness and the tinted one evens out the skin tone.</p>
+<p><strong>The downside: completely dry skin only.</strong> If the skin isn't fully dry, the serum pills. So I wait until my moisturiser has completely sunk in.</p>
+
+<h2 id="who-its-for">Who it's for</h2>
+<p>For sensitive skin and rosacea with mild to moderate redness, especially if the chemical SPF in CC creams makes you react. If you need heavy redness coverage, it won't be enough on its own. Rating 3.5/5.</p>
+""",
+    },
     "moj-glow-up-rutina-rozacea": {
         "slug": "my-glow-up-rosacea-routine",
         "title": "My glow up: rosacea routine with Omnilux LED mask, Soolantra and Skinoren",
