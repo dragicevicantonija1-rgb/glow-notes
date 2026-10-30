@@ -13,6 +13,7 @@ from content_recenzije import REVIEWS
 from komentari import KOMENTARI
 from content_kvizovi import QUIZZES
 from content_kvizovi_znanje import KNOWLEDGE_QUIZZES
+from content_brendovi import BRAND_INFO
 import random
 import content_en
 ARTICLES = sorted(REVIEWS, key=lambda r: r["kicker"] != "Rutina") + ARTICLES
@@ -364,12 +365,17 @@ def page_brand(x):
         intro = T(f"<p>Detaljna recenzija proizvoda brenda {e(x['name'])} stiže uskoro. Pratite portal ili mi javite koji vas proizvod najviše zanima.</p>",
                   f"<p>A detailed {e(x['name'])} review is coming soon. Follow the site or tell me which product interests you most.</p>")
         lst = ""
-    desc = T(f"{x['name']} recenzije na hrvatskom: iskrena iskustva s proizvodima brenda {x['name']} na osjetljivoj koži sklonoj crvenilu.",
-             f"{x['name']} reviews: honest experiences with {x['name']} products on sensitive skin prone to redness.")
-    ld = [cr_ld, {"@type": "CollectionPage", "name": T(f"{x['name']} recenzije", f"{x['name']} reviews"), "url": BASE + path, "about": {"@type": "Brand", "name": x["name"]}}]
+    info = BRAND_INFO.get(x["name"])
+    desc = T(*info["desc"]) if info else T(f"{x['name']} recenzije na hrvatskom: iskrena iskustva s proizvodima brenda {x['name']} na osjetljivoj koži sklonoj crvenilu.",
+                                         f"{x['name']} reviews: honest experiences with {x['name']} products on sensitive skin prone to redness.")
+    about = ("<h2>" + e(x["name"]) + T(" za osjetljivu kožu i rozaceu", " for sensitive skin and rosacea") + "</h2>" + T(*info["about"])) if info else ""
+    brand_ld = {"@type": "Brand", "name": x["name"]}
+    if info:
+        brand_ld["description"] = re.sub(r"<[^>]+>", "", T(*info["about"]).split("</p>")[0])
+    ld = [cr_ld, {"@type": "CollectionPage", "name": T(f"{x['name']} recenzije", f"{x['name']} reviews"), "url": BASE + path, "description": desc, "about": brand_ld}]
     return head(T(f"{x['name']} recenzije i iskustva", f"{x['name']} reviews and experiences"), desc, path, extra_ld=ld, noindex=not arts) + header("/brendovi/") + f"""
 {cr}<div class="wrap read"><header class="page-head"><p class="eyebrow">{T('Brend', 'Brand')}</p><h1>{e(x['name'])}</h1></header>
-<div class="page-intro prose">{x.get('intro') or intro}</div></div>
+<div class="page-intro prose">{x.get('intro') or intro}</div>{f'<div class="prose brand-about">{about}</div>' if about else ''}</div>
 <section class="section" style="padding-top:24px"><div class="wrap read">{lst}<p style="margin-top:28px"><a href="/brendovi/">← {T('Svi brendovi', 'All brands')}</a></p></div></section>
 """ + footer()
 
