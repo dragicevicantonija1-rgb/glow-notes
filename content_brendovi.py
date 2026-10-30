@@ -10,25 +10,31 @@ BRAND_INFO = {
         "desc": ("Avène i osjetljiva koža: termalna voda, Cicalfate, Couvrance i SPF iz ljekarne, iskreno testirani na koži s rozaceom i crvenilom.",
                  "Avène for sensitive skin: thermal water, Cicalfate, Couvrance and pharmacy SPF, honestly tested on skin with rosacea and redness."),
         "about": ("""<p>Avène je francuski dermokozmetički brend grupe Pierre Fabre, nastao oko termalnog izvora u istoimenom mjestu. Gotovo cijela ponuda namijenjena je osjetljivoj i reaktivnoj koži, a za crvenilo i rozaceu postoji posebna linija Antirougeurs. Većina formula je bez parfema i s kratkim popisom sastojaka.</p>
-<p>Moje iskustvo s Avèneom je mješovito: Cicalfate serum i mineralni fluid mi pomažu nakon tretmana, ali termalna voda, tonirani SPF i Couvrance puder nisu prošli test na mojoj koži s rozaceom. Dobar brend za početak, samo svaki proizvod isprobajte zasebno.</p>""",
+<p>Moje iskustvo s Avèneom je mješovito: Cicalfate serum i mineralni fluid mi pomažu nakon tretmana, ali termalna voda, tonirani SPF i Couvrance puder nisu prošli test na mojoj koži s rozaceom. Dobar brend za početak, samo svaki proizvod isprobajte zasebno.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Avène ima patentiranu tehnologiju sterilne kozmetike (Cosmétique Stérile) u liniji Tolérance, koja omogućuje formule bez konzervansa. Za termalnu vodu navodi više od 150 kliničkih i znanstvenih studija, ali bez objavljenog broja ispitanika. Krema Antirougeurs Rosamed u studiji na 41 osobi smanjila je intenzitet crvenila za 48&nbsp;% nakon mjesec dana korištenja dvaput dnevno.</p>""",
                   """<p>Avène is a French dermocosmetic brand from the Pierre Fabre group, built around the thermal spring in the village of the same name. Almost the entire range is made for sensitive and reactive skin, and there is a dedicated Antirougeurs line for redness and rosacea. Most formulas are fragrance-free with short ingredient lists.</p>
-<p>My experience with Avène is mixed: the Cicalfate serum and the mineral fluid help after treatments, but the thermal water, the tinted SPF and Couvrance foundation did not pass the test on my rosacea-prone skin. A good brand to start with, just test each product on its own.</p>"""),
+<p>My experience with Avène is mixed: the Cicalfate serum and the mineral fluid help after treatments, but the thermal water, the tinted SPF and Couvrance foundation did not pass the test on my rosacea-prone skin. A good brand to start with, just test each product on its own.</p>
+<p><strong>Patents and testing (according to the brand):</strong> Avène holds a patent on its sterile cosmetics technology (Cosmétique Stérile) used in the Tolérance line, which allows preservative-free formulas. It cites more than 150 clinical and scientific studies on its thermal water, without publishing subject numbers. In a study on 41 people, Antirougeurs Rosamed cream reduced redness intensity by 48% after a month of twice-daily use.</p>"""),
     },
     "Babé": {
         "desc": ("Babé (Laboratorios Babé) recenzije: mineralni SPF 50 i SPF za usne i obraze, testirani na osjetljivoj koži s rozaceom. Moj broj jedan SPF.",
                  "Babé (Laboratorios Babé) reviews: mineral SPF 50 and lip & cheek SPF tested on sensitive skin with rosacea. My number one SPF."),
         "about": ("""<p>Laboratorios Babé je španjolski ljekarnički brend poznat po pristupačnoj dermokozmetici i zaštiti od sunca. Za osjetljivu kožu i rozaceu najzanimljiviji su njihovi 100&nbsp;% mineralni SPF-ovi, jer mnogim reaktivnim kožama upravo kemijski UV filteri izazivaju crvenilo i peckanje.</p>
-<p>Babé Super Fluid Color SPF 50 je moj sveti gral među mineralnim SPF-ovima: lako se razmazuje, ne ostavlja bijeli trag na svijetloj koži i ne crveni me. Za mene je to brend kojem se uvijek vraćam.</p>""",
+<p>Babé Super Fluid Color SPF 50 je moj sveti gral među mineralnim SPF-ovima: lako se razmazuje, ne ostavlja bijeli trag na svijetloj koži i ne crveni me. Za mene je to brend kojem se uvijek vraćam.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Babé na stranici proizvoda ne navodi patente ni kliničke testove. Formula je 100&nbsp;% mineralna (cinkov oksid i titanov dioksid) i namijenjena koži koja ne podnosi kemijske filtere.</p>""",
                   """<p>Laboratorios Babé is a Spanish pharmacy brand known for affordable dermocosmetics and sun care. For sensitive skin and rosacea the most interesting products are their 100% mineral sunscreens, because chemical UV filters are a common trigger of redness and stinging on reactive skin.</p>
-<p>Babé Super Fluid Color SPF 50 is my holy grail mineral SPF: it spreads easily, leaves no white cast on fair skin and doesn't make me flush. It's a brand I keep coming back to.</p>"""),
+<p>Babé Super Fluid Color SPF 50 is my holy grail mineral SPF: it spreads easily, leaves no white cast on fair skin and doesn't make me flush. It's a brand I keep coming back to.</p>
+<p><strong>Patents and testing (according to the brand):</strong> Babé doesn't cite patents or clinical tests on the product page. The formula is 100% mineral (zinc oxide and titanium dioxide) and is made for skin that doesn't tolerate chemical filters.</p>"""),
     },
     "Bioderma": {
         "desc": ("Bioderma i osjetljiva koža: Sensibio H2O micelarna voda i Photoderm AR SPF protiv crvenila, iskreno testirani na koži s rozaceom.",
                  "Bioderma for sensitive skin: Sensibio H2O micellar water and Photoderm AR anti-redness SPF, honestly tested on skin with rosacea."),
         "about": ("""<p>Bioderma je francuski dermokozmetički brend (NAOS) i jedan od najprodavanijih ljekarničkih brendova u Europi. Za osjetljivu kožu ključna je linija Sensibio, za crvenilo i rozaceu Sensibio AR, a u liniji Photoderm postoje SPF-ovi s laganim tonom koji prikriva crvenilo.</p>
-<p>Sensibio H2O je moj dugogodišnji favorit i prvi korak čišćenja svake večeri. S njihovim SPF-ovima sam manje sretna: Photoderm AR je okej, a mineralni Photoderm mi je završio na dnu poretka.</p>""",
+<p>Sensibio H2O je moj dugogodišnji favorit i prvi korak čišćenja svake večeri. S njihovim SPF-ovima sam manje sretna: Photoderm AR je okej, a mineralni Photoderm mi je završio na dnu poretka.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Bioderma ima patentirani kompleks D.A.F. (Dermatological Advanced Formulation), koji podiže prag tolerancije kože, i patent za micelarno čišćenje bez ispiranja. Linije za crvenilo (Sensibio AR, Photoderm AR) koriste patent Rosactiv. Za Sensibio H2O navodi opservacijsku studiju na 400 osoba: nakon 28 dana 90&nbsp;% ih je prijavilo manje neugodnih osjećaja na koži. Za Sensibio AR navodi 73&nbsp;% manje crvenila, ali bez broja ispitanika.</p>""",
                   """<p>Bioderma is a French dermocosmetic brand (NAOS) and one of the best-selling pharmacy brands in Europe. The Sensibio line is the go-to for sensitive skin, Sensibio AR targets redness and rosacea, and the Photoderm range includes lightly tinted sunscreens that tone down redness.</p>
-<p>Sensibio H2O has been my favourite for years and is the first cleansing step every evening. I'm less happy with their sunscreens: Photoderm AR is fine, while the mineral Photoderm ended up at the bottom of my ranking.</p>"""),
+<p>Sensibio H2O has been my favourite for years and is the first cleansing step every evening. I'm less happy with their sunscreens: Photoderm AR is fine, while the mineral Photoderm ended up at the bottom of my ranking.</p>
+<p><strong>Patents and testing (according to the brand):</strong> Bioderma holds a patent on its D.A.F. complex (Dermatological Advanced Formulation), which raises the skin's tolerance threshold, and on its no-rinse micellar cleansing. Its redness lines (Sensibio AR, Photoderm AR) use the patented Rosactiv. For Sensibio H2O it cites an observational study on 400 people: after 28 days, 90% reported fewer unpleasant skin sensations. For Sensibio AR it claims 73% less redness, without giving the number of subjects.</p>"""),
     },
     "Biologique Recherche": {
         "desc": ("Biologique Recherche i rozacea: iskustvo s kultnim piling tonikom Lotion P50W na reaktivnoj, osjetljivoj koži sklonoj crvenilu.",
@@ -50,9 +56,11 @@ BRAND_INFO = {
         "desc": ("CeraVe i osjetljiva koža: iskustvo s umivalicama, kremom za lice i SA kremom za tijelo na koži s rozaceom. Što mi je odgovaralo, a što nije.",
                  "CeraVe for sensitive skin: my experience with the cleansers, face cream and SA body cream on rosacea-prone skin. What worked and what didn't."),
         "about": ("""<p>CeraVe je američki brend razvijen s dermatolozima, danas dio grupe L'Oréal. Prepoznatljiv je po ceramidima za obnovu kožne barijere i formulama bez parfema, pa je često prva preporuka za osjetljivu kožu.</p>
-<p>Kod rozacee to ipak nije pravilo: CeraVe umivalice i krema za lice mojoj koži nisu odgovarale. S druge strane, SA kremu za tijelo kupujem iznova. Dobar dokaz da isti brend može biti odličan za tijelo, a ne sjesti na reaktivno lice.</p>""",
+<p>Kod rozacee to ipak nije pravilo: CeraVe umivalice i krema za lice mojoj koži nisu odgovarale. S druge strane, SA kremu za tijelo kupujem iznova. Dobar dokaz da isti brend može biti odličan za tijelo, a ne sjesti na reaktivno lice.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> CeraVe koristi MVE tehnologiju (multivezikularnu emulziju) koja postupno otpušta ceramide tijekom dana, a za koju navodi raniji američki patent br. 6,709,663. Broj ispitanika u studijama za proizvode za lice na stranici brenda nije naveden.</p>""",
                   """<p>CeraVe is an American brand developed with dermatologists and now part of L'Oréal. It is known for ceramides that support the skin barrier and fragrance-free formulas, which makes it a frequent first recommendation for sensitive skin.</p>
-<p>With rosacea that isn't a rule, though: CeraVe cleansers and face cream didn't suit my skin. On the other hand, I keep repurchasing the SA body cream. Proof that the same brand can be great for the body and still not agree with a reactive face.</p>"""),
+<p>With rosacea that isn't a rule, though: CeraVe cleansers and face cream didn't suit my skin. On the other hand, I keep repurchasing the SA body cream. Proof that the same brand can be great for the body and still not agree with a reactive face.</p>
+<p><strong>Patents and testing (according to the brand):</strong> CeraVe uses MVE technology (multivesicular emulsion), which releases ceramides gradually through the day, and cites a former US patent no. 6,709,663. The brand's site doesn't give subject numbers for its face product studies.</p>"""),
     },
     "Chanel": {
         "desc": ("Chanel recenzije: Les Beiges Water-Fresh Tint i luksuzna šminka testirana na osjetljivoj koži 30+ sklonoj crvenilu. Vrijedi li cijene?",
@@ -66,9 +74,11 @@ BRAND_INFO = {
         "desc": ("Clinique i osjetljiva koža: alergološki testirane formule bez parfema i krema Smart Clinical Repair testirana na koži 30+ sklonoj rozacei.",
                  "Clinique for sensitive skin: allergy-tested, fragrance-free formulas and Smart Clinical Repair cream tested on 30+ skin prone to rosacea."),
         "about": ("""<p>Clinique je američki brend grupe Estée Lauder, od početka razvijan s dermatolozima. Proizvodi su alergološki testirani i bez parfema, što ga čini jednim od sigurnijih luksuznih izbora za osjetljivu kožu. Za crvenilo postoji i linija Redness Solutions.</p>
-<p>Na mojoj koži 30+ s rozaceom najbolje se pokazala krema Smart Clinical Repair Wrinkle Correcting Cream, koju kupujem ponovno.</p>""",
+<p>Na mojoj koži 30+ s rozaceom najbolje se pokazala krema Smart Clinical Repair Wrinkle Correcting Cream, koju kupujem ponovno.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Clinique ne navodi patent za osjetljivu kožu, ali navodi gotovo 6 milijuna testnih aplikacija u alergološkim testovima od osnutka, a svi proizvodi su dermatološki testirani i 100&nbsp;% bez parfema.</p>""",
                   """<p>Clinique is an American brand from the Estée Lauder group, developed with dermatologists from the start. Its products are allergy-tested and fragrance-free, which makes it one of the safer luxury choices for sensitive skin. There is also a Redness Solutions line for redness.</p>
-<p>On my 30+ skin with rosacea the Smart Clinical Repair Wrinkle Correcting Cream has worked best, and I keep buying it again.</p>"""),
+<p>On my 30+ skin with rosacea the Smart Clinical Repair Wrinkle Correcting Cream has worked best, and I keep buying it again.</p>
+<p><strong>Patents and testing (according to the brand):</strong> Clinique doesn't claim a sensitive-skin patent, but cites nearly 6 million test applications in allergy testing since its launch, and all products are dermatologist tested and 100% fragrance-free.</p>"""),
     },
     "Dior": {
         "desc": ("Dior recenzije: luksuzna šminka i njega iz perspektive osjetljive kože sklone rozacei. Na što paziti prije kupnje.",
@@ -82,17 +92,21 @@ BRAND_INFO = {
         "desc": ("Erborian i rozacea: iskustvo sa zelenom CC Red Correct kremom za crvenilo na osjetljivoj, reaktivnoj koži. Zašto mi nije odgovarala.",
                  "Erborian and rosacea: my experience with the green CC Red Correct cream for redness on sensitive, reactive skin, and why it didn't suit me."),
         "about": ("""<p>Erborian je korejsko-francuski brend koji spaja korejske formule i biljne sastojke poput centelle. Najpoznatiji je po CC kremama, a zelena CC Red Correct namijenjena je baš prikrivanju crvenila, pa se često preporučuje kod rozacee.</p>
-<p>Zeleni pigment crvenilo neutralizira odlično, ali kemijski SPF u kremi mojoj je koži izazvao još više crvenila i papula. Ako vaša rozacea reagira na kemijske filtere, preskočite ga ili ga koristite samo za kratke izlaske.</p>""",
+<p>Zeleni pigment crvenilo neutralizira odlično, ali kemijski SPF u kremi mojoj je koži izazvao još više crvenila i papula. Ako vaša rozacea reagira na kemijske filtere, preskočite ga ili ga koristite samo za kratke izlaske.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Za CC Red Correct brend ne navodi patent. U testu na 33 osobe vidljivo crvenilo (bez šminke) smanjilo se za 30&nbsp;% nakon 28 dana, a svi su odmah nakon nanošenja vidjeli neutralizirano crvenilo.</p>""",
                   """<p>Erborian is a Korean-French brand that combines Korean formulas with botanical ingredients such as centella. It is best known for its CC creams, and the green CC Red Correct is designed specifically to hide redness, so it's often recommended for rosacea.</p>
-<p>The green pigment neutralises redness beautifully, but the chemical SPF in the cream gave my skin even more redness and bumps. If your rosacea reacts to chemical filters, skip it or keep it for short outings.</p>"""),
+<p>The green pigment neutralises redness beautifully, but the chemical SPF in the cream gave my skin even more redness and bumps. If your rosacea reacts to chemical filters, skip it or keep it for short outings.</p>
+<p><strong>Patents and testing (according to the brand):</strong> Erborian doesn't claim a patent for CC Red Correct. In a test on 33 people, visible redness on bare skin dropped by 30% after 28 days, and all of them saw redness neutralised right after application.</p>"""),
     },
     "IT Cosmetics": {
         "desc": ("IT Cosmetics recenzije: CC krema s visokim prekrivanjem i SPF-om na osjetljivoj koži 30+ sklonoj crvenilu i rozacei.",
                  "IT Cosmetics reviews: high-coverage CC cream with SPF on sensitive 30+ skin prone to redness and rosacea."),
         "about": ("""<p>IT Cosmetics je američki brend (danas L'Oréal) poznat po CC+ kremi, toniranoj kremi s visokim prekrivanjem, njegujućim sastojcima i SPF-om. Za kožu s rozaceom zanimljiva je jer jednim slojem prekriva crvenilo i neravnine, bez potrebe za korektorom.</p>
-<p>Originalna CC krema mi je jedan od proizvoda koje kupujem ponovno. Ako vam smetaju kemijski filteri, prije kupnje provjerite sastav verzije koja se prodaje kod nas.</p>""",
+<p>Originalna CC krema mi je jedan od proizvoda koje kupujem ponovno. Ako vam smetaju kemijski filteri, prije kupnje provjerite sastav verzije koja se prodaje kod nas.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Za CC+ kremu brend ne navodi patent ni tvrdnje za osjetljivu kožu, nego samo potrošačke testove (npr. 98&nbsp;% kaže da brzo prikriva tragove akni), bez broja ispitanika.</p>""",
                   """<p>IT Cosmetics is an American brand (now L'Oréal) known for its CC+ Cream, a high-coverage tinted cream with skincare ingredients and SPF. For rosacea-prone skin it is interesting because a single layer covers redness and texture without needing concealer.</p>
-<p>The original CC cream is one of my repurchases. If chemical filters bother your skin, check the ingredient list of the version sold in your country before buying.</p>"""),
+<p>The original CC cream is one of my repurchases. If chemical filters bother your skin, check the ingredient list of the version sold in your country before buying.</p>
+<p><strong>Patents and testing (according to the brand):</strong> IT Cosmetics doesn't claim a patent or sensitive-skin benefits for CC+ Cream, only consumer tests (e.g. 98% say it quickly covers acne marks), without giving the number of people.</p>"""),
     },
     "Kérastase": {
         "desc": ("Kérastase recenzije: luksuzna njega kose i maska Nutritive Masquintense iz perspektive osjetljive kože lica i vlasišta.",
@@ -106,9 +120,11 @@ BRAND_INFO = {
         "desc": ("Kiehl's i osjetljiva koža: Ultra Facial Cream, krema oko očiju s avokadom i serumi testirani na koži s rozaceom. Favoriti i promašaji.",
                  "Kiehl's for sensitive skin: Ultra Facial Cream, avocado eye cream and serums tested on rosacea-prone skin. Favourites and flops."),
         "about": ("""<p>Kiehl's je brend nastao 1851. u njujorškoj ljekarni, danas dio grupe L'Oréal. Ponuda je široka: od jednostavnih hidratantnih krema do seruma s aktivnim sastojcima, pa se kod osjetljive kože i rozacee isplati čitati sastav proizvod po proizvod.</p>
-<p>Ultra Facial Cream i krema oko očiju s avokadom su mi stalni favoriti. Vitamin C serum i Skin Strengthening Super Serum s jakim mirisom alkohola mojoj reaktivnoj koži nisu odgovarali.</p>""",
+<p>Ultra Facial Cream i krema oko očiju s avokadom su mi stalni favoriti. Vitamin C serum i Skin Strengthening Super Serum s jakim mirisom alkohola mojoj reaktivnoj koži nisu odgovarali.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Za Ultra Facial Cream Kiehl's ne navodi patent, ali navodi 132&nbsp;% više hidratacije i trenutno manje suhoće kod 97&nbsp;% ispitanika, bez broja ispitanika. Krema je bez parfema i ima oznaku američkog udruženja National Eczema Association.</p>""",
                   """<p>Kiehl's started in a New York apothecary in 1851 and is now part of L'Oréal. The range is wide, from simple moisturisers to serums with strong actives, so with sensitive skin and rosacea it pays to read the ingredients product by product.</p>
-<p>Ultra Facial Cream and the avocado eye cream are long-time favourites. The vitamin C serum and the Skin Strengthening Super Serum, with its strong alcohol smell, didn't suit my reactive skin.</p>"""),
+<p>Ultra Facial Cream and the avocado eye cream are long-time favourites. The vitamin C serum and the Skin Strengthening Super Serum, with its strong alcohol smell, didn't suit my reactive skin.</p>
+<p><strong>Patents and testing (according to the brand):</strong> Kiehl's doesn't claim a patent for Ultra Facial Cream, but cites a 132% hydration boost and immediately less dryness in 97% of subjects, without giving the number of subjects. The cream is fragrance-free and carries the US National Eczema Association seal.</p>"""),
     },
     "L'Occitane": {
         "desc": ("L'Occitane i osjetljiva koža: iskustvo s njegom lica na koži sklonoj rozacei i na što paziti kod mirisnih formula s eteričnim uljima.",
@@ -122,9 +138,11 @@ BRAND_INFO = {
         "desc": ("La Roche-Posay i rozacea: Cicaplast Baume B5+ i njega za osjetljivu kožu iz ljekarne, iskreno testirani na koži sklonoj crvenilu.",
                  "La Roche-Posay and rosacea: Cicaplast Baume B5+ and pharmacy skincare for sensitive skin, honestly tested on skin prone to redness."),
         "about": ("""<p>La Roche-Posay je francuski dermokozmetički brend grupe L'Oréal, nastao uz termalni izvor bogat selenom. Za osjetljivu kožu tu su linije Toleriane i Cicaplast, za crvenilo i rozaceu Rosaliac, a Anthelios je jedan od najpoznatijih ljekarničkih SPF-ova.</p>
-<p>Cicaplast Baume B5+ je moj sigurni izbor kad je koža nadražena: odmah je smiri i ne peče. Za kožu s rozaceom ovo je jedan od brendova kojima najviše vjerujem.</p>""",
+<p>Cicaplast Baume B5+ je moj sigurni izbor kad je koža nadražena: odmah je smiri i ne peče. Za kožu s rozaceom ovo je jedan od brendova kojima najviše vjerujem.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Za Cicaplast Baume B5+ brend ne navodi patent (Tribioma opisuje kao ekskluzivni prebiotik), ali navodi testove na 14 stanja kože. Na 52 bebe (4 do 34 mjeseca) nakon 4 tjedna kod svih je koža bila smirena. Na 42 odrasle osobe nakon lasera 97&nbsp;% je osjetilo veću ugodu, a kod 60&nbsp;% crvenilo je brže nestalo. Studija o Rosaliac AR kod rozacee objavljena je u časopisu Journal of Drugs in Dermatology 2013.</p>""",
                   """<p>La Roche-Posay is a French dermocosmetic brand from the L'Oréal group, built around a selenium-rich thermal spring. Toleriane and Cicaplast are its lines for sensitive skin, Rosaliac targets redness and rosacea, and Anthelios is one of the best-known pharmacy sunscreens.</p>
-<p>Cicaplast Baume B5+ is my safe choice when my skin is irritated: it calms it instantly and doesn't sting. For rosacea-prone skin, this is one of the brands I trust most.</p>"""),
+<p>Cicaplast Baume B5+ is my safe choice when my skin is irritated: it calms it instantly and doesn't sting. For rosacea-prone skin, this is one of the brands I trust most.</p>
+<p><strong>Patents and testing (according to the brand):</strong> La Roche-Posay doesn't claim a patent for Cicaplast Baume B5+ (it calls Tribioma an exclusive prebiotic), but says it was tested on 14 skin conditions. In 52 babies (4 to 34 months), every participant's skin was soothed after 4 weeks. In 42 adults after laser treatment, 97% felt more comfortable and redness faded faster in 60%. A study of Rosaliac AR on rosacea-prone skin was published in the Journal of Drugs in Dermatology in 2013.</p>"""),
     },
     "Ladria": {
         "desc": ("Ladria recenzije: jastučići za područje oko očiju testirani na osjetljivoj koži 30+. Iskreno iskustvo i ocjena.",
@@ -162,9 +180,11 @@ BRAND_INFO = {
         "desc": ("Omnilux Contour Face LED maska i rozacea: crveno i blisko infracrveno svjetlo u kućnoj rutini za osjetljivu kožu 30+. Iskustvo i specifikacije.",
                  "Omnilux Contour Face LED mask and rosacea: red and near-infrared light in an at-home routine for sensitive 30+ skin. Experience and specs."),
         "about": ("""<p>Omnilux je brend LED uređaja s crvenim i bliskim infracrvenim svjetlom, a Contour Face je fleksibilna maska za kućnu upotrebu. LED terapija ne koristi aktivne sastojke na koži, pa je zanimljiva opcija za reaktivnu kožu koja teško podnosi kiseline i retinoide.</p>
-<p>Maska je najveća investicija u mojoj rutini za rozaceu. Ako imate rozaceu ili uzimate lijekove koji povećavaju osjetljivost na svjetlo, LED terapiju prvo dogovorite s dermatologom.</p>""",
+<p>Maska je najveća investicija u mojoj rutini za rozaceu. Ako imate rozaceu ili uzimate lijekove koji povećavaju osjetljivost na svjetlo, LED terapiju prvo dogovorite s dermatologom.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Contour Face je odobren od američke FDA (FDA cleared) i koristi crveno svjetlo od 633&nbsp;nm i blisko infracrveno od 830&nbsp;nm iz 132 LED diode. Proizvođač navodi studiju na 25 sudionika (3 tretmana tjedno, 4 tjedna), ali rezultate su procjenjivali sami sudionici i studija nije objavljena.</p>""",
                   """<p>Omnilux makes LED devices with red and near-infrared light, and Contour Face is its flexible mask for home use. LED therapy puts no actives on the skin, which makes it an interesting option for reactive skin that struggles with acids and retinoids.</p>
-<p>The mask is the biggest investment in my rosacea routine. If you have rosacea or take medication that increases light sensitivity, talk to your dermatologist before starting LED therapy.</p>"""),
+<p>The mask is the biggest investment in my rosacea routine. If you have rosacea or take medication that increases light sensitivity, talk to your dermatologist before starting LED therapy.</p>
+<p><strong>Patents and testing (according to the brand):</strong> Contour Face is FDA cleared and uses 633&nbsp;nm red and 830&nbsp;nm near-infrared light from 132 LEDs. The brand cites a study on 25 participants (3 treatments a week for 4 weeks), but results were self-reported and the study isn't published.</p>"""),
     },
     "Paula's Choice": {
         "desc": ("Paula's Choice i rozacea: SPF bez parfema, 2% BHA i azelaic booster testirani na osjetljivoj koži. Što je prošlo, a što ne.",
@@ -210,8 +230,10 @@ BRAND_INFO = {
         "desc": ("Vichy i osjetljiva koža: Minéral serum s vulkanskom vodom testiran na koži 30+ sklonoj rozacei. Iskreno iskustvo iz ljekarne.",
                  "Vichy for sensitive skin: Minéral serum with volcanic water tested on 30+ skin prone to rosacea. An honest pharmacy experience."),
         "about": ("""<p>Vichy je francuski dermokozmetički brend grupe L'Oréal, nastao oko vulkanske termalne vode iz Vichyja. Linija Minéral 89 s hijaluronskom kiselinom je kratka i jednostavna, pa je dobar izbor za osjetljivu kožu koja treba hidrataciju bez puno sastojaka.</p>
-<p>Vichy Minéral serum je u mojoj rutini i kupujem ga ponovno.</p>""",
+<p>Vichy Minéral serum je u mojoj rutini i kupujem ga ponovno.</p>
+<p><strong>Patenti i testiranja (prema proizvođaču):</strong> Minéral 89 testiran je u studiji na 1.630 osoba s kožnim problemima ili nakon estetskih tretmana. Nakon 4 tjedna crvenilo je nestalo ili se smanjilo kod 68 do 72&nbsp;% sudionika, a peckanje se smanjilo kod oko 85&nbsp;%. Patent za osjetljivu kožu brend ne navodi.</p>""",
                   """<p>Vichy is a French dermocosmetic brand from the L'Oréal group, built around volcanic thermal water from Vichy. The Minéral 89 line with hyaluronic acid is short and simple, which makes it a good choice for sensitive skin that needs hydration without a long ingredient list.</p>
-<p>Vichy Minéral serum is part of my routine and I keep buying it again.</p>"""),
+<p>Vichy Minéral serum is part of my routine and I keep buying it again.</p>
+<p><strong>Patents and testing (according to the brand):</strong> Minéral 89 was tested in a study on 1,630 people with skin conditions or after aesthetic procedures. After 4 weeks, redness cleared or improved in 68 to 72% of participants and stinging decreased in about 85%. The brand doesn't claim a sensitive-skin patent.</p>"""),
     },
 }
