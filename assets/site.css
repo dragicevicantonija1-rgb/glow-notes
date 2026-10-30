@@ -220,6 +220,7 @@ td:first-child { font-variant-numeric: tabular-nums; font-weight: 700; color: va
 .brand-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
 .brand-tile { display: flex; flex-direction: column; gap: 4px; padding: 16px 18px; border-radius: 18px; background: var(--blush); text-decoration: none; color: var(--burgundy); transition: transform .15s, background .15s; }
 .brand-tile:hover { transform: translateY(-2px); background: var(--pink); color: #7a1730; }
+.brand-tile:hover .brand-tile__count { color: #7a1730; opacity: .75; }
 .brand-tile__name { font: 900 1.25rem/1.15 var(--display); font-variation-settings: "SOFT" 100; }
 .brand-tile__count { font: 700 0.7rem/1 var(--body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); }
 .brand-tile--soon { background: var(--card); border: 1px dashed var(--hair); }
