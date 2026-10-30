@@ -574,6 +574,94 @@ REVIEWS = [
 """,
     },
     {
+        "slug": "jane-iredale-hydropure-tinted-serum-recenzija",
+        "title": "jane iredale HydroPure Tinted Serum recenzija: tonirani serum s hijaluronskom kiselinom i CoQ10, usporedba s Chanel Water-Fresh Tint",
+        "h1": "jane iredale HydroPure Tinted Serum: lagan i bez težine, ali Chanel mi je draži",
+        "description": "Recenzija jane iredale HydroPure Tinted Seruma na osjetljivoj koži: vrlo lagano prekrivanje, hijaluronska kiselina i CoQ10, nanošenje na suhu kožu, kombinacija sa zelenim serumom i usporedba s Chanel Water-Fresh Tint. Ocjena 3,5/5.",
+        "excerpt": "Vrlo lagano prekrivanje i osjećaj bez težine, odličan u kombinaciji sa zelenim serumom iste linije. Ali mora ići na suhu kožu, a Chanel Water-Fresh Tint mi je i dalje draži. Ocjena 3,5/5.",
+        "categories": ["sminka", "osjetljiva-koza", "koza-30-plus"],
+        "date": "2026-10-30",
+        "kicker": "Recenzija",
+        "verdict": "Ocjena 3,5/5: dobar, ali ne i najbolji tonirani proizvod koji imam",
+        "review": {
+            "brand": "jane iredale", "product": "jane iredale HydroPure Tinted Serum with Hyaluronic Acid & CoQ10", "rating": 3.5,
+            "pros": ["Vrlo lagano prekrivanje", "Ne osjeti se na koži, bez težine", "Hijaluronska kiselina daje plumpy efekt", "CoQ10 kao anti-age bonus", "Odličan u kombinaciji sa zelenim HydroPure serumom protiv crvenila"],
+            "cons": ["Mora se nanijeti na potpuno suhu kožu, inače se ne razmazuje", "Malo vidljiviji na koži od Chanel Water-Fresh Tinta", "Nema SPF"],
+        },
+        "faq": [
+            ("Koliko prekriva jane iredale HydroPure Tinted Serum?", "Vrlo lagano. Ujednači ten, ali ne skriva kožu. Ako trebate više prekrivanja, brend preporučuje mineralni puder preko njega."),
+            ("Kako nanijeti HydroPure Tinted Serum da se lijepo razmaže?", "Na potpuno suhu kožu. Ja ga nanosim tek kad se krema skroz upije, jer se na vlažnoj koži ne razmazuje kako treba. Brend preporučuje dva pritiska pumpice, izmiješati prstima i razmazati prstima ili kistom."),
+            ("Je li bolji jane iredale HydroPure Tinted Serum ili Chanel Water-Fresh Tint?", "Meni je draži Chanel. S njim koža izgleda zdravije, prekrivanje je još lakše i dobila sam više komplimenata. HydroPure je malo vidljiviji na koži."),
+            ("Ima li HydroPure Tinted Serum SPF?", "Nema, pa ispod njega uvijek nanosim SPF."),
+        ],
+        "body": """
+<p class="lead">jane iredale je mineralna šminka koju često preporučuju za osjetljivu kožu, pa sam isprobala njihov HydroPure Tinted Serum. Odmah sam ga usporedila s mojim favoritom, <a href="/clanci/chanel-water-fresh-tint-recenzija/">Chanel Water-Fresh Tintom</a>.</p>
+
+<h2 id="sto-kaze-proizvodac">Što kaže proizvođač</h2>
+<ul class="claims">
+  <li>Ultra hidratantni tonirani serum koji hidratizira, umiruje, zamućuje linije i ujednačava ten.</li>
+  <li>2&nbsp;% hijaluronske kiseline za trenutnu hidrataciju i glađi izgled kože te CoQ10 kao antioksidans.</li>
+  <li>Skvalan iz masline za zaštitu barijere, uz neven, alge, ekstrakt kore vrbe i aloju za smirivanje.</li>
+  <li>Lagano prekrivanje i rosni (dewy) finiš, osam nijansi, airless pumpica.</li>
+  <li>Nema SPF i nije veganski (sadrži pčelinji vosak).</li>
+</ul>
+
+<h2 id="moje-iskustvo">Moje iskustvo</h2>
+<p><strong>Vrlo lagano prekrivanje.</strong> Na koži se uopće ne osjeti, bez težine je. Hijaluronska kiselina daje koži onaj plumpy izgled, a CoQ10 je lijep anti-age bonus.</p>
+<p>Najbolje mi radi u kombinaciji sa zelenim serumom iz iste linije, <a href="/clanci/jane-iredale-hydropure-color-correcting-serum-recenzija/">HydroPure Color Correcting Serumom</a>, koji neutralizira crvenilo. Prvo zeleni, onda tonirani, i ten je ujednačen bez osjećaja maske.</p>
+<p><strong>Mana: samo na suhu kožu.</strong> Mora se nanijeti na potpuno suhu kožu, inače se ne razmazuje kako treba. Zato pričekam da se krema skroz upije prije nego ga nanesem.</p>
+
+<h3>Usporedba s Chanel Water-Fresh Tintom</h3>
+<p>Chanel mi je i dalje draži. S Chanelom koža izgleda zdravije, prekrivanje je još lakše, koža izgleda kao da je upila vodu i dobila sam više komplimenata. HydroPure je malo vidljiviji na koži. Nije loš, samo je Chanel bolji.</p>
+
+<h2 id="za-koga-je">Za koga je</h2>
+<p>Za osjetljivu kožu koja želi lagano mineralno prekrivanje s hidratacijom, posebno uz zeleni serum iste linije ako imate crvenilo. Ako tražite efekt <em>your skin but better</em> i niste ograničeni budžetom, ja bih prije uzela Chanel. Ocjena 3,5/5.</p>
+""",
+    },
+    {
+        "slug": "jane-iredale-hydropure-color-correcting-serum-recenzija",
+        "title": "jane iredale HydroPure Color Correcting Serum recenzija: zeleni serum protiv crvenila za rozaceu i osjetljivu kožu",
+        "h1": "jane iredale HydroPure Color Correcting Serum: zeleni serum koji smiruje crvenilo",
+        "description": "Recenzija jane iredale HydroPure Color Correcting Seruma na koži s rozaceom: zeleni ton neutralizira crvenilo, hijaluronska kiselina i CoQ10, mineralna šminka za osjetljivu kožu, nanošenje na suhu kožu i usporedba s Erborian CC Red Correct. Ocjena 3,5/5.",
+        "excerpt": "Lijepo neutralizira crvenilo, ne baš kao Erborian CC Red Correct, ali pomaže. Hijaluronska kiselina i CoQ10 su plus, a mana je što se na vlažnoj koži grudica. Ocjena 3,5/5.",
+        "categories": ["sminka", "rozacea", "osjetljiva-koza"],
+        "date": "2026-10-30",
+        "kicker": "Recenzija",
+        "verdict": "Ocjena 3,5/5: pomaže kod crvenila, samo na suhu kožu",
+        "review": {
+            "brand": "jane iredale", "product": "jane iredale HydroPure Color Correcting Serum with Hyaluronic Acid & CoQ10", "rating": 3.5,
+            "pros": ["Lijepo neutralizira crvenilo", "Hijaluronska kiselina daje plumpy efekt", "CoQ10 kao anti-age bonus", "Mineralna šminka koja odgovara osjetljivoj koži", "Odličan ispod HydroPure Tinted Seruma"],
+            "cons": ["Ne prekriva crvenilo kao Erborian CC Red Correct", "Mora na potpuno suhu kožu, inače se grudica", "Nema SPF"],
+        },
+        "faq": [
+            ("Prekriva li jane iredale HydroPure Color Correcting Serum crvenilo?", "Lijepo ga neutralizira, ali ne potpuno. Erborian CC Red Correct prekriva jače, ali meni je nakon njega koža bila crvenija, pa je HydroPure za moju rozaceu bolji izbor."),
+            ("Je li HydroPure Color Correcting Serum dobar za rozaceu?", "Meni pomaže kod crvenila i nije me iritirao. Brend kaže da je namijenjen blagom do umjerenom crvenilu i da nije lijek za kožna stanja, pa rozaceu i dalje pratite s dermatologom."),
+            ("Zašto se HydroPure zeleni serum grudica?", "Kod mene se to događa kad ga nanesem na kožu koja nije potpuno suha. Kad pričekam da se krema upije, razmaže se lijepo."),
+            ("Što staviti preko zelenog seruma?", "Ja preko njega stavljam HydroPure Tinted Serum. Brend preporučuje puder ili mineralni SPF preko, jer serum nema SPF."),
+        ],
+        "body": """
+<p class="lead">Zeleni proizvodi protiv crvenila su moja slaba točka, ali nakon <a href="/clanci/erborian-cc-red-correct-recenzija/">Erborian CC Red Correcta</a> postala sam oprezna. jane iredale HydroPure Color Correcting Serum je mineralna alternativa koju sam isprobala na svojoj koži s rozaceom.</p>
+
+<h2 id="sto-kaze-proizvodac">Što kaže proizvođač</h2>
+<ul class="claims">
+  <li>Hibrid šminke i ultra hidratantnog seruma sa svijetlozelenim tonom koji vizualno neutralizira blago do umjereno crvenilo. Nosi se ispod pudera.</li>
+  <li>2&nbsp;% hijaluronske kiseline za hidrataciju, CoQ10 kao antioksidans i alantoin za smirivanje.</li>
+  <li>Skvalan iz masline za barijeru, uz neven, alge, ekstrakt kore vrbe i aloju.</li>
+  <li>Mineralni pigmenti u inkapsuliranim liposomima, rosni (dewy) finiš.</li>
+  <li>Nema SPF, nije veganski, i brend naglašava da nije namijenjen liječenju kožnih stanja.</li>
+</ul>
+
+<h2 id="moje-iskustvo">Moje iskustvo</h2>
+<p><strong>Lijepo neutralizira crvenilo.</strong> Ne skroz kao Erborian CC Red Correct, ali pomaže, i to bez da mi je koža poslije crvenija. Za mene je to važnije od jačeg prekrivanja.</p>
+<p>Hijaluronska kiselina daje koži plumpy izgled, a CoQ10 je anti-age bonus. jane iredale općenito smatram dobrom mineralnom šminkom za osjetljivu kožu.</p>
+<p>Najbolje mi radi ispod <a href="/clanci/jane-iredale-hydropure-tinted-serum-recenzija/">HydroPure Tinted Seruma</a>: zeleni neutralizira crvenilo, a tonirani ujednači ten.</p>
+<p><strong>Mana: samo na potpuno suhu kožu.</strong> Ako koža nije skroz suha, serum se grudica. Zato pričekam da se krema potpuno upije.</p>
+
+<h2 id="za-koga-je">Za koga je</h2>
+<p>Za osjetljivu kožu i rozaceu s blagim do umjerenim crvenilom, posebno ako vam kemijski SPF-ovi u CC kremama izazivaju reakciju. Ako trebate jako prekrivanje crvenila, sam po sebi neće biti dovoljan. Ocjena 3,5/5.</p>
+""",
+    },
+    {
         "slug": "moj-glow-up-rutina-rozacea",
         "title": "Moj glow up: rutina za rozaceu s Omnilux LED maskom, Soolantrom i Skinorenom",
         "h1": "Moj glow up: rutina koja je promijenila moju kožu",

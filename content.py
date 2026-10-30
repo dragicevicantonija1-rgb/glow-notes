@@ -306,6 +306,7 @@ BRANDS = [
     {"name": "Dior", "aliases": ["Dior"]},
     {"name": "Erborian", "aliases": ["Erborian"]},
     {"name": "IT Cosmetics", "aliases": ["IT Cosmetics"]},
+    {"name": "jane iredale", "aliases": ["jane iredale", "Jane Iredale"]},
     {"name": "Kérastase", "aliases": ["Kérastase", "Kerastase"]},
     {"name": "Kiehl's", "aliases": ["Kiehl's", "Kiehls"]},
     {"name": "L'Occitane", "aliases": ["L'Occitane", "Loccitane"]},

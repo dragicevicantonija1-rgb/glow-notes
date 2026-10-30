@@ -14,7 +14,8 @@ W, H = 1200, 900
 MAX_W, MAX_H = 1000, 600
 
 # slug članka -> (fotografija, način): "fit" = proizvod na pozadini fotografije, "cover" = izrez cijele fotografije,
-# "pad" = cijela fotografija, pozadina razvučena iz lijevog ruba (za pozadinu s prijelazom)
+# "pad" = cijela fotografija, pozadina razvučena iz lijevog ruba (za pozadinu s prijelazom),
+# "blur" = cijela fotografija na zamućenoj vlastitoj pozadini (za fotke s mobitela)
 COVERS = {
     "babe-mineralni-spf-50-recenzija": ("babe-mineral-pack.jpg", "fit"),
     "babe-lip-cheek-spf-50-mocca-recenzija": ("babe-lip.jpg", "fit"),
@@ -30,6 +31,8 @@ COVERS = {
     "rhode-pocket-blush-tan-line-recenzija": ("rhode-blush.jpg", "cover"),
     "rhode-peptide-lip-shape-recenzija": ("rhode-lip.jpg", "fit"),
     "la-roche-posay-cicaplast-baume-b5-recenzija": ("cicaplast.jpg", "fit"),
+    "jane-iredale-hydropure-tinted-serum-recenzija": ("jane-iredale-tinted.jpg", "blur"),
+    "jane-iredale-hydropure-color-correcting-serum-recenzija": ("jane-iredale-cc.jpg", "blur"),
 }
 
 
@@ -64,11 +67,20 @@ def pad(im, box):
     return canvas
 
 
+def blur(im, box):
+    k = MAX_H * 1.1 / im.height
+    small = im.resize((round(im.width * k), round(im.height * k)), Image.LANCZOS)
+    canvas = cover(im, box).filter(ImageFilter.GaussianBlur(40))
+    canvas = Image.blend(canvas, Image.new("RGB", (W, H), (255, 255, 255)), 0.25)
+    canvas.paste(small, ((W - small.width) // 2, (H - small.height) // 2))
+    return canvas
+
+
 def main():
     boxes = json.load(open(os.path.join(SRC, "okviri.json")))
     for slug, (name, mode) in COVERS.items():
         im = Image.open(os.path.join(SRC, name)).convert("RGB")
-        out = {"fit": fit, "cover": cover, "pad": pad}[mode](im, boxes[name])
+        out = {"fit": fit, "cover": cover, "pad": pad, "blur": blur}[mode](im, boxes[name])
         out.save(os.path.join(OUT, slug + ".jpg"), quality=86, optimize=True, progressive=True)
         out.save(os.path.join(OUT, slug + ".webp"), quality=82, method=6)
         print(slug, "<-", name)
