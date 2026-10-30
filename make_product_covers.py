@@ -31,8 +31,8 @@ COVERS = {
     "rhode-pocket-blush-tan-line-recenzija": ("rhode-blush.jpg", "cover"),
     "rhode-peptide-lip-shape-recenzija": ("rhode-lip.jpg", "fit"),
     "la-roche-posay-cicaplast-baume-b5-recenzija": ("cicaplast.jpg", "fit"),
-    "jane-iredale-hydropure-tinted-serum-recenzija": ("jane-iredale-tinted.jpg", "blur"),
-    "jane-iredale-hydropure-color-correcting-serum-recenzija": ("jane-iredale-cc.jpg", "blur"),
+    "jane-iredale-hydropure-tinted-serum-recenzija": ("jane-iredale-tinted-web.jpg", "cover"),
+    "jane-iredale-hydropure-color-correcting-serum-recenzija": ("jane-iredale-cc-web.jpg", "cover"),
 }
 
 
