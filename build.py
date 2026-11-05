@@ -14,6 +14,7 @@ from komentari import KOMENTARI
 from content_kvizovi import QUIZZES
 from content_kvizovi_znanje import KNOWLEDGE_QUIZZES
 from content_brendovi import BRAND_INFO
+from content_seo import SEO_TITLES, SEO_DESCRIPTIONS
 import random
 import content_en
 ARTICLES = sorted(REVIEWS, key=lambda r: r["kicker"] != "Rutina") + ARTICLES
@@ -100,9 +101,40 @@ def person():
                             ["sensitive skin", "rosacea", "reactive skin", "mineral SPF", "skincare", "make-up"])}
 
 
-def head(title, desc, path, og_type="website", extra_ld=None, noindex=False, full_title=True, image=None):
+def seo_title(a):
+    """Kratki naslov za Google (<title>): ručni iz content_seo.py ili automatski dio prije dvotočke."""
+    t = (SEO_TITLES.get(a["slug"]) or (None, None))[LANG == "en"]
+    if not t:
+        t = a["title"]
+        if len(t) + len(CFG["site_name"]) + 3 > 60 and ":" in t:
+            t = t.split(":")[0].strip()
+    return t
+
+
+def seo_desc(a):
+    """Meta opis do ~158 znakova: ručni iz content_seo.py ili skraćen na kraju rečenice/riječi."""
+    d = (SEO_DESCRIPTIONS.get(a["slug"]) or (None, None))[LANG == "en"]
+    return d or shorten(a["description"])
+
+
+def shorten(d, n=158):
+    if len(d) <= n:
+        return d
+    cut = d[:n]
+    end = max(cut.rfind(". "), cut.rfind("! "), cut.rfind("? "))
+    if end > 100:
+        return cut[:end + 1]
+    return cut[:cut.rfind(" ")].rstrip(",;:") + "…"
+
+
+def head(title, desc, path, og_type="website", extra_ld=None, noindex=False, full_title=True, image=None, og_title=None, published=None, modified=None):
     url = BASE + path
+    desc = shorten(desc)
+    if full_title and len(title) + len(CFG["site_name"]) + 3 > 60:
+        full_title = False  # dugi naslovi bez "| Glow Notes" da Google ne reže ključne riječi
     t = f"{title} | {CFG['site_name']}" if full_title else title
+    art = (f'<meta property="article:published_time" content="{published}"><meta property="article:modified_time" content="{modified or published}">'
+           f'<meta property="article:author" content="{e(CFG["author"])}">') if published else ""
     fonts = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
              '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Instrument+Sans:wght@400..700&display=swap">') if PREVIEW else (
         '<link rel="preload" href="/fonts/instrumentsans-latin.woff2" as="font" type="font/woff2" crossorigin>'
@@ -132,15 +164,16 @@ def head(title, desc, path, og_type="website", extra_ld=None, noindex=False, ful
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{url}">
 <!--ALT-->
-<meta name="robots" content="{'noindex, follow' if noindex else 'index, follow, max-image-preview:large'}">
+<meta name="robots" content="{'noindex, follow' if noindex else 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}">
 <meta property="og:locale" content="{T('hr_HR', 'en_GB')}"><meta property="og:locale:alternate" content="{T('en_GB', 'hr_HR')}">
 <meta property="og:type" content="{og_type}">
 <meta property="og:site_name" content="{e(CFG['site_name'])}">
-<meta property="og:title" content="{e(title)}">
+<meta property="og:title" content="{e(og_title or title)}">
 <meta property="og:description" content="{e(desc)}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{BASE}{image or '/brand/og-image.png'}">
-<meta property="og:image:width" content="1200"><meta property="og:image:height" content="{750 if image else 630}">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="{750 if image else 630}"><meta property="og:image:alt" content="{e(og_title or title)}">
+{art}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#fffbf7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#24090f" media="(prefers-color-scheme: dark)">
@@ -508,9 +541,12 @@ def page_article(a):
         toc += f'<li><a href="#cesta-pitanja">{T("Česta pitanja", "FAQ")}</a></li>'
     faq = (f'<section class="faq" aria-labelledby="cesta-pitanja"><h2 id="cesta-pitanja">{T("Česta pitanja", "Frequently asked questions")}</h2>'
            + "".join(f"<h3>{e(q)}</h3><p>{e(ans)}</p>" for q, ans in a["faq"]) + "</section>") if a.get("faq") else ""
-    related = sorted((x for x in ARTICLES if x is not a), key=lambda x: -len(set(x["categories"]) & set(a["categories"])))[:2]
+    rb = (a.get("review") or {}).get("brand")
+    related = sorted((x for x in ARTICLES if x is not a),
+                     key=lambda x: -(2 * bool(rb and (x.get("review") or {}).get("brand") == rb) + len(set(x["categories"]) & set(a["categories"]))))[:3]
     upd = f'<span>{T("Ažurirano", "Updated")} <time datetime="{a["updated"]}">{hr_date(a["updated"])}</time></span>' if a.get("updated") and a["updated"] != a["date"] else ""
-    return head(a["title"], a["description"], path, "article", ld, image=f"/slike/{a['slug']}.jpg" if has_image(a["slug"]) else None) + header(None) + f"""
+    return head(seo_title(a), seo_desc(a), path, "article", ld, image=f"/slike/{a['slug']}.jpg" if has_image(a["slug"]) else None,
+                og_title=a["title"], published=a["date"], modified=a.get("updated", a["date"])) + header(None) + f"""
 {cr}
 <article class="wrap read">
 <header class="article-head">
@@ -541,7 +577,7 @@ def page_category(c, path, num, total, arts):
     ld = [cr_ld, {"@type": "CollectionPage", "name": c["title"] + page_suffix(num), "url": BASE + path, "description": c["description"],
                   "inLanguage": lang_tag(), "hasPart": [{"@type": "BlogPosting", "headline": a["title"], "url": f"{BASE}/clanci/{a['slug']}/"} for a in arts]}]
     intro = f'<div class="page-intro prose">{c["intro"]}</div>' if num == 1 else ""
-    return head(c["title"] + page_suffix(num), c["description"], path, extra_ld=ld) + header(base) + f"""
+    return head(c["title"] + page_suffix(num), c["description"] if num == 1 else T(f"Stranica {num}: ", f"Page {num}: ") + c["description"], path, extra_ld=ld) + header(base) + f"""
 {cr}
 <div class="wrap read">
 <header class="page-head"><p class="eyebrow"><span class="dot hue-{c['hue']}"></span> {T('Kategorija', 'Category')}</p><h1>{e(c['name'])}{page_suffix(num)}</h1></header>
@@ -559,7 +595,7 @@ def page_archive(path, num, total, arts):
     title = T("Sve beauty recenzije", "All beauty reviews") + page_suffix(num)
     ld = [cr_ld, {"@type": "CollectionPage", "name": title, "url": BASE + path, "inLanguage": lang_tag(),
                   "hasPart": [{"@type": "BlogPosting", "headline": a["title"], "url": f"{BASE}/clanci/{a['slug']}/"} for a in arts]}]
-    return head(title, T("Sve recenzije kozmetike na Glow Notes, od najnovijih: njega lica, šminka i SPF testirani na osjetljivoj koži s rozaceom.",
+    return head(title, (T(f"Stranica {num}: ", f"Page {num}: ") if num > 1 else "") + T("Sve recenzije kozmetike na Glow Notes, od najnovijih: njega lica, šminka i SPF testirani na osjetljivoj koži s rozaceom.",
                          "Every beauty review on Glow Notes, newest first: skincare, make-up and SPF tested on sensitive skin with rosacea."),
                 path, extra_ld=ld) + header(base) + f"""
 {cr}
@@ -858,14 +894,15 @@ def page_404():
 # ---------- pomoćne datoteke ----------
 
 def sitemap():
+    latest = max(x.get("updated", x["date"]) for x in ARTICLES)  # stabilan lastmod umjesto datuma builda
     urls = [("/", max(x.get("updated", x["date"]) for x in ARTICLES), "1.0")]
     urls += [(f"/kategorije/{c['slug']}/", max(a.get("updated", a["date"]) for a in ARTICLES if c["slug"] in a["categories"]), "0.8") for c in CATEGORIES]
     urls += [(f"/clanci/{a['slug']}/", a.get("updated", a["date"]), "0.9") for a in ARTICLES]
-    urls += [("/clanci/", ARTICLES[0].get("updated", ARTICLES[0]["date"]), "0.7"), ("/brendovi/", date.today().isoformat(), "0.7"), ("/kvizovi/", date.today().isoformat(), "0.7")]
-    urls += [(f"/kvizovi/{q['slug']}/", date.today().isoformat(), "0.7") for q in QUIZZES + KNOWLEDGE_QUIZZES]
+    urls += [("/clanci/", ARTICLES[0].get("updated", ARTICLES[0]["date"]), "0.7"), ("/brendovi/", latest, "0.7"), ("/kvizovi/", latest, "0.7")]
+    urls += [(f"/kvizovi/{q['slug']}/", latest, "0.7") for q in QUIZZES + KNOWLEDGE_QUIZZES]
     urls += [(f"/brendovi/{x['slug']}/", max(a.get("updated", a["date"]) for a in x["articles"]), "0.6") for x in BRANDS if x["articles"]]
-    urls += [("/o-meni/", date.today().isoformat(), "0.4"), ("/kontakt/", date.today().isoformat(), "0.3"),
-             ("/politika-privatnosti/", date.today().isoformat(), "0.2")]
+    urls += [("/o-meni/", latest, "0.4"), ("/kontakt/", latest, "0.3"),
+             ("/politika-privatnosti/", latest, "0.2")]
     def alts(p):
         return (f'<xhtml:link rel="alternate" hreflang="hr" href="{BASE}{p}"/><xhtml:link rel="alternate" hreflang="en" href="{BASE}{en_path(p)}"/>'
                 f'<xhtml:link rel="alternate" hreflang="x-default" href="{BASE}{p}"/>')
@@ -980,7 +1017,7 @@ def write_pages():
     write("/brendovi/", page_brands())
     for x in BRANDS:
         write(f"/brendovi/{x['slug']}/", page_brand(x))
-    write("/o-meni/", page_simple("o-meni", T("O meni", "About me"),
+    write("/o-meni/", page_simple("o-meni", T("O meni: tko piše recenzije za osjetljivu kožu", "About me: who writes these sensitive skin reviews"),
                                   T(f"Tko piše {CFG['site_name']} i kako nastaju recenzije kozmetike za osjetljivu kožu i rozaceu.",
                                     f"Who writes {CFG['site_name']} and how the beauty reviews for sensitive skin and rosacea are made."),
                                   T("O meni", "About me"), T(about_hr(), about_en())))
@@ -990,7 +1027,9 @@ def write_pages():
                                               T('<p>Tvoj komentar je stigao i objavit ću ga čim ga pročitam. Hvala što dijeliš svoje iskustvo!</p><p><a class="btn" href="/">Natrag na naslovnicu</a></p>',
                                                 '<p>Your comment has arrived and I\'ll publish it as soon as I\'ve read it. Thanks for sharing your experience!</p><p><a class="btn" href="/">Back to the home page</a></p>'),
                                               noindex=True))
-    write("/kontakt/", page_simple("kontakt", T("Kontakt", "Contact"), T("Kontakt za pitanja, prijedloge i suradnje.", "Contact for questions, suggestions and collaborations."),
+    write("/kontakt/", page_simple("kontakt", T("Kontakt i suradnje", "Contact and collaborations"),
+                                   T(f"Kontakt za {CFG['site_name']}: pitanja o njezi osjetljive kože i rozacee, prijedlozi proizvoda za recenziju i suradnje s brendovima.",
+                                     f"Contact {CFG['site_name']}: questions about sensitive skin and rosacea care, product suggestions for reviews and brand collaborations."),
                                    T("Kontakt", "Contact"), T(contact_hr(), contact_en())))
     write("/politika-privatnosti/", page_simple("politika-privatnosti", T("Politika privatnosti i kolačića", "Privacy and cookie policy"),
                                                 T(f"Kako {CFG['site_name']} koristi kolačiće, Google Analytics, PostHog analitiku i Google AdSense oglase.",
