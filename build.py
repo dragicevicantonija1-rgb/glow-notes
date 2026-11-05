@@ -771,12 +771,17 @@ def page_kquiz(q):
         btns = "".join(f'<button type="button" class="kq__opt"{" data-ok" if k == 0 else ""}>{e(TT(opts[k]))}</button>' for k in order)
         blocks.append(f"""<fieldset class="kq__q"><legend><span class="quiz__n">{i + 1}/{n}</span> {e(TT(qt))}</legend>
 <div class="kq__opts">{btns}</div><p class="kq__expl" hidden><strong class="kq__verdict"></strong> {e(TT(expl))}</p></fieldset>""")
-        qld.append({"@type": "Question", "name": TT(qt), "eduQuestionType": "Multiple choice",
-                    "acceptedAnswer": {"@type": "Answer", "text": TT(opts[0])},
-                    "suggestedAnswer": [{"@type": "Answer", "text": TT(o)} for o in opts[1:]]})
+        # Google "Practice problems": Question treba text; ostala polja uklanjaju upozorenja u Search Consoleu.
+        qld.append({"@type": "Question", "name": TT(qt), "text": TT(qt), "position": i + 1, "eduQuestionType": "Multiple choice",
+                    "encodingFormat": "text/html", "learningResourceType": "Practice problem",
+                    "acceptedAnswer": {"@type": "Answer", "position": 0, "text": TT(opts[0]), "encodingFormat": "text/html",
+                                       "answerExplanation": {"@type": "Comment", "text": TT(expl), "encodingFormat": "text/html"}},
+                    "suggestedAnswer": [{"@type": "Answer", "position": j + 1, "text": TT(o), "encodingFormat": "text/html"} for j, o in enumerate(opts[1:])]})
     others = "".join(f'<li><a href="/kvizovi/{o["slug"]}/">{e(T(*o["h1"]))}</a></li>' for o in KNOWLEDGE_QUIZZES if o is not q)
     ld = [cr_ld, {"@type": "Quiz", "name": T(*q["title"]), "description": T(*q["description"]), "url": BASE + path, "inLanguage": lang_tag(),
-                  "author": person(), "publisher": {"@id": BASE + "/#org"}, "hasPart": qld}]
+                  "author": person(), "publisher": {"@id": BASE + "/#org"}, "educationalLevel": "beginner",
+                  "learningResourceType": "Practice problem", "typicalAgeRange": "16-", "about": {"@type": "Thing", "name": T("Kozmetika i njega kože", "Cosmetics and skincare")},
+                  "hasPart": qld}]
     msgs = json.dumps({"ok": T("Točno!", "Correct!"), "no": T("Netočno.", "Not quite."),
                        "hi": T("Prava si beauty stručnjakinja! 🎆", "You're a true beauty expert! 🎆"),
                        "mid": T("Odlično, znaš puno! Još malo do vatrometa.", "Great, you know a lot! Just a little more for fireworks."),
@@ -855,10 +860,9 @@ def page_quiz(q):
 <h2>{e(T(*rv['title']))}</h2><p>{e(T(*rv['text']))}</p><h3>{T('Pročitaj dalje', 'Read next')}</h3>
 <ul>{''.join(f'<li><a href="{l}">{e(link_label(l))}</a></li>' for l in rv['links'])}</ul></section>""" for key, rv in q["results"].items())
     others = "".join(f'<li><a href="/kvizovi/{o["slug"]}/">{e(T(*o["h1"]))}</a></li>' for o in QUIZZES if o is not q)
-    ld = [cr_ld, {"@type": "Quiz", "name": T(*q["title"]), "description": T(*q["description"]), "url": BASE + path, "inLanguage": lang_tag(),
-                  "author": person(), "publisher": {"@id": BASE + "/#org"},
-                  "hasPart": [{"@type": "Question", "name": T(*qt), "eduQuestionType": "Multiple choice",
-                               "suggestedAnswer": [{"@type": "Answer", "text": T(*at)} for at, _ in ans]} for qt, ans in q["questions"]]}]
+    # Kviz osobnosti nema točnih odgovora, pa nije "Practice problem" za Google: obična WebPage bez pitanja u shemi.
+    ld = [cr_ld, {"@type": "WebPage", "name": T(*q["title"]), "description": T(*q["description"]), "url": BASE + path, "inLanguage": lang_tag(),
+                  "author": person(), "publisher": {"@id": BASE + "/#org"}}]
     return head(T(*q["title"]), T(*q["description"]), path, extra_ld=ld) + header("/kvizovi/") + f"""
 {cr}<div class="wrap read"><header class="page-head"><p class="eyebrow">{T('Kviz', 'Quiz')}</p><h1>{e(T(*q['h1']))}</h1>
 <p class="page-sub">{e(T(*q['intro']))}</p></header>
