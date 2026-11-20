@@ -650,9 +650,9 @@ ARTICLES_EN.update({
     },
     "rhode-pocket-blush-tan-line-recenzija": {
         "slug": "rhode-pocket-blush-tan-line-review",
-        "title": "Rhode Pocket Blush Tan Line review: cream blush for sensitive skin, my experience",
+        "title": "Rhode Pocket Blush Tan Line Review: Worth the Hype?",
         "h1": "Rhode Pocket Blush in Tan Line: the perfect blush",
-        "description": "Review of Rhode Pocket Blush in Tan Line: Hailey Bieber's cream blush that blends easily, looks like a natural sun flush and doesn't irritate sensitive skin. Rating 5/5.",
+        "description": "Rhode Tan Line blush, honestly reviewed: a pinky-bronze cream blush that looks like a natural sun flush and didn't irritate my rosacea-prone skin. 5/5.",
         "excerpt": "A lovely blush that blends easily, doesn't irritate me at all and looks like a natural flush from the sun. The only minus: it runs out fast.",
         "kicker": "Review",
         "verdict": "Rating 5/5: the perfect blush",
