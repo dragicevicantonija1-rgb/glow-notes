@@ -80,3 +80,7 @@ U GA4: **Reports → Reports snapshot** (ili Realtime/Acquisition) → ikona **S
 ## Pravilo rada
 
 Promjene ostaju lokalno i u pregledu. Na GitHub (i time na Netlify) idu tek kad Antonija kaže da ide live.
+
+## Pravilo za objave na društvenim mrežama
+
+Svaka objava vodi na članak na stranici. Na Threadsu objava uvijek sadrži izravan link na članak. Na Instagramu se uz svaku objavu objavi i story s linkom na članak (link sticker). Na Pinterestu svaki pin vodi na članak.

@@ -296,7 +296,7 @@ REVIEWS = [
     },
     {
         "slug": "avene-couvrance-tekuci-puder-recenzija",
-        "title": "Avène Couvrance tekući puder recenzija: ten za osjetljivu kožu i rozaceu, iskustvo",
+        "title": "Avène Couvrance tekući puder: recenzija i iskustvo s rozaceom",
         "h1": "Avène Couvrance: lijep ten, ali ne i za moju kožu",
         "description": "Recenzija Avène Couvrance korektivnog tekućeg pudera SPF 20 za osjetljivu kožu i rozaceu: finiš, nijanse za svijetlu kožu, papule i pustule. Ocjena 3/5.",
         "excerpt": "Daje lijep ten, ali nema dovoljno svijetlu nijansu, a čini mi se da mi je izazivao papule i pustule.",
@@ -312,6 +312,9 @@ REVIEWS = [
         "faq": [
             ("Ima li Avène Couvrance nijansu za jako svijetlu kožu?", "Meni nijedna nije bila dovoljno svijetla. Najsvjetlija nijansa u ponudi je Porcelain."),
             ("Je li Avène Couvrance dobar za rozaceu?", "Brend ga namjenjuje osjetljivoj koži, a ten je lijep. Meni se čini da je izazivao papule i pustule, pa sam ga odmah prestala koristiti."),
+            ("Ima li Avène Couvrance tekući puder SPF?", "Ima SPF 20 s mineralnim filterima (cinkov oksid i titanov dioksid). To je lijep dodatak, ali nije dovoljno kao jedina zaštita, pa ispod njega i dalje nanosim pravi SPF."),
+            ("Prekriva li Avène Couvrance crvenilo?", "Da, crvenilo i nepravilnosti prikriva dobro i ten izgleda ujednačeno. Prekrivanje mu je jedna od najvećih prednosti."),
+            ("Koja je bolja alternativa za kožu s rozaceom?", "Od svega što sam probala, najbolje mi je sjeo Chanel Les Beiges Water-Fresh Tint (4,5/5): lagan je, daje prirodan sjaj i nije mi izazivao reakcije. Ako trebate jače prekrivanje crvenila, pogledajte usporedbu u članku."),
         ],
         "body": """
 <p class="lead">Avène Couvrance je korektivni tekući puder iz ljekarne, napravljen baš za osjetljivu kožu. Na papiru idealan za rozaceu, ali kod mene se nije zadržao.</p>
@@ -331,6 +334,19 @@ REVIEWS = [
 
 <h2 id="za-koga-je">Za koga je</h2>
 <p>Za osjetljivu kožu svijetle do srednje puti kojoj treba prekrivanje crvenila, a ne reagira upaljenim točkicama. Ako imate rozaceu s papulama, testirajte ga oprezno na manjem dijelu lica.</p>
+
+<h2 id="usporedba">Avène Couvrance u usporedbi s drugim tenovima za crvenilo</h2>
+<p>Isprobala sam nekoliko proizvoda koji obećavaju lijep ten na osjetljivoj koži sklonoj crvenilu. Evo kako se Avène Couvrance snalazi u odnosu na njih, prema mom iskustvu:</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Proizvod</th><th scope="col">Prekrivanje</th><th scope="col">SPF</th><th scope="col">Moja koža</th><th scope="col">Ocjena</th></tr></thead>
+<tbody>
+<tr><td><a href="/clanci/chanel-water-fresh-tint-recenzija/">Chanel Les Beiges Water-Fresh Tint</a></td><td>Lagano, prirodan sjaj</td><td>Nema</td><td>Bez reakcija, malo suhoće tijekom dana</td><td>4,5/5</td></tr>
+<tr><td><a href="/clanci/jane-iredale-hydropure-color-correcting-serum-recenzija/">jane iredale HydroPure Color Correcting Serum</a></td><td>Neutralizira crvenilo</td><td>Nema</td><td>Bez reakcija, samo na suhu kožu</td><td>3,5/5</td></tr>
+<tr><td><strong>Avène Couvrance tekući puder</strong></td><td>Dobro prikriva crvenilo</td><td>SPF 20, mineralni</td><td>Papule i pustule, nema dovoljno svijetlu nijansu</td><td>3/5</td></tr>
+<tr><td><a href="/clanci/erborian-cc-red-correct-recenzija/">Erborian CC Red Correct</a></td><td>Najjače neutralizira crvenilo</td><td>SPF 25, kemijski</td><td>Crvenija koža i papule nakon skidanja</td><td>2,5/5</td></tr>
+<tr><td><a href="/clanci/jane-iredale-hydropure-tinted-serum-recenzija/">jane iredale HydroPure Tinted Serum</a></td><td>Vrlo lagano</td><td>Nema</td><td>Osjećaj da izaziva papule i pustule</td><td>2,5/5</td></tr>
+</tbody></table></div>
+<p>Ako vam je najvažnije prekriti crvenilo, Avène Couvrance i Erborian CC Red rade to najbolje, ali obama sam imala reakciju. Ako želite lagan ten koji koži s rozaceom ne smeta, moj izbor je <a href="/clanci/chanel-water-fresh-tint-recenzija/">Chanel Water-Fresh Tint</a>, a ispod njega uvijek nanosim mineralni SPF poput <a href="/clanci/babe-mineralni-spf-50-recenzija/">Babé Mineral Super Fluid SPF 50</a>.</p>
 """,
     },
     {
