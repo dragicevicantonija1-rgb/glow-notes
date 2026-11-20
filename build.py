@@ -111,6 +111,8 @@ def head(title, desc, path, og_type="website", extra_ld=None, noindex=False, ful
     gsc = f'<meta name="google-site-verification" content="{e(CFG["google_site_verification"])}">' if CFG["google_site_verification"] else ""
     if CFG.get("bing_site_verification"):
         gsc += f'<meta name="msvalidate.01" content="{e(CFG["bing_site_verification"])}">'
+    if CFG.get("pinterest_domain_verify"):
+        gsc += f'<meta name="p:domain_verify" content="{e(CFG["pinterest_domain_verify"])}">'
     ads = (f'<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={e(CFG["adsense_client"])}" crossorigin="anonymous"></script>'
            if CFG["adsense_client"] and not PREVIEW else "")
     ph = posthog_snippet() if CFG["posthog_key"] and not PREVIEW else ""
